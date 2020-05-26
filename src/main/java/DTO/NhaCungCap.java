@@ -10,15 +10,14 @@ package DTO;
  * @author WindZ
  */
 public class NhaCungCap {
-    private String maNCC, tenNCC, diaChi, dienThoai, soFax;
+    private String maNCC, tenNCC, diaChi, dienThoai;
     public NhaCungCap(){}
     
-    public NhaCungCap(String maNCC, String tenNCC, String diaChi, String dienThoai, String soFax){
+    public NhaCungCap(String maNCC, String tenNCC, String diaChi, String dienThoai){
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
         this.diaChi = diaChi;
         this.dienThoai = dienThoai;
-        this.soFax = soFax;
     }
 
     public String getMaNCC() {
@@ -51,14 +50,6 @@ public class NhaCungCap {
 
     public void setDienThoai(String dienThoai) {
         this.dienThoai = dienThoai;
-    }
-
-    public String getSoFax() {
-        return soFax;
-    }
-
-    public void setSoFax(String soFax) {
-        this.soFax = soFax;
     }
     
 }

@@ -10,23 +10,23 @@ package DTO;
  * @author WindZ
  */
 public class ChiTietHoaDon {
-    private String maSP,maHD,tenSP;
-    private int gia,sl;
+    private String maLaptop,maHD;
+    private int gia,sl,thanhtien;
 
-    public ChiTietHoaDon(String maHD, String maSP, String tenSP, int gia, int sl) {
-        this.maSP = maSP;
+    public ChiTietHoaDon(String maHD, String maLaptop, int sl, int gia, int thanhtien) {
+        this.maLaptop = maLaptop;
         this.maHD = maHD;
-        this.tenSP = tenSP;
         this.gia = gia;
         this.sl = sl;
+        this.thanhtien = thanhtien;
     }
 
-    public String getMaSP() {
-        return maSP;
+    public String getMaLaptop() {
+        return maLaptop;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setMaLaptop(String maSP) {
+        this.maLaptop = maLaptop;
     }
 
     public String getMaHD() {
@@ -35,14 +35,6 @@ public class ChiTietHoaDon {
 
     public void setMaHD(String maHD) {
         this.maHD = maHD;
-    }
-
-    public String getTenSP() {
-        return tenSP;
-    }
-
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
     }
 
     public int getGia() {
@@ -61,4 +53,11 @@ public class ChiTietHoaDon {
         this.sl = sl;
     }
     
+    public int getThanhTien() {
+        return this.thanhtien;
+    }
+    
+    public int setThanhTien() {
+        return this.thanhtien;
+    }
 }

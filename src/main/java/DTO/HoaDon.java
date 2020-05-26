@@ -11,15 +11,13 @@ package DTO;
  */
 public class HoaDon {
     private String maHD,maKH,maNV;
-    private String ngayHD;
-    private double tongTien;
+    private String ngaylap;
 
-    public HoaDon(String maHD, String maKH, String maNV, String ngayHD, double tongTien) {
+    public HoaDon(String maHD, String maKH, String maNV, String ngayHD) {
         this.maHD = maHD;
         this.maKH = maKH;
         this.maNV = maNV;
-        this.ngayHD = ngayHD;
-        this.tongTien = tongTien;
+        this.ngaylap = ngaylap;
     }
 
     public String getMaHD() {
@@ -46,21 +44,12 @@ public class HoaDon {
         this.maNV = maNV;
     }
 
-    public String getNgayHD() {
-        return ngayHD;
+    public String getNgaylap() {
+        return ngaylap;
     }
 
-    public void setNgayHD(String ngayHD) {
-        this.ngayHD = ngayHD;
+    public void setNgaylap(String ngaylap) {
+        this.ngaylap = ngaylap;
     }
-
-    public double getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(double tongTien) {
-        this.tongTien = tongTien;
-    }
-    
     
 }

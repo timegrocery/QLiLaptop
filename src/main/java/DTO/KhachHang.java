@@ -16,11 +16,10 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String maKH, String hoKH, String tenKH, String diaChi, int sdt) {
+    public KhachHang(String maKH, String hoKH, String tenKH, int sdt) {
         this.maKH = maKH;
         this.hoKH = hoKH;
         this.tenKH = tenKH;
-        this.diaChi = diaChi;
         this.sdt = sdt;
     }
 
@@ -46,14 +45,6 @@ public class KhachHang {
 
     public void setTenKH(String tenKH) {
         this.tenKH = tenKH;
-    }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
     }
 
     public int getSdt() {

@@ -11,19 +11,18 @@ package DTO;
  */
 public class NhanVien {
     private String maNV,hoNV,tenNV,phai,diaChi,img;
-    private int namSinh,mucLuong;
+    private int namSinh;
 
     public NhanVien() {
     }
     
-        public NhanVien(String maNV, String hoNV, String tenNV, int namSinh, String phai, int mucLuong ,String diaChi ,String img) {
+        public NhanVien(String maNV, String hoNV, String tenNV, String phai, int mucLuong ,String diaChi ,String img) {
         this.maNV = maNV;
         this.hoNV = hoNV;
         this.tenNV = tenNV;
         this.phai = phai;
         this.diaChi = diaChi;
         this.namSinh = namSinh;
-        this.mucLuong = mucLuong;
         this.img = img;
     }
 
@@ -73,14 +72,6 @@ public class NhanVien {
 
     public void setNamSinh(int namSinh) {
         this.namSinh = namSinh;
-    }
-
-    public int getMucLuong() {
-        return mucLuong;
-    }
-
-    public void setMucLuong(int mucLuong) {
-        this.mucLuong = mucLuong;
     }
 
     public String getImg() {
