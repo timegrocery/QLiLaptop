@@ -10,7 +10,7 @@ package DTO;
  * @author WindZ
  */
 public class KhachHang {
-    private String maKH,hoKH,tenKH,diaChi;
+    private String maKH,hoKH,tenKH;
     private int sdt;
 
     public KhachHang() {

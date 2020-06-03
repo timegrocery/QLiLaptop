@@ -11,14 +11,15 @@ package DTO;
  */
 public class ChiTietHoaDon {
     private String maLaptop,maHD;
-    private int gia,sl,thanhtien;
+    private int gia,sl;
 
-    public ChiTietHoaDon(String maHD, String maLaptop, int sl, int gia, int thanhtien) {
-        this.maLaptop = maLaptop;
+    public ChiTietHoaDon(String maHD, String maLaptop, int sl, int gia) {
+        
         this.maHD = maHD;
-        this.gia = gia;
+        this.maLaptop = maLaptop;
         this.sl = sl;
-        this.thanhtien = thanhtien;
+        this.gia = gia;
+        
     }
 
     public String getMaLaptop() {
@@ -51,13 +52,5 @@ public class ChiTietHoaDon {
 
     public void setSl(int sl) {
         this.sl = sl;
-    }
-    
-    public int getThanhTien() {
-        return this.thanhtien;
-    }
-    
-    public int setThanhTien() {
-        return this.thanhtien;
     }
 }

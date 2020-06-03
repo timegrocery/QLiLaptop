@@ -10,23 +10,22 @@ package DTO;
  * @author WindZ
  */
 public class ChuongTrinhKhuyenMai {
-    int maCtkm;
-    String tenCtkm, ngayBatdau, ngayKetthuc;
+    String maCtkm,tenCtkm, ngayBatdau, ngayKetthuc;
     
     public ChuongTrinhKhuyenMai() {};
     
-    public ChuongTrinhKhuyenMai(int maCtkm,String tenCtkm, String ngayBatdau, String ngayKetthuc) {
+    public ChuongTrinhKhuyenMai(String maCtkm,String tenCtkm, String ngayBatdau, String ngayKetthuc) {
         this.maCtkm = maCtkm;
         this.tenCtkm = tenCtkm;
         this.ngayBatdau = ngayBatdau;
         this.ngayKetthuc = ngayKetthuc;
     }
     
-    public int getMaCtkm() {
+    public String getMaCtkm() {
         return this.maCtkm;
     }
     
-    public void setMaCtkm(int maCtkm) {
+    public void setMaCtkm(String maCtkm) {
         this.maCtkm = maCtkm;
     }
     

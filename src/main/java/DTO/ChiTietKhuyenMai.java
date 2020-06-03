@@ -10,39 +10,40 @@ package DTO;
  * @author WindZ
  */
 public class ChiTietKhuyenMai {
-    int maCtkm, maLaptop, cachtinh;
+    String maCtkm, maLaptop;
+    float cachtinh;
     
     public ChiTietKhuyenMai(){
         
     }
     
-    public ChiTietKhuyenMai(int maCtkm, int maLaptop, int cachtinh) {
+    public ChiTietKhuyenMai(String maCtkm, String maLaptop, float cachtinh) {
         this.maCtkm = maCtkm;
         this.maLaptop = maLaptop;
         this.cachtinh = cachtinh;
     }
     
-    public int getMaCtkm() {
+    public String getMaCtkm() {
         return this.maCtkm;
     }
     
-    public void setMaCtkm(int maCtkm) {
+    public void setMaCtkm(String maCtkm) {
         this.maCtkm = maCtkm;
     }
     
-    public int getMaLaptop() {
+    public String getMaLaptop() {
         return this.maLaptop;
     }
     
-    public void setMaLaptop(int maLaptop) {
+    public void setMaLaptop(String maLaptop) {
         this.maLaptop = maLaptop;
     }
     
-    public int getCachtinh() {
+    public float getCachtinh() {
         return this.cachtinh;
     }
     
-    public void setCachtinh(int cachtinh) {
+    public void setCachtinh(float cachtinh) {
         this.cachtinh = cachtinh;
     }
 }

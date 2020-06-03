@@ -10,28 +10,26 @@ package DTO;
  * @author WindZ
  */
 public class NhapHang {
-    private String idNH,maNCC,maSP,ngayNhap;
-    private int donGiaNhap,soLuong,tongTien;
+    private String maPN, maNCC, maNV, ngayNhap;
+    private int tongTien;
 
     public NhapHang() {
     }
 
-    public NhapHang(String idNH, String maNCC, String maSP, String ngayNhap, int donGiaNhap, int soLuong, int tongTien) {
-        this.idNH = idNH;
+    public NhapHang(String maPN, String maNCC, String maNV, String ngayNhap, int tongTien) {
+        this.maPN = maPN;
         this.maNCC = maNCC;
-        this.maSP = maSP;
+        this.maNV = maNV;
         this.ngayNhap = ngayNhap;
-        this.donGiaNhap = donGiaNhap;
-        this.soLuong = soLuong;
         this.tongTien = tongTien;
     }
 
-    public String getIdNH() {
-        return idNH;
+    public String getMaPN() {
+        return this.maPN;
     }
 
-    public void setIdNH(String idNH) {
-        this.idNH = idNH;
+    public void setMaPN(String maPN) {
+        this.maPN = maPN;
     }
 
     public String getMaNCC() {
@@ -42,12 +40,12 @@ public class NhapHang {
         this.maNCC = maNCC;
     }
 
-    public String getMaSP() {
-        return maSP;
+    public String getMaNV() {
+        return this.maNV;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
     }
 
     public String getNgayNhap() {
@@ -58,22 +56,7 @@ public class NhapHang {
         this.ngayNhap = ngayNhap;
     }
 
-    public int getDonGiaNhap() {
-        return donGiaNhap;
-    }
-
-    public void setDonGiaNhap(int donGiaNhap) {
-        this.donGiaNhap = donGiaNhap;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
+    
     public int getTongTien() {
         return tongTien;
     }
