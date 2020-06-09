@@ -93,7 +93,7 @@ public class LaptopDAO {
         System.out.println(sql);
     }
     
-    public void set(Laptop sp) {
+    public void set(Laptop sp) {    
         String sql = "UPDATE sanpham SET ";
         sql += "TENSP='"+sp.getTen()+"', ";
         sql += "SOLUONG='"+sp.getSoluong()+"', ";

@@ -117,7 +117,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtSl.setBounds(new Rectangle(350,80,220,30));
         txtSl.setFont(font0);
 
-        JLabel lbGia = new JLabel("Đơn giá (VNĐ)");
+        JLabel lbGia = new JLabel("Đơn giá ($)");
         lbGia.setBounds(new Rectangle(250,120,200,30));
         lbGia.setFont(font0);
         txtGia = new JTextField("");
