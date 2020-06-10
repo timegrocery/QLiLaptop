@@ -165,17 +165,21 @@ public class QLiLaptop extends JFrame implements MouseListener {
         for(int i  = 0 ; i<navObj.size();i++)
         {
             navItem item = navObj.get(i); // lấy vị trí item trong menu
-            if(e.getSource()== item) {
+            if(e.getSource() == item) {
                 item.doActive(); // Active NavItem đc chọn 
                 changeMainInfo(i); // Hiển thị ra phần main
             }
-            else
+            else if (e.getSource() == item.getlb())
             {
+                item.doActive();
+                changeMainInfo(i);
+            }
+            else{
                 item.noActive();
             }
         }
     }
-
+    
     public void changeMainInfo(int i) //Đổi Phần hiển thị khi bấm btn trên menu
     {
         if(flag && i>4 && i<8) // Thay đổi nếu Thông kế đang dropdown
@@ -274,6 +278,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
             String iconActive = navItem.get(i).split(":")[2];
             navObj.add(new navItem(s, new Rectangle(0,200+50*i,220,50),icon,iconActive));
             navObj.get(i).addMouseListener(this);
+            navObj.get(i).getlb().addMouseListener(this);
         }
         //Đổi màu phần DropDown của thống kê 
         if(!flag && navObj.size() > 8) {
@@ -281,7 +286,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
             navObj.get(6).setColorNormal(new Color(86, 94, 127));
         }
         
-        //Xuất ra Naigation
+        //Xuất ra Nagivation
         nav.removeAll();
         JLabel profile = new JLabel(new ImageIcon("./src/main/java/image/baolong_150px.png"));
         profile.setBounds(0,0,220,200);

@@ -111,6 +111,10 @@ public class navItem extends JPanel implements MouseListener {
         return name;
     }
     
+    public JLabel getlb(){
+        return lb;
+    }
+
     public void doActive()
     {
         active = true;
