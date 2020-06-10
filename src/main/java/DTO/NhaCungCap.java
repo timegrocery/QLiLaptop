@@ -51,6 +51,9 @@ public class NhaCungCap {
     public void setDienThoai(String dienThoai) {
         this.dienThoai = dienThoai;
     }
-    
+    @Override
+    public String toString() {
+        return tenNCC;
+    }
 }
 

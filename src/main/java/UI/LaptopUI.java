@@ -64,7 +64,7 @@ public class LaptopUI extends JPanel implements KeyListener {
     private BufferedImage i = null;//Hình ảnh chọn từ file
     private JLabel img;
     private String imgName = "null";
-    private JTextField txtId,txtTenSP,txtSl,txtGia,txtNSX,txtSearch;
+    private JTextField txtId,txtTenSP,txtSl,txtGia,txtSearch;
     private DefaultTableModel model;
     private int DEFALUT_WIDTH;
     private boolean EditOrAdd = true;//Cờ cho button Cofirm True:ADD || False:Edit
@@ -72,7 +72,6 @@ public class LaptopUI extends JPanel implements KeyListener {
     private JTextField txtMaxPrice;
     private JTextField sortMaSP;
     private JTextField txtMinPrice;
-    private JTextField sortMaNSX;
     private JComboBox cmbNCC;
     private JComboBox cmbSortNCC;
     
