@@ -99,6 +99,13 @@ public class QLiLaptop extends JFrame implements MouseListener {
                 System.exit(0);
             }
         });
+
+        exit.getlb().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
         
         minimize.addMouseListener(new MouseAdapter() {
            @Override
@@ -106,6 +113,13 @@ public class QLiLaptop extends JFrame implements MouseListener {
               setState(Frame.ICONIFIED);
            }
         });
+
+        minimize.getlb().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               setState(Frame.ICONIFIED);
+            }
+         });
         
         header.add(hmain);
         
