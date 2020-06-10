@@ -64,7 +64,7 @@ public class LaptopUI extends JPanel implements KeyListener {
     private BufferedImage i = null;//Hình ảnh chọn từ file
     private JLabel img;
     private String imgName = "null";
-    private JTextField txtId,txtTenSP,txtSl,txtGia,txtSearch;
+    private JTextField txtId,txtTenSP,txtGia,txtCPU,txtRAM,txtGPU,txtManhinh,txtOcung,txtSearch;
     private DefaultTableModel model;
     private int DEFALUT_WIDTH;
     private boolean EditOrAdd = true;//Cờ cho button Cofirm True:ADD || False:Edit
@@ -74,6 +74,8 @@ public class LaptopUI extends JPanel implements KeyListener {
     private JTextField txtMinPrice;
     private JComboBox cmbNCC;
     private JComboBox cmbSortNCC;
+    private JComboBox cmbNSX;
+    private JComboBox cmbSortNSX;
     
     
     //        
@@ -94,7 +96,7 @@ public class LaptopUI extends JPanel implements KeyListener {
 /****************************** PHẦN HIỂN THỊ THÔNG TIN ******************************************/
 
         JPanel ItemView = new JPanel(null);
-        ItemView.setBounds(new Rectangle(30, 20, this.DEFALUT_WIDTH - 220 , 250));
+        ItemView.setBounds(new Rectangle(30, 20, this.DEFALUT_WIDTH - 220 , 310));
         ItemView.setBackground(Color.WHITE);
         
         /******** Tao Cac Label & TextField ************************/
@@ -104,39 +106,82 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtId = new JTextField("");
         txtId.setBounds(new Rectangle(350,0,220,30));
         txtId.setFont(font0);
-
+        txtId.setEditable(false);
+        
         JLabel lbName = new JLabel("Tên Sản Phẩm");
         lbName.setBounds(new Rectangle(250,40,200,30));
         lbName.setFont(font0);
         txtTenSP = new JTextField("");
         txtTenSP.setBounds(new Rectangle(350,40,220,30));
         txtTenSP.setFont(font0);
+        txtTenSP.setEditable(false);
 
-        JLabel lbSl = new JLabel("Số lượng");
-        lbSl.setBounds(new Rectangle(250,80,200,30));
-        lbSl.setFont(font0);
-        txtSl = new JTextField("");
-        txtSl.setBounds(new Rectangle(350,80,220,30));
-        txtSl.setFont(font0);
 
         JLabel lbGia = new JLabel("Đơn giá ($)");
-        lbGia.setBounds(new Rectangle(250,120,200,30));
+        lbGia.setBounds(new Rectangle(250,80,200,30));
         lbGia.setFont(font0);
         txtGia = new JTextField("");
-        txtGia.setBounds(new Rectangle(350,120,220,30));
+        txtGia.setBounds(new Rectangle(350,80,220,30));
         txtGia.setFont(font0);
+        txtGia.setEditable(false);
+        
+        JLabel lbCPU = new JLabel("CPU");
+        lbCPU.setBounds(new Rectangle(250,120,200,30));
+        lbCPU.setFont(font0);
+        txtCPU = new JTextField("");
+        txtCPU.setBounds(new Rectangle(350,120,220,30));
+        txtCPU.setFont(font0);
+        txtCPU.setEditable(false);
+        
+        JLabel lbRAM = new JLabel("RAM");
+        lbRAM.setBounds(new Rectangle(250,160,200,30));
+        lbRAM.setFont(font0);
+        txtRAM = new JTextField("");
+        txtRAM.setBounds(new Rectangle(350,160,220,30));
+        txtRAM.setFont(font0);
+        txtRAM.setEditable(false);
+        
+        JLabel lbGPU = new JLabel("GPU");
+        lbGPU.setBounds(new Rectangle(250,200,200,30));
+        lbGPU.setFont(font0);
+        txtGPU = new JTextField("");
+        txtGPU.setBounds(new Rectangle(350,200,220,30));
+        txtGPU.setFont(font0);
+        txtGPU.setEditable(false);
+        
+        JLabel lbManhinh = new JLabel("Màn hình");
+        lbManhinh.setBounds(new Rectangle(250,240,200,30));
+        lbManhinh.setFont(font0);
+        txtManhinh = new JTextField("");
+        txtManhinh.setBounds(new Rectangle(350,240,220,30));
+        txtManhinh.setFont(font0);
+        txtManhinh.setEditable(false);
+        
+        JLabel lbOcung = new JLabel("Ổ cứng");
+        lbOcung.setBounds(new Rectangle(250,280,200,30));
+        lbOcung.setFont(font0);
+        txtOcung = new JTextField("");
+        txtOcung.setBounds(new Rectangle(350,280,220,30));
+        txtOcung.setFont(font0);
+        txtOcung.setEditable(false);
 
         JLabel lbNCC = new JLabel("NCC");
-        lbNCC.setBounds(new Rectangle(250,200,50,30));
+        lbNCC.setBounds(new Rectangle(620,240,50,30));
         lbNCC.setFont(font0);
         cmbNCC = new JComboBox();
-//      cmbNCC.setEditable(true);
+        cmbNCC.setEditable(false);
         cmbNCC.setFont(font0);
-        cmbNCC.setBounds(new Rectangle(320,200,100,30));
+        cmbNCC.setBounds(new Rectangle(690,240,100,30));
         listNCC(cmbNCC);
-//        txtNSX = new JTextField("");
-//        txtNSX.setBounds(new Rectangle(370,250,80,30));
-//        txtNSX.setFont(font0);
+        
+        JLabel lbNSX = new JLabel("NSX");
+        lbNSX.setBounds(new Rectangle(620,280,50,30));
+        lbNSX.setFont(font0);
+        cmbNSX = new JComboBox();
+        cmbNCC.setEditable(false);
+        cmbNSX.setFont(font0);
+        cmbNSX.setBounds(new Rectangle(690,280,100,30));
+        listNSX(cmbNSX);
         
         img = new JLabel("Image");
         img.setBorder(createLineBorder(Color.BLACK));
@@ -148,12 +193,22 @@ public class LaptopUI extends JPanel implements KeyListener {
         ItemView.add(txtId);
         ItemView.add(lbName);
         ItemView.add(txtTenSP);
-        ItemView.add(lbSl);
-        ItemView.add(txtSl);
         ItemView.add(lbGia);
         ItemView.add(txtGia);
+        ItemView.add(lbCPU);
+        ItemView.add(txtCPU);
+        ItemView.add(lbRAM);
+        ItemView.add(txtRAM);
+        ItemView.add(lbGPU);
+        ItemView.add(txtGPU);
+        ItemView.add(lbManhinh);
+        ItemView.add(txtManhinh);
+        ItemView.add(lbOcung);
+        ItemView.add(txtOcung);
         ItemView.add(lbNCC);
         ItemView.add(cmbNCC);
+        ItemView.add(lbNSX);
+        ItemView.add(cmbNSX);
 //        ItemView.add(txtNCC);
         /************************************************************/
         
@@ -206,6 +261,8 @@ public class LaptopUI extends JPanel implements KeyListener {
         ItemView.add(btnFile);
         ItemView.add(btnXuatExcel);
         ItemView.add(btnNhapExcel);
+        // toggle editable field
+        
         
         // MouseClick btnADD
         btnAdd.addMouseListener(new MouseAdapter(){
@@ -215,6 +272,8 @@ public class LaptopUI extends JPanel implements KeyListener {
                 EditOrAdd = true;
                 
                 cleanView();
+                editableStatus(true);
+                txtId.setEditable(true);
                 
                 btnAdd.setVisible(false);
                 btnEdit.setVisible(false);
@@ -238,6 +297,7 @@ public class LaptopUI extends JPanel implements KeyListener {
                 {
                     spBUS.deleteSP(txtId.getText());
                     cleanView();
+                    editableStatus(false);
                     tbl.clearSelection();
                     outModel(model, spBUS.getList());
                 }
@@ -248,8 +308,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         btnEdit.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e)
             {
-                if(txtId.getText().equals(""))
-                {
+                if(txtId.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm cần sửa !!!");
                     return;
                 }
@@ -257,7 +316,7 @@ public class LaptopUI extends JPanel implements KeyListener {
                 EditOrAdd = false;
                 
                 
-                txtId.setEditable(false);
+                editableStatus(true);
                 
                 btnAdd.setVisible(false);
                 btnEdit.setVisible(false);
@@ -267,7 +326,7 @@ public class LaptopUI extends JPanel implements KeyListener {
                 btnBack.setVisible(true);
                 btnFile.setVisible(true);
                 
-//                tbl.clearSelection();
+//              tbl.clearSelection();
                 tbl.setEnabled(false);
             }
         });
@@ -307,6 +366,7 @@ public class LaptopUI extends JPanel implements KeyListener {
             {
                 cleanView();
                 
+                editableStatus(false);
                 btnAdd.setVisible(true);
                 btnEdit.setVisible(true);
                 btnDelete.setVisible(true);
@@ -331,17 +391,18 @@ public class LaptopUI extends JPanel implements KeyListener {
                     {
                         //Lấy dữ liệu từ TextField
                         String maSP = txtId.getText();
-                        String maNsx = "";
+                        NhaSanXuat nsx = (NhaSanXuat) cmbNSX.getSelectedItem();
+                        String maNsx = nsx.getMaNSX();
                         NhaCungCap ncc = (NhaCungCap) cmbNCC.getSelectedItem();
                         String maNcc = ncc.getMaNCC();
                         String tenSP = txtTenSP.getText();
-                        int sl = Integer.parseInt(txtSl.getText());
+                        int sl = 0;
                         int gia = Integer.parseInt(txtGia.getText());
-                        String CPU = "";
-                        String RAM = "";
-                        String GPU = "";
-                        String manhinh = "";
-                        String ocung = "";
+                        String CPU = txtCPU.getText();
+                        String RAM = txtRAM.getText();
+                        String GPU = txtGPU.getText();
+                        String manhinh = txtManhinh.getText();
+                        String ocung = txtOcung.getText();
                         String IMG = imgName;
                         if(spBUS.checkMasp(maSP))
                         {
@@ -357,6 +418,7 @@ public class LaptopUI extends JPanel implements KeyListener {
                         saveIMG();// Lưu hình ảnh 
 
                         cleanView();
+                        editableStatus(false);
                     }
                 }
                 else    // Edit Sản phẩm
@@ -366,19 +428,18 @@ public class LaptopUI extends JPanel implements KeyListener {
                     {
                         //Lấy dữ liệu từ TextField
                         String maSP = txtId.getText();
-                        String maNsx = "";
+                        NhaSanXuat nsx = (NhaSanXuat) cmbNSX.getSelectedItem();
+                        String maNsx = nsx.getMaNSX();
                         NhaCungCap ncc = (NhaCungCap) cmbNCC.getSelectedItem();
                         String maNcc = ncc.getMaNCC();
                         String tenSP = txtTenSP.getText();
-                        int sl = Integer.parseInt(txtSl.getText());
+                        int sl = spBUS.getSP(maSP).getSoluong();
                         int gia = Integer.parseInt(txtGia.getText());
-                        String CPU = "";
-                        String RAM = "";
-                        String GPU = "";
-                        String manhinh = "";
-                        String ocung = "";
-                        
-//                      String maNsx = txtNSX.getText();
+                        String CPU = txtCPU.getText();
+                        String RAM = txtRAM.getText();
+                        String GPU = txtGPU.getText();
+                        String manhinh = txtManhinh.getText();
+                        String ocung = txtOcung.getText();
                         String IMG = imgName;
 
                         //Upload sản phẩm lên DAO và BUS
@@ -406,7 +467,7 @@ public class LaptopUI extends JPanel implements KeyListener {
             }
         });
 
-         btnNhapExcel.addMouseListener(new MouseAdapter(){
+        btnNhapExcel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e)
             {   
                 JFileChooser fc = new JFileChooser();
@@ -498,7 +559,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);
-        scroll.setBounds(new Rectangle(30, 360, this.DEFALUT_WIDTH - 400 , 300));
+        scroll.setBounds(new Rectangle(30, 450, this.DEFALUT_WIDTH - 400 , 200));
         scroll.setBackground(null);
         scroll.getVerticalScrollBar().setPreferredSize(new Dimension(5,100));
         add(scroll);
@@ -510,23 +571,29 @@ public class LaptopUI extends JPanel implements KeyListener {
              public void mouseClicked(MouseEvent e)
              {
                 int i = tbl.getSelectedRow();
-                if(tbl.getRowSorter() != null)
-                {
+                if(tbl.getRowSorter() != null) {
                     i = tbl.getRowSorter().convertRowIndexToModel(i);
                 }
                 imgName = tbl.getModel().getValueAt(i, 11).toString();
                 Image newImage ;
                 try {
                     newImage = new ImageIcon("./src/main/java/image/SanPham/"+imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
-                }catch(NullPointerException E)
+                } catch(NullPointerException E)
                 {
                     newImage = new ImageIcon("./src/main/java/image/SanPham/NoImage.jpg").getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT); 
                 }
                 txtId.setText(tbl.getModel().getValueAt(i, 0).toString());
-                txtTenSP.setText(tbl.getModel().getValueAt(i, 3).toString());
-                txtSl.setText(tbl.getModel().getValueAt(i, 4).toString()); 
-                txtGia.setText(tbl.getModel().getValueAt(i, 5).toString());
+                cmbNSX.setSelectedItem(nsxBUS.searchMaNsx(tbl.getModel().getValueAt(i, 1).toString()));
                 cmbNCC.setSelectedItem(nccBUS.searchMaNcc(tbl.getModel().getValueAt(i, 2).toString()));
+                txtTenSP.setText(tbl.getModel().getValueAt(i, 3).toString());
+                //txtSl.setText(tbl.getModel().getValueAt(i, 4).toString());
+                txtGia.setText(tbl.getModel().getValueAt(i, 5).toString());
+                txtCPU.setText(tbl.getModel().getValueAt(i, 6).toString());
+                txtRAM.setText(tbl.getModel().getValueAt(i, 7).toString());
+                txtGPU.setText(tbl.getModel().getValueAt(i, 8).toString());
+                txtManhinh.setText(tbl.getModel().getValueAt(i, 9).toString());
+                txtOcung.setText(tbl.getModel().getValueAt(i, 10).toString());
+                
                 
                 img.setText("");
                 img.setIcon(new ImageIcon(newImage));
@@ -604,7 +671,7 @@ public class LaptopUI extends JPanel implements KeyListener {
 /*********************** PHẦN SEARCH TABLE *****************************/
         JPanel sort = new JPanel(null);
         sort.setBackground(null);
-        sort.setBounds(30,265,this.DEFALUT_WIDTH - 400,100);
+        sort.setBounds(30,350,this.DEFALUT_WIDTH - 400,100);
 
         JLabel sortTitle = new JLabel("--------------------------------------------------------------------------- TÌM KIẾM THÔNG TIN ---------------------------------------------------------------------------",JLabel.CENTER); // Mỗi bên 74 dấu ( - )
         sortTitle.setFont(font1);
@@ -626,19 +693,35 @@ public class LaptopUI extends JPanel implements KeyListener {
         
         /*************************************/
         
-        /******** SORT MANSX **************/
+        /******** SORT MANCC **************/
         JLabel lbSortMaNCC = new JLabel("Mă NCC :");
         lbSortMaNCC.setFont(font0);
-        lbSortMaNCC.setBounds(340,40,60,30);
+        lbSortMaNCC.setBounds(170,40,60,30);
         sort.add(lbSortMaNCC);
 
         cmbSortNCC = new JComboBox();
         cmbSortNCC.setFont(font0);
-        cmbSortNCC.setBounds(new Rectangle(400,42,100,30));
+        cmbSortNCC.setBounds(new Rectangle(230,42,100,30));
         cmbSortNCC.addItem("Không");
         cmbSortNCC.addKeyListener(this);
         listNCC(cmbSortNCC);
         sort.add(cmbSortNCC);
+        
+        /*************************************/
+        
+        /******** SORT MANSX **************/
+        JLabel lbSortMaNSX = new JLabel("Mă NSX :");
+        lbSortMaNSX.setFont(font0);
+        lbSortMaNSX.setBounds(340,40,60,30);
+        sort.add(lbSortMaNSX);
+
+        cmbSortNSX = new JComboBox();
+        cmbSortNSX.setFont(font0);
+        cmbSortNSX.setBounds(new Rectangle(400,42,100,30));
+        cmbSortNSX.addItem("Không");
+        cmbSortNSX.addKeyListener(this);
+        listNSX(cmbSortNSX);
+        sort.add(cmbSortNSX);
         
         /*************************************/
         
@@ -695,17 +778,30 @@ public class LaptopUI extends JPanel implements KeyListener {
             Logger.getLogger(LaptopUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void cleanView() //Xóa trắng các TextField
-    {
+    
+    // toggle editable field
+    public void editableStatus(boolean flag) {
+        txtId.setEditable(false);
+        txtTenSP.setEditable(flag);
+        txtGia.setEditable(flag);
+        txtCPU.setEditable(flag);
+        txtRAM.setEditable(flag);
+        txtGPU.setEditable(flag);
+        txtManhinh.setEditable(flag);
+        txtOcung.setEditable(flag);
+    }
+    //Xóa trắng các TextField
+    public void cleanView() {
         txtId.setEditable(true);
 
         txtId.setText("");
         txtTenSP.setText("");
-        txtSl.setText("");
         txtGia.setText("");
-//        txtNSX.setText("");
-//        txtLoai.setText("");
-        
+        txtCPU.setText("");
+        txtRAM.setText("");
+        txtGPU.setText("");
+        txtManhinh.setText("");
+        txtOcung.setText("");
         img.setIcon(null);
         img.setText("Image");
         
@@ -750,6 +846,12 @@ public class LaptopUI extends JPanel implements KeyListener {
         if(nccBUS.getList()== null)nccBUS.listNCC();
         ArrayList<NhaCungCap> ncc = nccBUS.getList();
         addCombo(cmb,ncc);
+    }
+    public void listNSX(JComboBox cmb)
+    {
+        if(nsxBUS.getList()== null)nsxBUS.listNSX();
+        ArrayList<NhaSanXuat> nsx = nsxBUS.getList();
+        addCombo(cmb,nsx);
     }
     public void addCombo(JComboBox cmb,ArrayList list)
     {

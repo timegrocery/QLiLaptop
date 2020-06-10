@@ -76,7 +76,7 @@ public class LaptopDAO {
 
     public void add(Laptop ct) {
         MySQLConnect mySQL = new MySQLConnect();
-        String sql = "INSERT INTO chitiethoadon VALUES (";
+        String sql = "INSERT INTO laptop VALUES (";
                sql += "'"+ct.getMaLaptop()+"',";
                sql += "'"+ct.getMaNhaSanXuat()+"',";
                sql += "'"+ct.getMaNhaCungCap()+"',";
@@ -88,8 +88,7 @@ public class LaptopDAO {
                sql += "'"+ct.getGPU()+"',";
                sql += "'"+ct.getManhinh()+"',";
                sql += "'"+ct.getOcung()+"',";
-               sql += "'"+ct.getImg()+"',";
-               sql += "'1')";
+               sql += "'"+ct.getImg()+"')";
         System.out.println(sql);
         mySQL.executeUpdate(sql);
     }
