@@ -693,22 +693,6 @@ public class LaptopUI extends JPanel implements KeyListener {
         
         /*************************************/
         
-        /******** SORT MANCC **************/
-        JLabel lbSortMaNCC = new JLabel("Mă NCC :");
-        lbSortMaNCC.setFont(font0);
-        lbSortMaNCC.setBounds(170,40,60,30);
-        sort.add(lbSortMaNCC);
-
-        cmbSortNCC = new JComboBox();
-        cmbSortNCC.setFont(font0);
-        cmbSortNCC.setBounds(new Rectangle(230,42,100,30));
-        cmbSortNCC.addItem("Không");
-        cmbSortNCC.addKeyListener(this);
-        listNCC(cmbSortNCC);
-        sort.add(cmbSortNCC);
-        
-        /*************************************/
-        
         /******** SORT MANSX **************/
         JLabel lbSortMaNSX = new JLabel("Mă NSX :");
         lbSortMaNSX.setFont(font0);
@@ -861,20 +845,19 @@ public class LaptopUI extends JPanel implements KeyListener {
         }
     }
 
-    public void search()
-    {
+    public void search() {
         String masp = sortMaSP.getText();
-        String mancc = "";
-        if(cmbSortNCC.getSelectedIndex() != 0)
+        String mansx = "";
+        if(cmbSortNSX.getSelectedIndex() != 0)
         {
-             NhaCungCap ncc = (NhaCungCap) cmbSortNCC.getSelectedItem();
-             mancc = ncc.getMaNCC();
-             System.out.println(mancc);
+             NhaSanXuat nsx = (NhaSanXuat) cmbSortNSX.getSelectedItem();
+             mansx = nsx.getMaNSX();
+             System.out.println(mansx);
         }
         int max = txtMaxPrice.getText().equals("") ? 999999 : Integer.parseInt(txtMaxPrice.getText());
         int min = txtMinPrice.getText().equals("") ? 0      : Integer.parseInt(txtMinPrice.getText());
 
-        outModel(model,spBUS.searchSP(masp, mancc, max, min));
+        outModel(model,spBUS.searchSP(masp, mansx, max, min));
     }
     
     @Override

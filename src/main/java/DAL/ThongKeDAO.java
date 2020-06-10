@@ -33,7 +33,7 @@ public class ThongKeDAO {
             // BÁN
             if(!listHd.isEmpty())
             {
-                String sql1 = "SELECT SUM(SOLUONG) AS SL,SUM(SOLUONG*DONGIA) AS TONGTIEN FROM chitiethd WHERE (";
+                String sql1 = "SELECT SUM(SOLUONG) AS SL,SUM(SOLUONG*DONGIA) AS TONGTIEN FROM chitiethoadon WHERE (";
                 for(int i = 0 ; i < listHd.size() ; i++)
                 {
                     String mahd = listHd.get(i).getMaHD();
@@ -48,8 +48,7 @@ public class ThongKeDAO {
                 sql1 += "GROUP BY MAHD";
                 System.out.println(sql1);
                 ResultSet rs1 = mySQL.executeQuery(sql1);
-                while(rs1.next())
-                {
+                while(rs1.next()) {
                     slOut += rs1.getInt("SL");
                     sumOut += rs1.getInt("TONGTIEN");
                 }
@@ -126,7 +125,7 @@ public class ThongKeDAO {
             }
             
             // Mã SP || Số lượng 
-            String sql2 = "SELECT MASP,SUM(chitiethd.SOLUONG) AS SOLUONG FROM chitiethd WHERE chitiethd.MAHD IN (SELECT MAHD FROM hoadon WHERE (";
+            String sql2 = "SELECT MALAPTOP,SUM(chitiethoadon.SOLUONG) AS SOLUONG FROM chitiethoadon WHERE chitiethoadon.MAHD IN (SELECT MAHD FROM hoadon WHERE (";
             for(int i = 0 ; i < listHd.size() ; i++)
             {
                 String mahd = listHd.get(i).getMaHD();
@@ -138,12 +137,12 @@ public class ThongKeDAO {
                 sql2 += "MAHD ='"+ mahd +"' OR ";
             }
             sql2+= "AND MANV = '"+MaNV+"' )";
-            sql2 += "GROUP BY MASP";
+            sql2 += "GROUP BY MALAPTOP";
             System.out.println(sql2);
             ResultSet rs2 = mySQL.executeQuery(sql2);
             while(rs2.next())
             {
-                listItem += String.format("|%10s|%10s|\n",rs2.getString("MASP"),rs2.getString("SOLUONG"));
+                listItem += String.format("|%10s|%10s|\n",rs2.getString("MALAPTOP"),rs2.getString("SOLUONG"));
                 
             }
             
@@ -189,7 +188,7 @@ public class ThongKeDAO {
             }
             
             // Mã SP || Số lượng 
-            String sql2 = "SELECT MASP,SUM(chitiethd.SOLUONG) AS SOLUONG FROM chitiethd WHERE chitiethd.MAHD IN (SELECT MAHD FROM hoadon WHERE (";
+            String sql2 = "SELECT MALAPTOP,SUM(chitiethoadon.SOLUONG) AS SOLUONG FROM chitiethoadon WHERE chitiethoadon.MAHD IN (SELECT MAHD FROM hoadon WHERE (";
             for(int i = 0 ; i < listHd.size() ; i++)
             {
                 String mahd = listHd.get(i).getMaHD();
@@ -201,12 +200,12 @@ public class ThongKeDAO {
                 sql2 += "MAHD ='"+ mahd +"' OR ";
             }
             sql2+= "AND MAKH = '"+MaKH+"' )";
-            sql2 += "GROUP BY MASP";
+            sql2 += "GROUP BY MALAPTOP";
             System.out.println(sql2);
             ResultSet rs2 = mySQL.executeQuery(sql2);
             while(rs2.next())
             {
-                listItem += String.format("|%10s|%10s|\n",rs2.getString("MASP"),rs2.getString("SOLUONG"));
+                listItem += String.format("|%10s|%10s|\n",rs2.getString("MALAPTOP"),rs2.getString("SOLUONG"));
                 
             }
             
@@ -216,7 +215,7 @@ public class ThongKeDAO {
         }
         s += listItem;
         s += "--------------------------------------------------- \n";
-        s += "TỔNG TIỀN : "+sum+"VNĐ"+"\n";      
+        s += "TỔNG TIỀN : "+sum+"VNĐ"+"\n";
         return s;
     }
     
@@ -227,9 +226,8 @@ public class ThongKeDAO {
         {
             try {
                 MySQLConnect mySQL = new MySQLConnect();
-                String sql = "SELECT MASP,TENSP,SUM(SOLUONG) AS SOLUONG FROM chitiethd WHERE ";
-                for(int i = 0 ; i < listHd.size() ; i++)
-                {
+                String sql = "SELECT MALAPTOP,TENLAPTOP,SUM(SOLUONG) AS SOLUONG FROM chitiethoadon WHERE ";
+                for(int i = 0 ; i < listHd.size() ; i++) {
                     String mahd = listHd.get(i).getMaHD();
                     if(i == (listHd.size() - 1))
                     {
@@ -238,15 +236,15 @@ public class ThongKeDAO {
                     }
                     sql += "MAHD ='"+ mahd +"' OR ";
                 }
-                sql += "GROUP BY MASP ";
+                sql += "GROUP BY MALAPTOP ";
                 sql += "ORDER BY SUM(SOLUONG) DESC ";
                 sql += "LIMIT 5";
                 System.out.println(sql);
                 ResultSet rs = mySQL.executeQuery(sql);
                 while(rs.next())
                 {
-                    String maSP = rs.getString("MASP");
-                    String tenSP = rs.getString("TENSP");
+                    String maSP = rs.getString("MALAPTOP");
+                    String tenSP = rs.getString("TENLAPTOP");
                     int sl = rs.getInt("SOLUONG");
                     String s = String.format("%6s_%20s_%5d",maSP,tenSP,sl);
                     kq.add(s);
