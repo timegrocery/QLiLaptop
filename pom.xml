@@ -47,11 +47,6 @@
             <artifactId>JDateChooser</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.toedter.JCalendar</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
-        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

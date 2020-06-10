@@ -49,6 +49,25 @@ public class NhaCungCapBUS {
             }
         }
     }
+    public NhaCungCap searchMaNcc(String mancc) {
+        for(NhaCungCap ncc : dsncc) {
+            if( ncc.getMaNCC().equals(mancc)) {
+                return ncc;
+            }
+        }
+        return null;
+    }
+    public ArrayList<NhaCungCap> searchNcc(String mancc,String tenncc) {
+        ArrayList<NhaCungCap> search = new ArrayList<>();
+        mancc = mancc.isEmpty()?mancc = "": mancc;
+        tenncc = tenncc.isEmpty()?tenncc = "": tenncc;
+        for(NhaCungCap ncc : dsncc)
+            if( ncc.getMaNCC().contains(mancc) && 
+                ncc.getTenNCC().contains(tenncc)) {
+                search.add(ncc);
+            }
+        return search;
+    }
     public boolean checkMancc(String MaNCC) {
         for(NhaCungCap ncc : dsncc) {
             if(ncc.getMaNCC().equals(MaNCC)) {

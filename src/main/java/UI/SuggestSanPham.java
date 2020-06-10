@@ -289,7 +289,6 @@ public class SuggestSanPham extends JDialog {
             data.add(s.getTen());
             data.add(s.getSoluong());
             data.add(s.getGia());
-            data.add(s.getMaChitiet());
             data.add(s.getImg());
             model.addRow(data);
         }

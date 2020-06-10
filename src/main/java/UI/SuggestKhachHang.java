@@ -45,7 +45,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class SuggestKhachHang extends JDialog {
     private KhachHangBUS khBUS = new KhachHangBUS();
-    private JTextField txtMaKH,txtTen,txtPhai;
+    private JTextField txtMaKH,txtSdt;
     private DefaultTableModel model;
     private JTable tbl;
     private int DWIDTH = 1200;
@@ -93,21 +93,14 @@ public class SuggestKhachHang extends JDialog {
         itemView.add(lbHo);
         itemView.add(txtHo);
         
-        JLabel lbTen = new JLabel("Địa chỉ ");
-        lbTen.setFont(font0);
-        lbTen.setBounds(20,120,100,30);
-        txtTen = new JTextField();
-        txtTen.setBounds(new Rectangle(120,120,250,30));
-        itemView.add(lbTen);
-        itemView.add(txtTen);
         
-        JLabel lbPhai = new JLabel("SĐT ");
-        lbPhai.setFont(font0);
-        lbPhai.setBounds(20,170,100,30);
-        txtPhai = new JTextField();
-        txtPhai.setBounds(new Rectangle(120,170,250,30));
-        itemView.add(lbPhai);
-        itemView.add(txtPhai);
+        JLabel lbSdt = new JLabel("SĐT ");
+        lbSdt.setFont(font0);
+        lbSdt.setBounds(20,170,100,30);
+        txtSdt = new JTextField();
+        txtSdt.setBounds(new Rectangle(120,170,250,30));
+        itemView.add(lbSdt);
+        itemView.add(txtSdt);
         
 /**************** TẠO CÁC BTN XÓA, SỬA, VIEW, IN BILL ********************/
 
@@ -141,7 +134,6 @@ public class SuggestKhachHang extends JDialog {
         Vector header = new Vector();
         header.add("Mă KH");
         header.add("Họ và tên");
-        header.add("Địa chỉ");
         header.add("SĐT");
         model = new DefaultTableModel(header,5);
         tbl = new JTable(model);
@@ -158,7 +150,6 @@ public class SuggestKhachHang extends JDialog {
         tbl.getColumnModel().getColumn(0).setPreferredWidth(40);
         tbl.getColumnModel().getColumn(1).setPreferredWidth(100);
         tbl.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tbl.getColumnModel().getColumn(3).setPreferredWidth(50);
 
         // Custom table
         tbl.setFocusable(false);
@@ -191,9 +182,8 @@ public class SuggestKhachHang extends JDialog {
                     i = tbl.getRowSorter().convertRowIndexToModel(i);
                 }
                 txtMaKH.setText(tbl.getModel().getValueAt(i, 0).toString());
-                txtHo.setText(tbl.getModel().getValueAt(i, 1).toString());
-                txtTen.setText(tbl.getModel().getValueAt(i, 2).toString()); 
-                txtPhai.setText(tbl.getModel().getValueAt(i, 3).toString());
+                txtHo.setText(tbl.getModel().getValueAt(i, 1).toString()); 
+                txtSdt.setText(tbl.getModel().getValueAt(i, 2).toString());
              }
         });
 /*********************************************************************/
@@ -211,7 +201,6 @@ public class SuggestKhachHang extends JDialog {
         cmbChoice.setFont(new Font("Segoe UI",Font.PLAIN,14));
         cmbChoice.addItem("Mã KH");
         cmbChoice.addItem("Tên KH");
-        cmbChoice.addItem("Địa chỉ");
         cmbChoice.addItem("SĐT");
         cmbChoice.setBounds(new Rectangle(0,0,80,30));
         

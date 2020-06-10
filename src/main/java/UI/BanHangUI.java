@@ -447,32 +447,32 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnMaNV) // Suggest Nhan Vien
         {
-            //SuggestNhanVien rm = new SuggestNhanVien();
-            //String s = rm.getTextFieldContent();
-            //txtMaNV.setText(s);
+            SuggestNhanVien rm = new SuggestNhanVien();
+            String s = rm.getTextFieldContent();
+            txtMaNV.setText(s);
         }
         if(e.getSource() == btnMaKH) // Suggest Khach hang
         {
-            ///SuggestKhachHang rm = new SuggestKhachHang();
-            //String s = rm.getTextFieldContent();
-            //txtMaKH.setText(s);
+            SuggestKhachHang rm = new SuggestKhachHang();
+            String s = rm.getTextFieldContent();
+            txtMaKH.setText(s);
         }
         if(e.getSource().equals(btnMaSP)) // Suggest San Pham
         {
             // Lấy data và gắn lên TextField vs Hình
-            //SuggestSanPham rm = new SuggestSanPham(txtMaSP.getText());
-            //String[] s = rm.getTextFieldContent().split("%");
-            //txtMaSP.setText(s[0]);
-            //txtCTTenSP.setText(s[1]);
-            //txtCTGia.setText(s[2]);
+            SuggestSanPham rm = new SuggestSanPham(txtMaSP.getText());
+            String[] s = rm.getTextFieldContent().split("%");
+            txtMaSP.setText(s[0]);
+            txtCTTenSP.setText(s[1]);
+            txtCTGia.setText(s[2]);
             Image newImage ;
             try{
-               // newImage = new ImageIcon("./src/image/SanPham/"+s[3]).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
+                newImage = new ImageIcon("./src/image/SanPham/"+s[3]).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
             }catch(NullPointerException E)
             {
                 newImage = new ImageIcon("./src/main/java/image/SanPham/NoImage.jpg").getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT); 
             }
-            //imgSP.setIcon(new ImageIcon(newImage));
+            imgSP.setIcon(new ImageIcon(newImage));
             
             //Chỉnh Focus vào txtCTSL
             txtCTSL.requestFocus();

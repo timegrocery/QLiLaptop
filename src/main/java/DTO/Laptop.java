@@ -10,23 +10,78 @@ package DTO;
  * @author WindZ
  */
 public class Laptop {
-    String maLaptop, maChitiet, maNhaSanXuat, maNhaCungCap;
-    String ten, img;
-    int soluong,gia;
+    String maLaptop;
+    String maNhaSanXuat;
+    String maNhaCungCap;
+    String ten;
+    int soluong;
+    int gia;
+    String CPU;
+    String RAM;
+    String GPU;
+    String manhinh;
+    String ocung;    
+    String img;
+
     
     public Laptop() {
         
     }
     
-    public Laptop(String maLaptop, String ten, int soluong, int gia, String maChitiet, String maNhaSanXuat, String maNhaCungCap, String img) {
+    public Laptop(String maLaptop, String maNhaSanXuat, String maNhaCungCap, String ten, int soluong, int gia,
+            String CPU, String RAM, String GPU, String manhinh, String ocung, String img) {
         this.maLaptop = maLaptop;
+        this.maNhaSanXuat = maNhaSanXuat;
+        this.maNhaCungCap = maNhaCungCap;
         this.ten = ten;
         this.soluong = soluong;
         this.gia = gia;
-        this.maChitiet = maChitiet;
-        this.maNhaSanXuat = maNhaSanXuat;
-        this.maNhaCungCap = maNhaCungCap;
+        this.CPU = CPU;
+        this.RAM = RAM;
+        this.GPU = GPU;
+        this.manhinh = manhinh;
+        this.ocung = ocung;
         this.img = img;
+    }
+    
+    public String getCPU() {
+        return this.CPU;
+    }
+    
+    public void setCPU(String CPU) {
+        this.CPU = CPU;
+    }
+    
+    public String getRAM() {
+        return this.RAM;
+    }
+    
+    public void setRAM(String RAM) {
+        this.RAM = RAM;
+    }
+    
+    public String getGPU() {
+        return this.GPU;
+    }
+    
+    public void setGPU(String GPU) {
+        this.GPU = GPU;
+    }
+    
+    public String getManhinh() {
+        return this.manhinh;
+    }
+    
+    public void setManhinh(String manhinh) {
+        this.manhinh = manhinh;
+    }
+    
+    public String getOcung() {
+        return this.ocung;
+    }
+    
+    public void setOcung(String ocung) {
+        this.ocung = ocung;
     }
     
     public String getMaLaptop() {
@@ -60,14 +115,6 @@ public class Laptop {
     
     public void setGia(int gia) {
         this.gia = gia;
-    }
-    
-    public String getMaChitiet() {
-        return this.maChitiet;
-    }
-    
-    public void setMaChitiet(String maChitiet) {
-        this.maChitiet = maChitiet;
     }
     
     public String getMaNhaSanXuat() {
