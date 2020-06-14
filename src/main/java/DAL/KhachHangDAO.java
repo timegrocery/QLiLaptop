@@ -35,7 +35,7 @@ public class KhachHangDAO {
                 String maKH = rs.getString("MAKH");
                 String hoKH = rs.getString("HOKH");
                 String tenKH = rs.getString("TENKH");
-                int sdt = rs.getInt("SDT");
+                String sdt = rs.getString("SDT");
 
                 KhachHang ct = new KhachHang(maKH, hoKH, tenKH, sdt);
                 dsct.add(ct);

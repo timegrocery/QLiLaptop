@@ -237,7 +237,7 @@ public class KhachHangUI extends JPanel {
                         String maKH = txtMaKH.getText();
                         String hoKH = txtHoKH.getText();
                         String tenKH = txtTenKH.getText();
-                        int dienThoai = Integer.parseInt(txtSDT.getText());
+                        String dienThoai = txtSDT.getText();
                         if(khBUS.check(maKH)) {
                             JOptionPane.showMessageDialog(null, "Mã khách hàng đă tồn tại !!!");
                             return;
@@ -260,7 +260,7 @@ public class KhachHangUI extends JPanel {
                         String maKH = txtMaKH.getText();
                         String hoKH = txtHoKH.getText();
                         String tenKH = txtTenKH.getText();
-                        int sdt = Integer.parseInt(txtSDT.getText());
+                        String sdt = txtSDT.getText();
 
                         //Upload sản phẩm lên DAO và BUS
                         KhachHang kh = new KhachHang(maKH, hoKH, tenKH, sdt);

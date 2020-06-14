@@ -10,13 +10,12 @@ package DTO;
  * @author WindZ
  */
 public class KhachHang {
-    private String maKH,hoKH,tenKH;
-    private int sdt;
+    private String maKH,hoKH,tenKH,sdt;
 
     public KhachHang() {
     }
 
-    public KhachHang(String maKH, String hoKH, String tenKH, int sdt) {
+    public KhachHang(String maKH, String hoKH, String tenKH, String sdt) {
         this.maKH = maKH;
         this.hoKH = hoKH;
         this.tenKH = tenKH;
@@ -47,11 +46,11 @@ public class KhachHang {
         this.tenKH = tenKH;
     }
 
-    public int getSdt() {
+    public String getSdt() {
         return sdt;
     }
 
-    public void setSdt(int sdt) {
+    public void setSdt(String sdt) {
         this.sdt = sdt;
     }
     
