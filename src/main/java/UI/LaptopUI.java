@@ -273,7 +273,7 @@ public class LaptopUI extends JPanel implements KeyListener {
                 
                 cleanView();
                 editableStatus(true);
-                txtId.setEditable(true);
+                txtId.setText(spBUS.remindMaLaptop());
                 
                 btnAdd.setVisible(false);
                 btnEdit.setVisible(false);
@@ -451,7 +451,7 @@ public class LaptopUI extends JPanel implements KeyListener {
                         saveIMG();// Lưu hình ảnh 
                         
                         JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
-                        
+                        editableStatus(false);
                     }
                 }
                 
@@ -572,9 +572,17 @@ public class LaptopUI extends JPanel implements KeyListener {
              {
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null) {
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex) {
+                            
+                    }
                 }
-                imgName = tbl.getModel().getValueAt(i, 11).toString();
+                try {
+                    imgName = tbl.getModel().getValueAt(i, 11).toString();
+                } catch (Exception ex) {
+                    
+                }
                 Image newImage ;
                 try {
                     newImage = new ImageIcon("./src/main/java/image/SanPham/"+imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
@@ -776,8 +784,6 @@ public class LaptopUI extends JPanel implements KeyListener {
     }
     //Xóa trắng các TextField
     public void cleanView() {
-        txtId.setEditable(true);
-
         txtId.setText("");
         txtTenSP.setText("");
         txtGia.setText("");

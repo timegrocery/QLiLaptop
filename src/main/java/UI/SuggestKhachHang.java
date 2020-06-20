@@ -61,7 +61,7 @@ public class SuggestKhachHang extends JDialog {
     }
     public void init()
     {
-        setTitle("Danh sách sản phẩm");
+        setTitle("Danh sách khách hàng");
         setSize(DWIDTH,700);
         getContentPane().setBackground(new Color(55, 63, 81));
         setLayout(null);
@@ -104,7 +104,7 @@ public class SuggestKhachHang extends JDialog {
         
 /**************** TẠO CÁC BTN XÓA, SỬA, VIEW, IN BILL ********************/
 
-        JLabel btnConfirm = new JLabel(new ImageIcon("./src/image/btnConfirm_150px.png"));
+        JLabel btnConfirm = new JLabel(new ImageIcon("./src/main/java/image/btnConfirm_150px.png"));
         btnConfirm.setBounds(new Rectangle(20,260,150,50));
         btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnConfirm.addMouseListener(new MouseAdapter(){
@@ -114,7 +114,7 @@ public class SuggestKhachHang extends JDialog {
             }
         });
               
-        JLabel btnBack = new JLabel(new ImageIcon("./src/image/btnBack_150px.png"));
+        JLabel btnBack = new JLabel(new ImageIcon("./src/main/java/image/btnBack_150px.png"));
         btnBack.setBounds(new Rectangle(180,260,150,50));
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));    
         btnBack.addMouseListener(new MouseAdapter(){

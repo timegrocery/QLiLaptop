@@ -139,6 +139,7 @@ public class NhanVienUI extends JPanel{
         img.setBorder(createLineBorder(Color.BLACK));
         img.setBounds(new Rectangle(0,0,200,230));
         
+        
         // THÊM VÀO PHẦN HIỂN THỊ
         ItemView.add(img);
         ItemView.add(lbMaNV);
@@ -154,6 +155,7 @@ public class NhanVienUI extends JPanel{
 //        ItemView.add(txtPhai);
         ItemView.add(lbDiaChi);
         ItemView.add(txtDiaChi);
+        setEditable(false);
         /************************************************************/
         
         /**************** TẠO CÁC BTN THÊM ,XÓA, SỬA ********************/
@@ -215,6 +217,8 @@ public class NhanVienUI extends JPanel{
                 
                 tbl.clearSelection();
                 tbl.setEnabled(false);
+                txtMaNV.setText(nvBUS.remindMaNV());
+                setEditable(true);
             }
         });
         
@@ -249,7 +253,7 @@ public class NhanVienUI extends JPanel{
                 EditOrAdd = false;
                 
                 
-                txtMaNV.setEditable(false);
+                setEditable(true);
                 
                 btnAdd.setVisible(false);
                 btnEdit.setVisible(false);
@@ -305,6 +309,7 @@ public class NhanVienUI extends JPanel{
                 btnFile.setVisible(false);
                 
                 tbl.setEnabled(true);
+                setEditable(false);
             }
         });
         
@@ -345,9 +350,11 @@ public class NhanVienUI extends JPanel{
                         saveIMG();// Lưu hình ảnh 
                             
                         cleanView();
-                         }catch(NumberFormatException ex){
+                        setEditable(false);
+                        }catch(NumberFormatException ex){
                             JOptionPane.showMessageDialog(null,"Loi");
                         }
+                        
                     }
                 }
                 else    // Edit Sản phẩm
@@ -373,7 +380,7 @@ public class NhanVienUI extends JPanel{
                         saveIMG();// Lưu hình ảnh 
                         
                         JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
-                        
+                        setEditable(false);
                     }
                 }
                 
@@ -457,7 +464,11 @@ public class NhanVienUI extends JPanel{
              public void mouseClicked(MouseEvent e)
              {
                 int i = tbl.getSelectedRow();
-                imgName = tbl.getModel().getValueAt(i, 6).toString();
+                try {
+                    imgName = tbl.getModel().getValueAt(i, 6).toString();
+                } catch (Exception ex) {
+                    
+                }
                 Image newImage ;
                 try{
                     newImage = new ImageIcon("./src/main/java/image/NhanVien/"+imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
@@ -643,8 +654,6 @@ public class NhanVienUI extends JPanel{
     }
     public void cleanView() //Xóa trắng các TextField
     {
-        txtMaNV.setEditable(true);
-
         txtMaNV.setText("");
         txtHoNV.setText("");
         txtTenNV.setText("");
@@ -656,6 +665,15 @@ public class NhanVienUI extends JPanel{
         
         imgName = "null";
     }
+    
+    private void setEditable(boolean flag) {
+        txtMaNV.setEditable(false); // tránh lỗi trong lúc chỉnh sửa csdl
+        txtHoNV.setEditable(flag);
+        txtTenNV.setEditable(flag);
+        txtNamSinh.setEditable(flag);
+        txtDiaChi.setEditable(flag);
+    }
+    
     public void outModel(DefaultTableModel model , ArrayList<NhanVien> nv) // Xuất ra Table từ ArrayList
     {
         Vector data;

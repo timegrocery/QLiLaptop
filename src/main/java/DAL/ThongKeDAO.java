@@ -218,9 +218,8 @@ public class ThongKeDAO {
         s += "TỔNG TIỀN : "+sum+"VNĐ"+"\n";
         return s;
     }
-    
-    public ArrayList<String> StatisticTopSP(ArrayList<HoaDon> listHd)
-    {   
+
+    public ArrayList<String> StatisticTopSP(ArrayList<HoaDon> listHd) {   
         ArrayList<String> kq = new ArrayList<>();
         if(!listHd.isEmpty())
         {

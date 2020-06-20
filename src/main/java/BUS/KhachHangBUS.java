@@ -90,6 +90,22 @@ public class KhachHangBUS {
         }
         return search;
     }
+    
+    public String remindMaKH() {
+        int max = 0;
+        String s ="";
+        for(KhachHang kh : dskh) {
+            int id = Integer.parseInt(kh.getMaKH());
+            if(id > max) {
+                max = id;
+            }
+        }
+        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
+            s+="0";
+        }
+        return s+(max+1);
+    }
+    
     public ArrayList<KhachHang> getList() {
         return dskh;
     }

@@ -467,9 +467,8 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             txtCTGia.setText(s[2]);
             Image newImage ;
             try{
-                newImage = new ImageIcon("./src/image/SanPham/"+s[3]).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
-            }catch(NullPointerException E)
-            {
+                newImage = new ImageIcon("./src/main/java/image/SanPham/"+s[3]).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
+            } catch(NullPointerException E) {
                 newImage = new ImageIcon("./src/main/java/image/SanPham/NoImage.jpg").getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT); 
             }
             imgSP.setIcon(new ImageIcon(newImage));

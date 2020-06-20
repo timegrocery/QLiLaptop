@@ -41,10 +41,11 @@ import javax.swing.table.TableRowSorter;
 public class KhachHangUI extends JPanel {
     private KhachHangBUS khBUS = new KhachHangBUS();
     
-    private JTable tbl;
+    private JTable tbl = new JTable();
+    
     private JTextField txtMaKH,txtHoKH,txtTenKH,txtSDT;
     private JTextField sortMaKH,sortHoKH,sortTenKH;
-    private DefaultTableModel model;
+    DefaultTableModel model;
     private int DEFALUT_WIDTH;
     private boolean EditOrAdd = true;//Cờ cho button Cofirm True:ADD || False:Edit
     
@@ -55,6 +56,7 @@ public class KhachHangUI extends JPanel {
     }
     public void init()
     {
+        
         setLayout(null);
         setBackground(null);
         setBounds(new Rectangle(50, 0, this.DEFALUT_WIDTH - 220, 1000));
@@ -91,7 +93,7 @@ public class KhachHangUI extends JPanel {
         lbTenKH.setBounds(new Rectangle(400,40,200,30));
         lbTenKH.setFont(font0);
         txtTenKH.setBounds(new Rectangle(500,40,220,30));
-        
+        setEditable(false);
             
         
         // THÊM VÀO PHẦN HIỂN THỊ
@@ -140,6 +142,8 @@ public class KhachHangUI extends JPanel {
         itemView.add(btnConfirm);
         itemView.add(btnBack);
         
+        // set editable
+        
         // MouseClick btnADD
         btnAdd.addMouseListener(new MouseAdapter(){
             @Override
@@ -148,7 +152,7 @@ public class KhachHangUI extends JPanel {
                 EditOrAdd = true;
                 
                 cleanView();
-                
+                setEditable(true);
                 btnAdd.setVisible(false);
                 btnEdit.setVisible(false);
                 btnDelete.setVisible(false);
@@ -156,6 +160,7 @@ public class KhachHangUI extends JPanel {
                 btnConfirm.setVisible(true);
                 btnBack.setVisible(true);
 //                btnFile.setVisible(true);
+                txtMaKH.setText(khBUS.remindMaKH());
                 
                 tbl.clearSelection();
                 tbl.setEnabled(false);
@@ -167,8 +172,7 @@ public class KhachHangUI extends JPanel {
             public void mouseClicked(MouseEvent e)
             {   
                 int i = JOptionPane.showConfirmDialog(null, "Xác nhận xóa","Alert",JOptionPane.YES_NO_OPTION);
-                if(i == 0)
-                {
+                if(i == 0) {
                     khBUS.delete(txtMaKH.getText());
                     cleanView();
                     tbl.clearSelection();
@@ -189,8 +193,7 @@ public class KhachHangUI extends JPanel {
                 
                 EditOrAdd = false;
                 
-                
-                txtMaKH.setEditable(false);
+                setEditable(true);
                 
                 btnAdd.setVisible(false);
                 btnEdit.setVisible(false);
@@ -198,9 +201,6 @@ public class KhachHangUI extends JPanel {
                 
                 btnConfirm.setVisible(true);
                 btnBack.setVisible(true);
-//                btnFile.setVisible(true);
-                
-//                tbl.clearSelection();
                 tbl.setEnabled(false);
             }
         });
@@ -218,9 +218,9 @@ public class KhachHangUI extends JPanel {
                 
                 btnConfirm.setVisible(false);
                 btnBack.setVisible(false);
-//                btnFile.setVisible(false);
                 
                 tbl.setEnabled(true);
+                setEditable(false);
             }
         });
         
@@ -231,8 +231,7 @@ public class KhachHangUI extends JPanel {
                 int i;
                 if(EditOrAdd) {
                     i = JOptionPane.showConfirmDialog(null, "Xác nhận thêm khách hàng?","",JOptionPane.YES_NO_OPTION);
-                    if(i == 0)
-                    {
+                    if(i == 0) {
                         //Lấy dữ liệu từ TextField
                         String maKH = txtMaKH.getText();
                         String hoKH = txtHoKH.getText();
@@ -249,13 +248,13 @@ public class KhachHangUI extends JPanel {
                         outModel(model, khBUS.getList());// Load lại table
                         
                         cleanView();
+                        setEditable(false);
                     }
                 }
                 else    // Edit Sản phẩm
                 {
                     i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa khách hàng?","",JOptionPane.YES_NO_OPTION);
-                    if(i == 0)
-                    {
+                    if(i == 0) {
                         //Lấy dữ liệu từ TextField
                         String maKH = txtMaKH.getText();
                         String hoKH = txtHoKH.getText();
@@ -265,11 +264,12 @@ public class KhachHangUI extends JPanel {
                         //Upload sản phẩm lên DAO và BUS
                         KhachHang kh = new KhachHang(maKH, hoKH, tenKH, sdt);
                         khBUS.set(kh);
-                        
+
                         outModel(model, khBUS.getList());// Load lại table
                         
                         
                         JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
+                        setEditable(false);
                         
                     }
                 }
@@ -282,8 +282,7 @@ public class KhachHangUI extends JPanel {
 /************** TẠO MODEL VÀ HEADER *********************/
         Vector header = new Vector();
         header.add("Mă KH");
-        header.add("Họ KH");
-        header.add("Tên KH");
+        header.add("Họ và tên");
         header.add("SĐT");
         model = new DefaultTableModel(header,5);
         tbl = new JTable(model);
@@ -297,9 +296,8 @@ public class KhachHangUI extends JPanel {
 
         // Chỉnh width các cột 
         tbl.getColumnModel().getColumn(0).setPreferredWidth(40);
-        tbl.getColumnModel().getColumn(1).setPreferredWidth(40);
+        tbl.getColumnModel().getColumn(1).setPreferredWidth(80);
         tbl.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tbl.getColumnModel().getColumn(3).setPreferredWidth(100);
 
 
         // Custom table
@@ -327,9 +325,18 @@ public class KhachHangUI extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 int i = tbl.getSelectedRow();
                 txtMaKH.setText(tbl.getModel().getValueAt(i, 0).toString());
-                txtHoKH.setText(tbl.getModel().getValueAt(i, 1).toString());
-                txtTenKH.setText(tbl.getModel().getValueAt(i, 2).toString()); 
-                txtSDT.setText( tbl.getModel().getValueAt(i, 3).toString());        
+                String name = tbl.getModel().getValueAt(i, 1).toString();
+                String lastName = "";
+                String firstName= "";
+                if(name.split("\\w+").length>1){
+                    lastName = name.substring(name.lastIndexOf(" ")+1);
+                    firstName = name.substring(0, name.lastIndexOf(' '));
+                } else {
+                    firstName = name;
+                }
+                txtHoKH.setText(firstName);
+                txtTenKH.setText(lastName);
+                txtSDT.setText(tbl.getModel().getValueAt(i, 2).toString());
             }
         });
 /*********************** SORT TABLE *****************************/
@@ -353,7 +360,7 @@ public class KhachHangUI extends JPanel {
         txtSearch.setOpaque(false);
         txtSearch.setFont(new Font("Segoe UI",Font.PLAIN,15));
         
-        // Custem Icon search
+        // Custom Icon search
         JLabel searchIcon = new JLabel(new ImageIcon("./src/main/java/image/search_25px.png"));
         searchIcon.setBounds(new Rectangle(485,-10,50,50));
         searchIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -385,8 +392,9 @@ public class KhachHangUI extends JPanel {
                 if (text.trim().length() == 0) {
                     rowSorter.setRowFilter(null);
                 } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)"+ text +"", choice));
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)"+ text +"", choice));
                 }
+                
             }
 
             @Override
@@ -410,9 +418,16 @@ public class KhachHangUI extends JPanel {
         itemView.add(searchBox);
 /******************************************************************/
     }
+    
+    private void setEditable(boolean flag) {
+        txtMaKH.setEditable(false); // tránh lỗi trong lúc chỉnh sửa csdl
+        txtHoKH.setEditable(flag);
+        txtTenKH.setEditable(flag);
+        txtSDT.setEditable(flag);
+    }
     public void cleanView() //Xóa trắng các TextField
     {
-        txtMaKH.setEditable(true);
+        txtMaKH.setEditable(false);
 
         txtMaKH.setText("");
         txtHoKH.setText("");
@@ -427,8 +442,7 @@ public class KhachHangUI extends JPanel {
         for(KhachHang n:nv) {
             data = new Vector();
             data.add(n.getMaKH());
-            data.add(n.getHoKH());
-            data.add(n.getTenKH());
+            data.add(n.getHoKH() + " " + n.getTenKH());
             data.add(n.getSdt());
             model.addRow(data);
         }

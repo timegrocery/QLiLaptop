@@ -111,7 +111,7 @@ public class SuggestNhanVien extends JDialog {
         
 /**************** TẠO CÁC BTN XÓA, SỬA, VIEW, IN BILL ********************/
 
-        JLabel btnConfirm = new JLabel(new ImageIcon("./src/image/btnConfirm_150px.png"));
+        JLabel btnConfirm = new JLabel(new ImageIcon("./src/main/java/image/btnConfirm_150px.png"));
         btnConfirm.setBounds(new Rectangle(20,260,150,50));
         btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnConfirm.addMouseListener(new MouseAdapter(){
@@ -121,7 +121,7 @@ public class SuggestNhanVien extends JDialog {
             }
         });
               
-        JLabel btnBack = new JLabel(new ImageIcon("./src/image/btnBack_150px.png"));
+        JLabel btnBack = new JLabel(new ImageIcon("./src/main/java/image/btnBack_150px.png"));
         btnBack.setBounds(new Rectangle(180,260,150,50));
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));    
         btnBack.addMouseListener(new MouseAdapter(){

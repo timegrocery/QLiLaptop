@@ -76,7 +76,7 @@ public class KhachHangDAO {
     
     public void delete(String MaHD) {
         MySQLConnect mySQL = new MySQLConnect();
-        String sql = "DELETE FROM khachhhang WHERE MAKH='"+MaHD+"'";  
+        String sql = "DELETE FROM khachhang WHERE MAKH='"+MaHD+"'";  
         mySQL.executeUpdate(sql);
         System.out.println(sql);
     }

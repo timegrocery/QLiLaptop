@@ -84,6 +84,20 @@ public class NhanVienBUS {
         }
         return search;
     }
+    public String remindMaNV() {
+        int max = 0;
+        String s ="";
+        for(NhanVien nv : dsnv) {
+            int id = Integer.parseInt(nv.getMaNV());
+            if(id > max) {
+                max = id;
+            }
+        }
+        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
+            s+="0";
+        }
+        return s+(max+1);
+    }
     public ArrayList<NhanVien> getList() {
         return dsnv;
     }

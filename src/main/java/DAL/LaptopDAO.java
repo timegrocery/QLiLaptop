@@ -101,19 +101,19 @@ public class LaptopDAO {
     }
     
     public void set(Laptop sp) {    
-        String sql = "UPDATE sanpham SET ";
-        sql += "'"+sp.getMaNhaSanXuat()+"',";
-        sql += "'"+sp.getMaNhaCungCap()+"',";
-        sql += "'"+sp.getTen()+"',";
-        sql += "'"+sp.getSoluong()+"',";
-        sql += "'"+sp.getGia()+"',";
-        sql += "'"+sp.getCPU()+"',";
-        sql += "'"+sp.getRAM()+"',";
-        sql += "'"+sp.getGPU()+"',";
-        sql += "'"+sp.getManhinh()+"',";
-        sql += "'"+sp.getOcung()+"',";
-        sql += "'"+sp.getImg()+"',";
-        sql += "WHERE MASP='"+sp.getMaLaptop()+"'";
+        String sql = "UPDATE laptop SET ";
+        sql += "MANSX='"+sp.getMaNhaSanXuat()+"', ";
+        sql += "MANCC='"+sp.getMaNhaCungCap()+"', ";
+        sql += "TEN='"+sp.getTen()+"', ";
+        sql += "SOLUONG='"+sp.getSoluong()+"', ";
+        sql += "GIA='"+sp.getGia()+"', ";
+        sql += "CPU='"+sp.getCPU()+"', ";
+        sql += "RAM='"+sp.getRAM()+"', ";
+        sql += "GPU='"+sp.getGPU()+"', ";
+        sql += "MANHINH='"+sp.getManhinh()+"', ";
+        sql += "OCUNG='"+sp.getOcung()+"', ";
+        sql += "IMG='"+sp.getImg()+"' ";
+        sql += "WHERE MALAPTOP='"+sp.getMaLaptop()+"'";
         System.out.println(sql);
         mySQL.executeUpdate(sql);
     }
@@ -137,10 +137,10 @@ public class LaptopDAO {
             XSSFCell cell;
             
             cell = row.createCell(0);
-            cell.setCellValue("MASP");
+            cell.setCellValue("MALAPTOP");
             cell.setCellStyle(style);
             cell = row.createCell(1);
-            cell.setCellValue("TENSP");
+            cell.setCellValue("TEN");
             cell.setCellStyle(style);
             cell = row.createCell(2);
             cell.setCellValue("SOLUONG");

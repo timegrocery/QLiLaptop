@@ -112,6 +112,20 @@ public class LaptopBUS {
         }
         return search;
     }
+    public String remindMaLaptop() {
+        int max = 0;
+        String s ="";
+        for(Laptop kh : dssp) {
+            int id = Integer.parseInt(kh.getMaLaptop());
+            if(id > max) {
+                max = id;
+            }
+        }
+        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
+            s+="0";
+        }
+        return s+(max+1);
+    }
     public ArrayList<Laptop> getList() {
         return dssp;
     }

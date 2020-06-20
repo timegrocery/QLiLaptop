@@ -165,7 +165,7 @@ public class HoaDonUI extends JPanel {
         
         itemView.add(btnConfirm);
         itemView.add(btnBack);
-        
+        setEditable(false);
         // MouseClick btnDelete
         btnDelete.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e)
@@ -221,6 +221,7 @@ public class HoaDonUI extends JPanel {
                     return;
                 }
                 isEdit(true);
+                setEditable(true);
                 
             }   
         });
@@ -255,6 +256,7 @@ public class HoaDonUI extends JPanel {
                 outModel(model, hdBUS.getList());
                 tbl.setRowSelectionInterval(i, i);
                 isEdit(false);
+                setEditable(false);
             }   
         });
         
@@ -279,7 +281,9 @@ public class HoaDonUI extends JPanel {
                     System.out.println(newTime);
                     txtNgayHD.setText(newTime.toString());
                 }
+                setEditable(false);
             }
+            
         });
         /*************************************************************************/
 /****************** TẠO MODEL VÀ HEADER *********************************************/
@@ -348,7 +352,11 @@ public class HoaDonUI extends JPanel {
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null)
                 {
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex) {
+                        
+                    }
                 }
                 txtMaHD.setText(tbl.getModel().getValueAt(i, 0).toString());
                 try
@@ -424,18 +432,7 @@ public class HoaDonUI extends JPanel {
         txtMaxPrice.setFont(font0);
         txtMaxPrice.setBounds(new Rectangle(510,42,100,26));
         sort.add(txtMaxPrice);
-          
-        /******************************************/
-        /************ SORT MÃ SP ***************/
-        JLabel sortSP = new JLabel("Mã SP :");
-        sortSP.setFont(font0);
-        sortSP.setBounds(650,40,60,30);
-        sort.add(sortSP);
-
         txtMaSP = new JTextField();
-        txtMaSP.setFont(font0);
-        txtMaSP.setBounds(new Rectangle(700,42,100,26));  
-        sort.add(txtMaSP);
 //        /******************************************/
         JLabel btnSearch = new JLabel(new ImageIcon("./src/main/java/image/btnSearch_45px.png"));
         btnSearch.setBounds(new Rectangle(840,20,63,63));
@@ -467,7 +464,7 @@ public class HoaDonUI extends JPanel {
         }
         double max = txtMaxPrice.getText().equals("") ? 99999999 : Double.parseDouble(txtMaxPrice.getText());
         double min = txtMinPrice.getText().equals("") ? 0      : Double.parseDouble(txtMinPrice.getText());
-
+        
         outModel(model,hdBUS.search(mm, yyy, max, min,ctBUS.getHD(txtMaSP.getText())));
     }
     public void cleanView()
@@ -477,6 +474,13 @@ public class HoaDonUI extends JPanel {
         txtMaNV.setText("");
         txtNgayHD.setText("");
         txtTongTien.setText("");
+    }
+    public void setEditable(boolean flag) {
+        txtMaHD.setEditable(false);
+        txtMaKH.setEditable(flag);
+        txtMaNV.setEditable(flag);
+        txtNgayHD.setEditable(flag);
+        txtTongTien.setEditable(flag);
     }
     public void outModel(DefaultTableModel model , ArrayList<HoaDon> hd) // Xuất ra Table từ ArrayList
     {
