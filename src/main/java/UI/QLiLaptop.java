@@ -61,7 +61,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
         
 /************ PHẦN HEADER *************************************/      
         header = new JPanel(null);
-        header.setBackground(new Color(40,40,40));
+        header.setBackground(new Color(34, 56, 92));
         header.setPreferredSize(new Dimension(DEFALUT_WIDTH,40));
         
         header hmain = new header(DEFALUT_WIDTH, 40, "Quản lý cửa hàng");
@@ -128,7 +128,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
 
 /************ PHẦN NAVIGATION ( MENU ) **************************/  
         nav = new JPanel(null);
-        nav.setBackground(new Color(55, 63, 81));
+        nav.setBackground(new Color(56, 121, 164));
         nav.setPreferredSize(new Dimension(220,DEFAULT_HEIGHT));
         
         JScrollPane scroll = new JScrollPane(nav);
@@ -255,7 +255,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
             case 6: // NHẬP HÀNG
                 main.removeAll();
                 //main.add(new Maintainance(DEFALUT_WIDTH, "THỐNG KÊ - NHẬP HÀNG"));
-                main.add(new NhapHangUI(DEFALUT_WIDTH));
+                main.add(new NhapHangUI(DEFALUT_WIDTH, userID));
                 main.repaint();
                 main.revalidate();
             break;
@@ -296,13 +296,13 @@ public class QLiLaptop extends JFrame implements MouseListener {
         }
         //Đổi màu phần DropDown của thống kê 
         if(!flag && navObj.size() > 8) {
-            navObj.get(5).setColorNormal(new Color(86, 94, 127));
-            navObj.get(6).setColorNormal(new Color(86, 94, 127));
+            navObj.get(5).setColorNormal(new Color(109, 173, 255));
+            navObj.get(6).setColorNormal(new Color(109, 173, 255));
         }
         
         //Xuất ra Nagivation
         nav.removeAll();
-        JLabel profile = new JLabel(new ImageIcon("./src/main/java/image/baolong_150px.png"));
+        JLabel profile = new JLabel(new ImageIcon("./src/main/java/image/profile_150px.png"));
         profile.setBounds(0,0,220,200);
         nav.add(profile);
         for(navItem n : navObj) {

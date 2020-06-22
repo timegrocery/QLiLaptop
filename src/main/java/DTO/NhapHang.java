@@ -10,22 +10,22 @@ package DTO;
  * @author WindZ
  */
 public class NhapHang {
-    private String maPN, maNCC, maNV, ngayNhap;
-    private int tongTien;
+    private String maPN, maNCC, maNV, ngayNhap, maLaptop;
+    private int soluong, dongia, tongTien;
 
-    public NhapHang() {
-    }
-
-    public NhapHang(String maPN, String maNCC, String maNV, String ngayNhap, int tongTien) {
+    public NhapHang(String maPN, String maNCC, String maNV, String ngayNhap, String maLaptop, int soluong, int dongia, int tongTien) {
         this.maPN = maPN;
         this.maNCC = maNCC;
         this.maNV = maNV;
         this.ngayNhap = ngayNhap;
+        this.maLaptop = maLaptop;
+        this.soluong = soluong;
+        this.dongia = dongia;
         this.tongTien = tongTien;
     }
 
     public String getMaPN() {
-        return this.maPN;
+        return maPN;
     }
 
     public void setMaPN(String maPN) {
@@ -41,11 +41,19 @@ public class NhapHang {
     }
 
     public String getMaNV() {
-        return this.maNV;
+        return maNV;
     }
 
     public void setMaNV(String maNV) {
         this.maNV = maNV;
+    }
+
+    public String getMaLaptop() {
+        return maLaptop;
+    }
+
+    public void setMaLaptop(String maLaptop) {
+        this.maLaptop = maLaptop;
     }
 
     public String getNgayNhap() {
@@ -56,7 +64,22 @@ public class NhapHang {
         this.ngayNhap = ngayNhap;
     }
 
-    
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public int getDongia() {
+        return dongia;
+    }
+
+    public void setDongia(int dongia) {
+        this.dongia = dongia;
+    }
+
     public int getTongTien() {
         return tongTien;
     }
@@ -65,7 +88,5 @@ public class NhapHang {
         this.tongTien = tongTien;
     }
 
-    
-    
     
 }

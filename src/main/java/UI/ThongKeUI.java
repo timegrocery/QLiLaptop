@@ -15,12 +15,8 @@ import DTO.Laptop;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -28,15 +24,12 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
-//import javafx.scene.control.ToggleButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,15 +37,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
-//import jdk.tools.jaotc.binformat.pecoff.JPECoffRelocObject;
+
 
 /**
  *
@@ -103,16 +94,14 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
     private JScrollPane scrollViewALL;
     
     
-    public ThongKeUI(int width)
-    {
+    public ThongKeUI(int width){
         spBUS.listSP();
         nvBUS.listNV();
         khBUS.list();
         DEFALUT_WIDTH = width;
         init();
     }
-    public void init()
-    {
+    public void init(){
         setLayout(null);
         setBackground(null);
         setBounds(new Rectangle(50, 0, this.DEFALUT_WIDTH - 220, 730));
@@ -199,10 +188,8 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         txtMa.setBounds(new Rectangle(110,0,230,30));
         txtMa.setFont(font0);
         txtMa.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e)
-            {
-                if(e.getKeyChar() == KeyEvent.VK_ENTER)
-                {
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyChar() == KeyEvent.VK_ENTER){
                     btnStatistic.doClick();
                 }
             }
@@ -308,8 +295,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         
         cmbTrimester.setBounds(new Rectangle(110,0,160,30));
         cmbTrimester.setFont(font0);
-        for(int i = 1 ; i <=12  ; i+=3)
-        {
+        for(int i = 1 ; i <=12  ; i+=3){
             cmbTrimester.addItem("Quý "+(i+2)/3+" ( tháng "+i+" - "+(i+2)+" )");
         }
         
@@ -343,8 +329,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         
         cmbPeriod.setBounds(new Rectangle(110,0,160,30));
         cmbPeriod.setFont(font0);
-        for(int i = 1 ; i <=12  ; i+=4)
-        {
+        for(int i = 1 ; i <=12  ; i+=4){
             cmbPeriod.addItem("Kỳ "+(i+3)/4+" ( tháng "+i+" - "+(i+3)+" )");
         }
         
@@ -432,8 +417,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
 /*********************************************************************/
 
     }
-    public static void main(String[]args)
-    {
+    public static void main(String[]args){
         JFrame frame = new JFrame();
         frame.setSize(1080, 730);
         frame.setLocationRelativeTo(null);
@@ -441,89 +425,74 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         frame.add(new ThongKeUI(1300));
         frame.setVisible(true);
     }
-    public void listDate(JComboBox cmb,boolean flag) // TRUE is FROM - FALSE is TO
-    {
+    public void listDate(JComboBox cmb,boolean flag){ // TRUE is FROM - FALSE is TO
         cmb.addItem("Không");
         int thisMonth = 12 , thisDate = 31 ,thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        if( cmbFromYear.getSelectedIndex() > 0 || cmbToYear.getSelectedIndex() > 0)
-        {
-            thisYear = flag ? Integer.parseInt(cmbFromYear.getSelectedItem().toString()) : Integer.parseInt(cmbToYear.getSelectedItem().toString());
-//            System.out.println(thisYear);
+        if( cmbFromYear.getSelectedIndex() > 0 || cmbToYear.getSelectedIndex() > 0){
+            try {
+                thisYear = flag ? Integer.parseInt(cmbFromYear.getSelectedItem().toString()) : Integer.parseInt(cmbToYear.getSelectedItem().toString());
+                
+            } catch (Exception ex) {
+
+            }
         }
-        if( cmbFromMonth.getSelectedIndex() > 0 || cmbToMonth.getSelectedIndex() > 0)
-        {
+        if( cmbFromMonth.getSelectedIndex() > 0 || cmbToMonth.getSelectedIndex() > 0){
             thisMonth = flag?cmbFromMonth.getSelectedIndex():cmbToMonth.getSelectedIndex();
-//            System.out.println(thisMonth);
         }
         
         Calendar calendar = Calendar.getInstance();
         calendar.set(thisYear, thisMonth - 1, 1);
-//        System.out.println(calendar.getTime());
+
         thisDate = calendar.getActualMaximum(Calendar.DATE);
-//        System.out.println(thisDate);
+
         
-        for(int i = 1 ; i <= thisDate ; i++)
-        {
+        for(int i = 1 ; i <= thisDate ; i++){
             cmb.addItem(i);
         }
     }
-    public void listMonth(JComboBox cmb)
-    {
+    public void listMonth(JComboBox cmb){
         cmb.addItem("Không");
-        for(int i = 1 ; i <= 12 ; i++ )
-        {
+        for(int i = 1 ; i <= 12 ; i++ ){
             cmb.addItem(i);
         }
     }
-    public void listYear(JComboBox cmb)
-    {
+    public void listYear(JComboBox cmb){
         cmb.addItem("Không");
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        for(int i = thisYear ; i >= thisYear - 20 ; i-- )
-        {
+        for(int i = thisYear ; i >= thisYear - 20 ; i-- ){
             cmb.addItem(i);
         }
     }
     
-    public void btnStaticticAction (ActionEvent e)
-    {
+    public void btnStaticticAction(ActionEvent e){
         ThongKeBUS tk = new ThongKeBUS();
         String ma = txtMa.getText();
         Object obj = null;
-        if(ckMaSP.isSelected())
-        {
-            if(OnOff)
-            {
+        if(ckMaSP.isSelected()){
+            if(OnOff){
                 obj = new Laptop();
                 obj = spBUS.getSP(ma);
-                if(obj == null)
-                {
+                if(obj == null){
                     JOptionPane.showMessageDialog(null, "Không tồn tại sản phầm !!");
                     return;
                 }
             }
         }
-        else if(ckMaNV.isSelected())
-        {
-            if(OnOff)
-            {
+        else if(ckMaNV.isSelected()){
+            if(OnOff){
                 obj = new NhanVien();
                 obj = nvBUS.get(ma);
-                if(obj == null)
-                {
+                if(obj == null){
                     JOptionPane.showMessageDialog(null, "Không tồn tại nhân viên !!");
                     return;
                 }
             }
         }
-        else if(ckMaKH.isSelected())
-        {
-            if(OnOff)
-            {
+        else if(ckMaKH.isSelected()){
+            if(OnOff){
                 obj = new KhachHang();
                 obj = khBUS.get(ma);
-                if(obj == null)
-                {
+                if(obj == null){
                     JOptionPane.showMessageDialog(null, "Không tồn tại khách hàng !!");
                     return;
                 }
@@ -534,8 +503,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         Calendar to = Calendar.getInstance();
         
         // THÔNG KÊ THEO NGÀY
-        if(ckDate.isSelected())
-        {
+        if(ckDate.isSelected()){
             int fYear = cmbFromYear.getSelectedIndex()>0 ? Integer.parseInt(cmbFromYear.getSelectedItem().toString()) : 2000;
             int fMonth = cmbFromMonth.getSelectedIndex()>0 ? cmbFromMonth.getSelectedIndex()-1 : 0;
             int fDate =  cmbFromDate.getSelectedIndex()>0 ? Integer.parseInt(cmbFromDate.getSelectedItem().toString()) : 1;
@@ -549,8 +517,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
             to.set(tYear, tMonth, tDate,23,0,0);
         }
         // THỐNG KÊ THEO QUÝ
-        else if(ckTrimester.isSelected())
-        {
+        else if(ckTrimester.isSelected()){
             int year = Integer.parseInt(cmbYearTrimester.getSelectedItem().toString());
             int fMonth = (cmbTrimester.getSelectedIndex()+1)*3-2;
             int tMonth = fMonth + 2;
@@ -560,8 +527,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
             int dateOfMonth = to.getActualMaximum(Calendar.DAY_OF_MONTH);
             to.set(Calendar.DATE, dateOfMonth);
         }
-        else if(ckPeriod.isSelected()) 
-        {
+        else if(ckPeriod.isSelected()){
             int year = Integer.parseInt(cmbYearPeriod.getSelectedItem().toString());
             int fMonth = (cmbPeriod.getSelectedIndex()+1)*4-3;
             int tMonth = fMonth + 3;
@@ -576,47 +542,32 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         System.out.print(from.getTime());
         System.err.println(to.getTime());
         
-        if(to.before(from))
-        {
+        if(to.before(from)){
             JOptionPane.showMessageDialog(null,"Lỗi");
             return;
         }
         
-        if(OnOff)
-        {
+        if(OnOff){
             String result = "";
-            if(ckMaSP.isSelected())
-            {
+            if(ckMaSP.isSelected()) {
                 result = tk.StatisticSP(ma, from, to);
-            }
-            else if(ckMaNV.isSelected())
-            {
+            } else if(ckMaNV.isSelected()){
                 result = tk.StatisticNV(ma, from, to);
-            }
-            else if(ckMaKH.isSelected())
-            {
+            } else if(ckMaKH.isSelected()){
                 result = tk.StatisticKH(ma, from, to);
             }
-
             SimpleDateFormat sdf = new SimpleDateFormat("dd - MM - yyyy");
-
             viewStatistic.setText( outStatistic( obj,sdf.format( from.getTime() ), sdf.format( to.getTime() ) ,result) );
-        }
-        else
-        {
-            if(ckMaSP.isSelected())
-            {
+        } else{
+            if(ckMaSP.isSelected()){
                 Vector header = new Vector();
                 header.add("STT");
                 header.add("Mã SP");
                 header.add("SL Bán");
-                model = new DefaultTableModel(header,5);
                 header.add("Tên SP");
-                
+                model = new DefaultTableModel(header,5);
                 outStatistic(tk.StatisticTopSP(from, to));
-            }
-            else if(ckMaNV.isSelected())
-            {
+            } else if(ckMaNV.isSelected()) {
                 Vector header = new Vector();
                 header.add("STT");
                 header.add("Mã NV");
@@ -625,44 +576,36 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
                 model = new DefaultTableModel(header,5);
                 
                 outStatistic(tk.StatisticTopNV(from, to));
-            }
-            else if(ckMaKH.isSelected())
-            {
+            } else if(ckMaKH.isSelected()) {
                 Vector header = new Vector();
                 header.add("STT");
                 header.add("Mã KH");
                 header.add("Họ và Tên");
                 header.add("Tổng tiền(VNĐ)");
                 model = new DefaultTableModel(header,5);
-                
+
                 outStatistic(tk.StatisticTopKH(from, to));
             }
         }
     }
     
-    public String outStatistic(Object obj,String fromDate, String toDate, String result)
-    {
+    public String outStatistic(Object obj,String fromDate, String toDate, String result){
         String s = "Từ ngày : "+fromDate+"\n";
         s += "Đến ngày : "+toDate+"\n";
         s += "--------------------------------------------- \n";
-        if(ckMaSP.isSelected())
-        {
+        if(ckMaSP.isSelected()){
             Laptop sp = (Laptop) obj; 
             s += "Sản phẩm :"+sp.getMaLaptop()+"\t";
             s += "Tên : "+sp.getTen()+"\n";
             s += result;
-        }
-        else if(ckMaNV.isSelected())
-        {
+        } else if (ckMaNV.isSelected()){
             NhanVien nv = (NhanVien) obj; 
             s += "Mã nhân viên :"+nv.getMaNV()+"\n";
             s += "Họ và tên : "+nv.getHoNV().concat(" "+nv.getTenNV())+"\n";
             s += "Tuổi :"+( Calendar.getInstance().get(Calendar.YEAR) - nv.getNamSinh() )+"\n";
             s += "Phái :"+nv.getPhai()+"\n";
             s += result;
-        }
-        else if(ckMaKH.isSelected())
-        {
+        } else if(ckMaKH.isSelected()) {
             KhachHang kh = (KhachHang) obj; 
             s += "Mã khách hàng :"+kh.getMaKH()+"\n";
             s += "Họ và tên : "+kh.getHoKH().concat(" "+kh.getTenKH())+"\n";
@@ -671,15 +614,11 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         }
         return s;
     }
-    public void outStatistic(ArrayList<String> sp)
-    {
+    public void outStatistic(ArrayList<String> sp){
         model.setRowCount(0);
-        for(int i = 0 ; i < sp.size() ; i++)
-        {
+        for(int i = 0 ; i < sp.size() ; i++){
             System.out.print(sp.get(i));
             String[] s = sp.get(i).split("_");
-//            System.out.println(s[1]);
-            /**********/
             String maSP = s[0].trim();
             String tenSP = s[1].trim();
             String sl = s[2].trim();
@@ -692,22 +631,20 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
             model.addRow(data);
         }
         tbl.setModel(model);
-        tbl.getColumnModel().getColumn(0).setPreferredWidth(15);
-        tbl.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tbl.getColumnModel().getColumn(2).setPreferredWidth(140);
-        tbl.getColumnModel().getColumn(3).setPreferredWidth(50);
+        tbl.getColumnModel().getColumn(0).setPreferredWidth(7);
+        tbl.getColumnModel().getColumn(1).setPreferredWidth(15);
+        tbl.getColumnModel().getColumn(2).setPreferredWidth(20);
+        tbl.getColumnModel().getColumn(3).setPreferredWidth(100);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
         //Switch On Off
-        if(obj.equals(onOffButton))
-        {
+        if(obj.equals(onOffButton)){
             Color color = new Color(61, 252, 47);
             int change = 60;
             String text = "TOP";
-            if(!OnOff)
-            {
+            if(!OnOff){
                 change = 0;
                 text = "ALL";
                 color = Color.GRAY;
@@ -731,32 +668,24 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         }
         
         
-        if(obj.equals(cmbFromMonth) || obj.equals(cmbFromYear))
-        {
+        if(obj.equals(cmbFromMonth) || obj.equals(cmbFromYear)){
             cmbFromDate.removeAllItems();
             listDate(cmbFromDate,true);
         }
-        if(obj.equals(cmbToMonth) || obj.equals(cmbToYear))
-        {
+        if(obj.equals(cmbToMonth) || obj.equals(cmbToYear)){
             cmbToDate.removeAllItems();
             listDate(cmbToDate,false);
         }
-        if(obj.equals(btnSuggest))
-        {
-            if(ckMaSP.isSelected())
-            {
+        if(obj.equals(btnSuggest)){
+            if(ckMaSP.isSelected()){
                 SuggestSanPham sp = new SuggestSanPham(txtMa.getText());
                 String s = sp.getTextFieldContent();
                 txtMa.setText(s.split("%")[0]);
-            }
-            else if(ckMaNV.isSelected())
-            {
+            } else if(ckMaNV.isSelected()){
                 SuggestNhanVien sp = new SuggestNhanVien();
                 String s = sp.getTextFieldContent();
                 txtMa.setText(s);
-            }
-            else if(ckMaKH.isSelected())
-            {
+            } else if(ckMaKH.isSelected()){
                 SuggestKhachHang sp = new SuggestKhachHang();
                 String s = sp.getTextFieldContent();
                 txtMa.setText(s);
@@ -765,49 +694,36 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) 
-    {
+    public void itemStateChanged(ItemEvent e) {
         // Chọn Control TIME
-        if(ckDate.isSelected())
-        {
+        if(ckDate.isSelected()){
             paneTime.setVisible(true);
             paneTrimester.setVisible(false);
             panePeriod.setVisible(false);
-        }
-        else if(ckTrimester.isSelected())
-        {
+        } else if(ckTrimester.isSelected()){
             paneTime.setVisible(false);
             paneTrimester.setVisible(true);
             panePeriod.setVisible(false);
-        }
-        else
-        {
+        } else{
             paneTime.setVisible(false);
             paneTrimester.setVisible(false);
             panePeriod.setVisible(true);
         }
         
         // Chọn Control MĂ
-        if(ckMaSP.isSelected() && OnOff)
-        {
+        if(ckMaSP.isSelected() && OnOff) {
             lbMa.setVisible(true);
             txtMa.setVisible(true);
             lbMa.setText("Mă sản phẩm");
-        }
-        else if(ckMaNV.isSelected() && OnOff)
-        {
+        } else if(ckMaNV.isSelected() && OnOff){
             lbMa.setVisible(true);
             txtMa.setVisible(true);
             lbMa.setText("Mã nhân viên");
-        }
-        else if(ckMaKH.isSelected() && OnOff)
-        {
+        } else if(ckMaKH.isSelected() && OnOff){
             lbMa.setVisible(true);
             txtMa.setVisible(true);
             lbMa.setText("Mã khách hàng");
-        }
-        else
-        {
+        } else{
             lbMa.setVisible(false);
             txtMa.setVisible(false);
         }
@@ -817,6 +733,5 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
     @Override
     public void stateChanged(ChangeEvent e) {
         txtMa.setVisible(false);
-        
     }
 }

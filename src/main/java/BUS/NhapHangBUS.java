@@ -78,6 +78,20 @@ public class NhapHangBUS {
         }
         return list;
     }
+    public String remindMaNH() {
+        int max = 0;
+        String s ="";
+        for(NhapHang nh : dsNH) {
+            int id = Integer.parseInt(nh.getMaPN());
+            if(id > max) {
+                max = id;
+            }
+        }
+        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
+            s+="0";
+        }
+        return s+(max+1);
+    }
     public ArrayList<NhapHang> getList() {
         return dsNH;
     }

@@ -22,8 +22,8 @@ import javax.swing.JPanel;
  */
 public class navItem extends JPanel implements MouseListener {
     private JLabel lb,icon;
-    private Color hover = new Color(100, 113, 140);
-    private Color normal = new Color(67, 76, 94);
+    private Color hover = new Color(101, 135, 235);
+    private Color normal = new Color(109, 172, 181);
     private boolean active ;
     private String name,img,imgActive,imgHover;
     private Rectangle rec = new Rectangle();
@@ -50,16 +50,14 @@ public class navItem extends JPanel implements MouseListener {
         this.hover = hover;
         init();
     }
-    public navItem(String s,Rectangle r)
-    {
+    public navItem(String s,Rectangle r){
         lb = new JLabel(s);
         icon = new JLabel();
         rec = r;
         init();
     }
     
-    public void setColorNormal(Color e)
-    {
+    public void setColorNormal(Color e){
         this.normal = e;
         lb.setBackground(normal);
         lb.repaint();   
@@ -82,16 +80,15 @@ public class navItem extends JPanel implements MouseListener {
         setBounds(rec);
         
         icon.setIcon(new ImageIcon("./src/main/java/image/"+img));
-        icon.setBackground(Color.white);
+        icon.setBackground(new Color(249, 242, 255));
         icon.setBounds(new Rectangle(rec.width/7 , rec.height/4, 50, 30));
         
         lb.setFont(font);
-        lb.setForeground(Color.white);
+        lb.setForeground(Color.WHITE);
         lb.setBounds(new Rectangle(rec.width/4+10, rec.height/4, 150, 30));
            
-        if(active)
-        {
-            setBackground(Color.WHITE);
+        if(active) {
+            setBackground(new Color(249, 242, 255));
         }
         else
         {
@@ -120,7 +117,7 @@ public class navItem extends JPanel implements MouseListener {
         active = true;
         icon.setIcon(new ImageIcon("./src/main/java/image/"+imgActive));
         lb.setForeground(Color.BLACK);
-        setBackground(Color.WHITE);
+        setBackground(new Color(249, 242, 255));
     }
     public void noActive()
     {

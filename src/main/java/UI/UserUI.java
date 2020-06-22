@@ -135,13 +135,14 @@ public class UserUI extends JPanel {
                 btnBack.setVisible(true);
                 
                 tbl.setEnabled(false);
+                setEditable(true);
             }
         });
               
         btnDelete.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 System.exit(0);
+                setEditable(false);
             }
         });
         
@@ -149,8 +150,7 @@ public class UserUI extends JPanel {
             public void mouseClicked(MouseEvent e)
             {
                 int i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa sản phẩm","",JOptionPane.YES_NO_OPTION);
-                    if(i == 0)
-                    {
+                    if(i == 0){
                         //Lấy dữ liệu từ TextField
                         String maNV = txtMaNV.getText();
                         String user = txtUser.getText();
@@ -164,9 +164,8 @@ public class UserUI extends JPanel {
                         
                         outModel(model, usBUS.getList());// Load lại table
                         
-//                        saveIMG();// Lưu hình ảnh 
-                        
                         JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
+                        setEditable(false);
                         
                     }
             }
@@ -185,6 +184,7 @@ public class UserUI extends JPanel {
 //                btnFile.setVisible(false);
                 
                 tbl.setEnabled(true);
+                setEditable(false);
             }
         });
         
@@ -192,6 +192,8 @@ public class UserUI extends JPanel {
         itemView.add(btnDelete);
         itemView.add(btnConfirm);
         itemView.add(btnBack);
+        
+        setEditable(false);
 /*************************************************************************/
 /**************** TẠO TABLE ************************************************************/
 
@@ -220,7 +222,7 @@ public class UserUI extends JPanel {
 
         // Custom table
         tbl.setFocusable(false);
-        tbl.setIntercellSpacing(new Dimension(0,0));     
+        tbl.setIntercellSpacing(new Dimension(0,0));
         tbl.getTableHeader().setFont(font1);
         tbl.setRowHeight(30);
         tbl.setShowVerticalLines(false);              
@@ -281,11 +283,15 @@ public class UserUI extends JPanel {
     
     public void cleanView() //Xóa trắng các TextField
     {
-        txtMaNV.setEditable(true);
-
+        txtMaNV.setEditable(false);
         txtMaNV.setText("");
         txtUser.setText("");
         txtPass.setText("");
- 
+    }
+    
+    public void setEditable(boolean flag){
+        txtMaNV.setEditable(false);
+        txtUser.setEditable(flag);
+        txtPass.setEditable(flag);
     }
 }

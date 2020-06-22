@@ -110,6 +110,7 @@ public class NhaCungCapUI extends JPanel {
         itemView.add(lbDienThoai);
         itemView.add(txtDienThoai);
         add(itemView);
+        setEditable(false);
         
         /**************** TẠO CÁC BTN THÊM ,XÓA, SỬA ********************/
         JLabel btnAdd = new JLabel(new ImageIcon("./src/main/java/image/btnAdd.png"));
@@ -160,35 +161,33 @@ public class NhaCungCapUI extends JPanel {
                 
                 btnConfirm.setVisible(true);
                 btnBack.setVisible(true);
-//                btnFile.setVisible(true);
                 
                 tbl.clearSelection();
                 tbl.setEnabled(false);
+                txtMaNCC.setText(nccBUS.remindMaNCC());
+                setEditable(true);
             }
         });
         
         // MouseClick btnDelete
         btnDelete.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {   
+            public void mouseClicked(MouseEvent e){   
                 int i = JOptionPane.showConfirmDialog(null, "Xác nhận xóa","Alert",JOptionPane.YES_NO_OPTION);
-                if(i == 0)
-                {
+                if(i == 0){
                     nccBUS.deleteNCC(txtMaNCC.getText());
                     cleanView();
                     tbl.clearSelection();
                     outModel(model, nccBUS.getList());
+                    setEditable(false);
                 }
             }
         });
         
         // MouseClick btnEdit
         btnEdit.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 
-                if(txtMaNCC.getText().equals(""))
-                {
+                if(txtMaNCC.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp cần sửa !!!");
                     return;
                 }
@@ -206,14 +205,14 @@ public class NhaCungCapUI extends JPanel {
                 btnBack.setVisible(true);
 
                 tbl.setEnabled(false);
+                setEditable(true);
             }
         });
         
         
         //MouseClick btnBack
         btnBack.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 cleanView();
                 
                 btnAdd.setVisible(true);
@@ -222,9 +221,10 @@ public class NhaCungCapUI extends JPanel {
                 
                 btnConfirm.setVisible(false);
                 btnBack.setVisible(false);
-//                btnFile.setVisible(false);
+//              btnFile.setVisible(false);
                 
                 tbl.setEnabled(true);
+                setEditable(false);
             }
         });
         
@@ -246,6 +246,7 @@ public class NhaCungCapUI extends JPanel {
                         if(nccBUS.checkMancc(maNCC))
                         {
                             JOptionPane.showMessageDialog(null, "Mã nhân viên đă tồn tại !!!");
+                            setEditable(false);
                             return;
                         }
                         //Upload sản phẩm lên DAO và BUS
@@ -254,8 +255,7 @@ public class NhaCungCapUI extends JPanel {
 
                         outModel(model, nccBUS.getList());// Load lại table
 
-//                        saveIMG();// Lưu hình ảnh 
-
+                        setEditable(false);
                         cleanView();
                     }
                 }
@@ -276,9 +276,8 @@ public class NhaCungCapUI extends JPanel {
                         
                         outModel(model, nccBUS.getList());// Load lại table
                         
-//                        saveIMG();// Lưu hình ảnh 
-                        
                         JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
+                        setEditable(false);
                         
                     }
                 }
@@ -333,14 +332,13 @@ public class NhaCungCapUI extends JPanel {
 
         
         tbl.addMouseListener(new MouseAdapter() {
-             public void mouseClicked(MouseEvent e)
-             {
+            public void mouseClicked(MouseEvent e){
                 int i = tbl.getSelectedRow();
                 txtMaNCC.setText(tbl.getModel().getValueAt(i, 0).toString());
                 txtTenNCC.setText(tbl.getModel().getValueAt(i, 1).toString());
                 txtDiaChi.setText(tbl.getModel().getValueAt(i, 2).toString()); 
                 txtDienThoai.setText(tbl.getModel().getValueAt(i, 3).toString());  
-             }
+            }
         });
         
         
@@ -379,13 +377,11 @@ public class NhaCungCapUI extends JPanel {
         //bắt sự kiện Focus vào search box
         txtSearch.addFocusListener(new FocusAdapter(){
             @Override
-            public void focusGained(FocusEvent e) 
-            {
+            public void focusGained(FocusEvent e) {
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px_focus.png")); //Đổi màu icon
                 searchBox.setBorder(createLineBorder(new Color(52,152,219))); // Đổi màu viền 
             }
-            public void focusLost(FocusEvent e) //Trờ về như cũ
-            {
+            public void focusLost(FocusEvent e){ //Trờ về như cũ
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px.png"));
                 searchBox.setBorder(createLineBorder(Color.BLACK));
             }
@@ -424,22 +420,25 @@ public class NhaCungCapUI extends JPanel {
         itemView.add(searchBox);
 /******************************************************************/
     }
-    public void cleanView() //Xóa trắng các TextField
-    {
-        txtMaNCC.setEditable(true);
-
+    public void cleanView(){ //Xóa trắng các TextField
+        txtMaNCC.setEditable(false);
         txtMaNCC.setText("");
         txtTenNCC.setText("");
         txtDiaChi.setText("");
         txtDienThoai.setText("");
- 
     }
-    public void outModel(DefaultTableModel model , ArrayList<NhaCungCap> ncc) // Xuất ra Table từ ArrayList
-    {
+    
+    public void setEditable(boolean flag) {
+        txtMaNCC.setEditable(false);
+        txtTenNCC.setEditable(flag);
+        txtDiaChi.setEditable(flag);
+        txtDienThoai.setEditable(flag);
+    }
+    public void outModel(DefaultTableModel model , ArrayList<NhaCungCap> ncc){ // Xuất ra Table từ ArrayList
+    
         Vector data;
         model.setRowCount(0);
-        for(NhaCungCap n:ncc)
-        {
+        for(NhaCungCap n:ncc){
             data = new Vector();
             data.add(n.getMaNCC());
             data.add(n.getTenNCC());
@@ -449,11 +448,10 @@ public class NhaCungCapUI extends JPanel {
         }
         tbl.setModel(model);
     }
-    public void listNCC() // Chép ArrayList lên table
-    {
+    public void listNCC(){ // Chép ArrayList lên table
+    
         if(nccBUS.getList()== null)nccBUS.listNCC();
         ArrayList<NhaCungCap> ncc = nccBUS.getList();
-//        model.setRowCount(0);
         outModel(model,ncc);
     }
 }

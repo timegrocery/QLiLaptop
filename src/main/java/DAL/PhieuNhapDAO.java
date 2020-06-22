@@ -37,8 +37,11 @@ public class PhieuNhapDAO {
             String MANCC = rs.getString("MANCC");
             String MANV = rs.getString("MANV");
             String NGAYNHAP = rs.getString("NGAYNHAP");
+            String MALAPTOP = rs.getString("MALAPTOP");
+            int SOLUONG = rs.getInt("SOLUONG");
+            int DONGIA = rs.getInt("DONGIA");
             int TONGTIEN = rs.getInt("TONGTIEN");
-            PhieuNhap temp = new PhieuNhap(MAPN,MANCC,MANV,NGAYNHAP,TONGTIEN);
+            PhieuNhap temp = new PhieuNhap(MAPN,MANCC,MANV,NGAYNHAP,MALAPTOP,SOLUONG,DONGIA,TONGTIEN);
             dsct.add(temp);
         }
         return dsct;
@@ -52,6 +55,9 @@ public class PhieuNhapDAO {
         sql += "'" + ph.getMANCC() + ",";
         sql += "'" + ph.getMANV() + ",";
         sql += "'" + ph.getNGAYNHAP()+ ",";
+        sql += "'" + ph.getMALAPTOP() + ",";
+        sql += "'" + ph.getSOLUONG() + ",";
+        sql += "'" + ph.getDONGIA() + ",";
         sql += "'" + ph.getTONGTIEN() + "," + ");";
 
         System.out.println(sql);
@@ -71,13 +77,15 @@ public class PhieuNhapDAO {
         sql += "MANCC='"+ph.getMANCC()+"',";
         sql += "MANV='"+ph.getMANV()+"',";
         sql += "NGAYNHAP='"+ph.getNGAYNHAP()+"',";
+        sql += "MALAPTOP='"+ph.getMALAPTOP()+"',";
+        sql += "SOLUONG='"+ph.getSOLUONG()+"',";
+        sql += "DONGIA='"+ph.getDONGIA()+"',";
         sql += "TONGTIEN='"+ph.getTONGTIEN()+"',";
         sql += "WHERE MAPN='"+ph.getMAPN()+"'";
         System.out.println(sql);
         mySQL.executeUpdate(sql);
-
     }
-
+    
     public void ExportExcelDatabase(){
         try{
             String sql = "SELECT * FROM phieunhap";

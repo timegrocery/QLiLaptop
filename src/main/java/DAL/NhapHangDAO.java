@@ -36,9 +36,12 @@ public class NhapHangDAO {
                 String maNCC = rs.getString("MANCC");
                 String maNV = rs.getString("MANV");
                 String ngayNhap = rs.getString("NGAYNHAP");
+                String maLaptop = rs.getString("MALAPTOP");
+                int soluong = rs.getInt("SOLUONG");
+                int dongia = rs.getInt("DONGIA");
                 int tongTien = rs.getInt("TONGTIEN");
                 
-                NhapHang ct = new NhapHang(maPN, maNCC, maNV, ngayNhap, tongTien);
+                NhapHang ct = new NhapHang(maPN, maNCC, maNV, ngayNhap, maLaptop, soluong, dongia, tongTien);
                 dsct.add(ct);
             }
             rs.close();
@@ -57,6 +60,10 @@ public class NhapHangDAO {
                sql += "'"+ct.getMaPN()+"',";
                sql += "'"+ct.getMaNCC()+"',";
                sql += "'"+ct.getMaNV()+"',";
+               sql += "'"+ct.getNgayNhap()+",";
+               sql += "'"+ct.getMaLaptop()+",";
+               sql += "'"+ct.getSoluong()+",";
+               sql += "'"+ct.getDongia()+",";
                sql += "'"+ct.getTongTien()+"')";
         System.out.println(sql);
         mySQL.executeUpdate(sql);
@@ -68,6 +75,9 @@ public class NhapHangDAO {
             sql += "MANCC='"+nh.getMaNCC()+"', ";
             sql += "MANV='"+nh.getMaNV()+"', ";
             sql += "NGAYNHAP='"+nh.getNgayNhap()+"', ";
+            sql += "MALAPTOP='"+nh.getMaLaptop()+"', ";
+            sql += "SOLUONG='"+nh.getSoluong()+"', ";
+            sql += "DONGIA='"+nh.getDongia()+"', ";
             sql += "TONGTIEN='"+nh.getTongTien()+"' ";
             sql += "WHERE MAPN ='"+nh.getMaPN()+"'";
         System.out.println(sql);

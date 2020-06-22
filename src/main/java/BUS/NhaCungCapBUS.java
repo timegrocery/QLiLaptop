@@ -76,6 +76,25 @@ public class NhaCungCapBUS {
         }
         return false;
     }
+    public void list() {
+        NhaCungCapDAO nccDAO = new NhaCungCapDAO();
+        dsncc = new ArrayList<>();
+        dsncc = nccDAO.list();
+    }
+    public String remindMaNCC() {
+        int max = 0;
+        String s ="";
+        for(NhaCungCap ncc : dsncc) {
+            int id = Integer.parseInt(ncc.getMaNCC());
+            if(id > max) {
+                max = id;
+            }
+        }
+        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
+            s+="0";
+        }
+        return s+(max+1);
+    }
     public ArrayList<NhaCungCap> getList() {
         return dsncc;
     }

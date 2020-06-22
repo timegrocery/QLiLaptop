@@ -55,8 +55,8 @@ public class NhaCungCapDAO {
             MySQLConnect mySQL = new MySQLConnect();
             String sql = "UPDATE nhacungcap SET ";
             sql += "TENNCC='"+ncc.getTenNCC()+"', ";
-            sql += "DIACHI='"+ncc.getDiaChi()+"', ";
-            sql += "DIENTHOAI='"+ncc.getDienThoai()+"', ";
+            sql += "DIACHINCC='"+ncc.getDiaChi()+"', ";
+            sql += "DIENTHOAI='"+ncc.getDienThoai()+"' ";
             sql += " WHERE MANCC='"+ncc.getMaNCC()+"'";
             System.out.println(sql);
             
@@ -69,7 +69,8 @@ public class NhaCungCapDAO {
                sql += "'"+ct.getMaNCC()+"',";
                sql += "'"+ct.getTenNCC()+"',";
                sql += "'"+ct.getDiaChi()+"',";
-               sql += "'"+ct.getDienThoai()+"')";
+               sql += "'"+ct.getDienThoai()+"',";
+               sql += "'1')";
         System.out.println(sql);
         mySQL.executeUpdate(sql);
     }

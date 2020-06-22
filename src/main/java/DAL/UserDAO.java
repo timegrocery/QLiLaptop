@@ -56,7 +56,7 @@ public class UserDAO {
             MySQLConnect mySQL = new MySQLConnect();
             String sql = "UPDATE user SET ";
             sql += "username='"+us.getUserName()+"', ";
-            sql += "password='"+us.getPass()+"', ";
+            sql += "pass='"+us.getPass()+"', ";
             sql += "role='"+us.getRole()+"', ";
             sql += "enable='"+us.getEnable()+"' ";
             sql += " WHERE userID='"+us.getUserID()+"'";

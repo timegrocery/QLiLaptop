@@ -7,6 +7,8 @@ package DAL;
 
 import DTO.HoaDon;
 import DTO.NhapHang;
+import DTO.Laptop;
+import BUS.LaptopBUS;
 //import com.sun.javafx.binding.StringFormatter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,12 +21,11 @@ import java.util.logging.Logger;
  * @author WindZ
  */
 public class ThongKeDAO {
-    public ThongKeDAO()
-    {
-        
+    LaptopBUS spBUS = new LaptopBUS();
+    public ThongKeDAO(){
+        spBUS.listSP();
     }
-    public String StatisticSP( ArrayList<HoaDon> listHd, ArrayList<NhapHang> listNH,String MaSP)
-    {
+    public String StatisticSP( ArrayList<HoaDon> listHd, ArrayList<NhapHang> listNH,String MaSP){
         String s = "";
         int slOut=0,sumOut = 0;
         int slIn=0,sumIn = 0;
@@ -57,7 +58,7 @@ public class ThongKeDAO {
             // NHẬP
             if(!listNH.isEmpty())
             {
-                String sql2 = "SELECT SUM(SOLUONG) AS SL,SUM(THANHTIEN) AS TONGTIEN FROM chitietphieunhap WHERE (";
+                String sql2 = "SELECT SUM(SOLUONG) AS SL,SUM(TONGTIEN) AS TONGTIEN FROM phieunhap WHERE (";
                 for(int i = 0 ; i < listNH.size() ; i++)
                 {
                     String idNhap = listNH.get(i).getMaPN();
@@ -221,15 +222,13 @@ public class ThongKeDAO {
 
     public ArrayList<String> StatisticTopSP(ArrayList<HoaDon> listHd) {   
         ArrayList<String> kq = new ArrayList<>();
-        if(!listHd.isEmpty())
-        {
+        if(!listHd.isEmpty()){
             try {
                 MySQLConnect mySQL = new MySQLConnect();
-                String sql = "SELECT MALAPTOP,TENLAPTOP,SUM(SOLUONG) AS SOLUONG FROM chitiethoadon WHERE ";
+                String sql = "SELECT MALAPTOP,SUM(SOLUONG) AS SOLUONG FROM chitiethoadon WHERE ";
                 for(int i = 0 ; i < listHd.size() ; i++) {
                     String mahd = listHd.get(i).getMaHD();
-                    if(i == (listHd.size() - 1))
-                    {
+                    if(i == (listHd.size() - 1)){
                         sql += "MAHD ='"+ mahd +"' ";
                         break;
                     }
@@ -237,15 +236,15 @@ public class ThongKeDAO {
                 }
                 sql += "GROUP BY MALAPTOP ";
                 sql += "ORDER BY SUM(SOLUONG) DESC ";
+                // only need 10 top-sale products
                 sql += "LIMIT 5";
                 System.out.println(sql);
                 ResultSet rs = mySQL.executeQuery(sql);
-                while(rs.next())
-                {
+                while(rs.next()){
                     String maSP = rs.getString("MALAPTOP");
-                    String tenSP = rs.getString("TENLAPTOP");
                     int sl = rs.getInt("SOLUONG");
-                    String s = String.format("%6s_%20s_%5d",maSP,tenSP,sl);
+                    String tenSP = spBUS.getSP(maSP).getTen();
+                    String s = String.format("%6s_%5d_%25s",maSP,sl,tenSP);
                     kq.add(s);
                 }
             } catch (SQLException ex) {
