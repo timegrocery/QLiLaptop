@@ -20,7 +20,6 @@ public class NhanVienBUS {
     }
     
     public NhanVienBUS() {
-        
     }
     public NhanVien get(String MaNV) {
         for(NhanVien nv : dsnv ) {

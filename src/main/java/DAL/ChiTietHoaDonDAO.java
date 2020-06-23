@@ -21,18 +21,14 @@ import java.util.logging.Logger;
 
 public class ChiTietHoaDonDAO {
     private MySQLConnect mySQL = new MySQLConnect();
-    public ChiTietHoaDonDAO()
-    {
-        
+    public ChiTietHoaDonDAO(){
     }
     public ArrayList<ChiTietHoaDon> list() {
         ArrayList<ChiTietHoaDon> dsct = new ArrayList<>();
         try {
-           
             String sql = "SELECT * FROM chitiethoadon WHERE 1";
             ResultSet rs = mySQL.executeQuery(sql);
-            while(rs.next())
-            {
+            while(rs.next()){
                 String maHD = rs.getString("MAHD");
                 String maSP = rs.getString("MALAPTOP");
                 int soluong = rs.getInt("SOLUONG");
@@ -43,11 +39,9 @@ public class ChiTietHoaDonDAO {
             }
             rs.close();
             mySQL.disConnect();
-            
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return dsct;
     }
 

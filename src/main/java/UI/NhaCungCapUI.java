@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.NhaCungCapBUS;
 import BUS.NhanVienBUS;
 import DTO.NhaCungCap;
@@ -81,24 +82,28 @@ public class NhaCungCapUI extends JPanel {
         lbMaNCC.setBounds(new Rectangle(50,0,200,30));
         lbMaNCC.setFont(font0);
         txtMaNCC.setBounds(new Rectangle(150,0,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNCC,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         
         JLabel lbTenNCC = new JLabel("Tên NCC");
         txtTenNCC = new JTextField("");
         lbTenNCC.setBounds(new Rectangle(400,0,100,30));
         lbTenNCC.setFont(font0);
         txtTenNCC.setBounds(new Rectangle(500,0,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenNCC,InfoBalloon.filter_all, InfoBalloon.limit_name);
      
         JLabel lbDienThoai = new JLabel("Số Điện thoại");
         txtDienThoai = new JTextField("");
         lbDienThoai.setBounds(new Rectangle(50,40,200,30));
         lbDienThoai.setFont(font0);
         txtDienThoai.setBounds(new Rectangle(150,40,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtDienThoai,InfoBalloon.filter_numberOnly, InfoBalloon.limit_sdt);
         
         JLabel lbDiaChi = new JLabel("Địa chỉ");
         txtDiaChi = new JTextField("");
         lbDiaChi.setBounds(new Rectangle(50,80,200,30));
         lbDiaChi.setFont(font0);
         txtDiaChi.setBounds(new Rectangle(150,80,500,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtDiaChi,InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         // THÊM VÀO PHẦN HIỂN THỊ
         itemView.add(lbMaNCC);
@@ -333,11 +338,15 @@ public class NhaCungCapUI extends JPanel {
         
         tbl.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
-                int i = tbl.getSelectedRow();
-                txtMaNCC.setText(tbl.getModel().getValueAt(i, 0).toString());
-                txtTenNCC.setText(tbl.getModel().getValueAt(i, 1).toString());
-                txtDiaChi.setText(tbl.getModel().getValueAt(i, 2).toString()); 
-                txtDienThoai.setText(tbl.getModel().getValueAt(i, 3).toString());  
+                try {
+                    int i = tbl.getSelectedRow();
+                    txtMaNCC.setText(tbl.getModel().getValueAt(i, 0).toString());
+                    txtTenNCC.setText(tbl.getModel().getValueAt(i, 1).toString());
+                    txtDiaChi.setText(tbl.getModel().getValueAt(i, 2).toString()); 
+                    txtDienThoai.setText(tbl.getModel().getValueAt(i, 3).toString());
+                } catch (Exception ex){
+                    
+                }
             }
         });
         

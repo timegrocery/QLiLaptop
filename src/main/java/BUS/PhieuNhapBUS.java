@@ -10,8 +10,7 @@ import javax.swing.JOptionPane;
 public class PhieuNhapBUS {
     private ArrayList <PhieuNhap> dspn = new ArrayList<>();
 
-    public PhieuNhapBUS() {
-        
+    public PhieuNhapBUS() { 
     }
 
     public void listpn() throws SQLException {

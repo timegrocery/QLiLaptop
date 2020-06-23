@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.NhanVienBUS;
 import DTO.NhanVien;
 import java.awt.Choice;
@@ -82,6 +83,7 @@ public class SuggestNhanVien extends JDialog {
         lbMaNV.setBounds(20,20,100,30);
         txtMaNV = new JTextField();
         txtMaNV.setBounds(new Rectangle(120,20,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNV, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaNV);
         itemView.add(txtMaNV);
         
@@ -90,6 +92,7 @@ public class SuggestNhanVien extends JDialog {
         lbHo.setBounds(20,70,100,30);
         txtHo = new JTextField();
         txtHo.setBounds(new Rectangle(120,70,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtHo,InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
         itemView.add(lbHo);
         itemView.add(txtHo);
         
@@ -98,6 +101,7 @@ public class SuggestNhanVien extends JDialog {
         lbTen.setBounds(20,120,100,30);
         txtTen = new JTextField();
         txtTen.setBounds(new Rectangle(120,120,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtTen,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbTen);
         itemView.add(txtTen);
         

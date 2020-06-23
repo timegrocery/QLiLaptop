@@ -18,16 +18,18 @@ import java.util.Calendar;
 public class NhapHangBUS {
     private ArrayList<NhapHang> dsNH;
     public NhapHangBUS() {
-        
     }
+    
     public NhapHangBUS(int i) {
         list();
     }
+    
     public void list() {
         NhapHangDAO nhDAO = new NhapHangDAO();
         dsNH= new ArrayList<>();
         dsNH= nhDAO.list();
     }
+    
     public void add(NhapHang nh) {
         int id = 0;
         if(!dsNH.isEmpty()) {

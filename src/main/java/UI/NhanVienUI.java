@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.NhanVienBUS;
 import BUS.UserBUS;
 import DTO.NhanVien;
@@ -101,30 +102,35 @@ public class NhanVienUI extends JPanel{
         lbMaNV.setBounds(new Rectangle(250,0,200,30));
         lbMaNV.setFont(font0);
         txtMaNV.setBounds(new Rectangle(350,0,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNV,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         
         JLabel lbHoNV = new JLabel("Họ");
         txtHoNV = new JTextField("");
         lbHoNV.setBounds(new Rectangle(250,40,200,30));
         lbHoNV.setFont(font0);
         txtHoNV.setBounds(new Rectangle(350,40,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtHoNV, InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
         
         JLabel lbTenNV = new JLabel("Tên nhân viên");
         txtTenNV = new JTextField("");
         lbTenNV.setBounds(new Rectangle(250,80,200,30));
         lbTenNV.setFont(font0);
-        txtTenNV.setBounds(new Rectangle(350,80,220,30)); 
+        txtTenNV.setBounds(new Rectangle(350,80,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenNV, InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
         
         JLabel lbDiaChi = new JLabel("Địa chỉ");
         txtDiaChi = new JTextField("");
         lbDiaChi.setBounds(new Rectangle(250,160,200,30));
         lbDiaChi.setFont(font0);
         txtDiaChi.setBounds(new Rectangle(350,160,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtDiaChi, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JLabel lbNamSinh = new JLabel("Năm sinh");
         txtNamSinh = new JTextField("");
         lbNamSinh.setBounds(new Rectangle(420,200,80,30));
         lbNamSinh.setFont(font0);
         txtNamSinh.setBounds(new Rectangle(490,200,80,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtNamSinh, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         
         JLabel lbPhai = new JLabel("Phái");
         lbPhai.setBounds(new Rectangle(250,200,30,30));
@@ -575,6 +581,7 @@ public class NhanVienUI extends JPanel{
         sortMaNV = new JTextField();
         sortMaNV.setFont(font0);
         sortMaNV.setBounds(new Rectangle(50,42,100,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, sortMaNV,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         sort.add(sortMaNV);
         /*************************************/
 
@@ -587,6 +594,7 @@ public class NhanVienUI extends JPanel{
         sortHoNV = new JTextField();
         sortHoNV.setFont(font0);
         sortHoNV.setBounds(new Rectangle(200,42,100,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtHoNV,InfoBalloon.filter_all, InfoBalloon.limit_name);
         sort.add(sortHoNV);
         /*************************************/
         
@@ -599,6 +607,7 @@ public class NhanVienUI extends JPanel{
         sortTenNV = new JTextField();
         sortTenNV.setFont(font0);
         sortTenNV.setBounds(new Rectangle(350,42,100,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenNV,InfoBalloon.filter_all, InfoBalloon.limit_name);
         sort.add(sortTenNV);
         /*************************************/
         /************ SORT PHÁI **************/

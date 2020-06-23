@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.KhachHangBUS;
 import BUS.NhanVienBUS;
 import BUS.LaptopBUS;
@@ -715,14 +716,17 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
             lbMa.setVisible(true);
             txtMa.setVisible(true);
             lbMa.setText("Mă sản phẩm");
+            new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMa,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         } else if(ckMaNV.isSelected() && OnOff){
             lbMa.setVisible(true);
             txtMa.setVisible(true);
             lbMa.setText("Mã nhân viên");
+            new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMa,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         } else if(ckMaKH.isSelected() && OnOff){
             lbMa.setVisible(true);
             txtMa.setVisible(true);
             lbMa.setText("Mã khách hàng");
+            new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMa,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         } else{
             lbMa.setVisible(false);
             txtMa.setVisible(false);

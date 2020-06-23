@@ -60,10 +60,10 @@ public class NhapHangDAO {
                sql += "'"+ct.getMaPN()+"',";
                sql += "'"+ct.getMaNCC()+"',";
                sql += "'"+ct.getMaNV()+"',";
-               sql += "'"+ct.getNgayNhap()+",";
-               sql += "'"+ct.getMaLaptop()+",";
-               sql += "'"+ct.getSoluong()+",";
-               sql += "'"+ct.getDongia()+",";
+               sql += "'"+ct.getNgayNhap()+"',";
+               sql += "'"+ct.getMaLaptop()+"',";
+               sql += "'"+ct.getSoluong()+"',";
+               sql += "'"+ct.getDongia()+"',";
                sql += "'"+ct.getTongTien()+"')";
         System.out.println(sql);
         mySQL.executeUpdate(sql);

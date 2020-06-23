@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.NhaCungCapBUS;
 import DTO.NhaCungCap;
 import java.awt.Choice;
@@ -80,6 +81,7 @@ public class SuggestNhaCungCap extends JDialog {
         lbMaNcc.setBounds(20,20,100,30);
         txtMaNcc = new JTextField();
         txtMaNcc.setBounds(new Rectangle(120,20,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNcc,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaNcc);
         itemView.add(txtMaNcc);
         
@@ -88,6 +90,7 @@ public class SuggestNhaCungCap extends JDialog {
         lbTenNcc.setBounds(20,70,100,30);
         txtTenNcc = new JTextField();
         txtTenNcc.setBounds(new Rectangle(120,70,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenNcc,InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
         itemView.add(lbTenNcc);
         itemView.add(txtTenNcc);
         
@@ -96,6 +99,7 @@ public class SuggestNhaCungCap extends JDialog {
         lbDiaChi.setBounds(20,120,100,30);
         txtDiaChiNcc = new JTextField();
         txtDiaChiNcc.setBounds(new Rectangle(120,120,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtDiaChiNcc,InfoBalloon.filter_all, InfoBalloon.limit_name);
         itemView.add(lbDiaChi);
         itemView.add(txtDiaChiNcc);
         
@@ -105,6 +109,7 @@ public class SuggestNhaCungCap extends JDialog {
         lbDienThoai.setBounds(20,170,100,30);
         txtDienThoai = new JTextField();
         txtDienThoai.setBounds(new Rectangle(120,170,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtDienThoai,InfoBalloon.filter_numberOnly, InfoBalloon.limit_sdt);
         itemView.add(lbDienThoai);
         itemView.add(txtDienThoai);
         

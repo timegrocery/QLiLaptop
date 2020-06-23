@@ -20,8 +20,7 @@ import java.util.logging.Logger;
  */
 public class ChuongTrinhKhuyenMaiDAO {
     private MySQLConnect mySQL = new MySQLConnect();
-    public ChuongTrinhKhuyenMaiDAO()
-    {
+    public ChuongTrinhKhuyenMaiDAO(){
         
     }
     public ArrayList<ChuongTrinhKhuyenMai> list() {

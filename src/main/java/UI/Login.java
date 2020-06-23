@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.NhanVienBUS;
 import BUS.UserBUS;
 import DTO.NhanVien;
@@ -102,6 +103,7 @@ public class Login extends JFrame implements KeyListener {
         user.setBounds(120,160,180,30);
         user.setBorder(null);
         user.setOpaque(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, user, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         pass = new JPasswordField("Password");
         pass.setFont(font);
@@ -110,6 +112,7 @@ public class Login extends JFrame implements KeyListener {
         pass.setBorder(null);
         pass.setBounds(120,240,150,30);
         pass.setOpaque(false);    
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, pass, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JSeparator sp1 = new JSeparator();
         sp1.setBounds(80,190,220,10);

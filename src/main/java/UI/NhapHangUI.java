@@ -9,6 +9,9 @@ import BUS.NhanVienBUS;
 import DTO.NhanVien;
 import BUS.NhapHangBUS;
 import DTO.NhapHang;
+import DTO.Laptop;
+import DAL.LaptopDAO;
+import BUS.LaptopBUS;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -38,6 +41,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import BUS.Handler;
+import BUS.InfoBalloon;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -46,6 +59,8 @@ import BUS.Handler;
 public class NhapHangUI extends JPanel implements ActionListener,FocusListener,MouseListener {
     private NhapHangBUS nhBUS = new NhapHangBUS();
     private NhanVienBUS nvBUS = new NhanVienBUS(1);
+    private LaptopBUS spBUS = new LaptopBUS();
+    private LaptopDAO spDAO = new LaptopDAO();
     
     private String userID;
     private int DWIDTH;
@@ -73,6 +88,7 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
     public NhapHangUI(int width, String userID) {
         this.DWIDTH = width;
         this.userID = userID;
+        spBUS.listSP();
         init();
     }
     public void init()
@@ -97,6 +113,7 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         txtMaPN.setFont(font0);
         txtMaPN.addFocusListener(this);
         txtMaPN.setBounds(new Rectangle(120,20,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaPN,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaPN);
         itemView.add(txtMaPN);
         
@@ -110,6 +127,7 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         btnSuggestNCC.setFont(font0);
         btnSuggestNCC.addActionListener(this);
         btnSuggestNCC.setBounds(new Rectangle(340,70,30,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNCC,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaNCC);
         itemView.add(txtMaNCC);
         itemView.add(btnSuggestNCC);
@@ -117,14 +135,16 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         JLabel lbMaNV = new JLabel("Mã Nhân Viên");
         lbMaNV.setFont(font0);
         lbMaNV.setBounds(20,120,100,30);
-        if( Handler.isNullOrEmpty(userID) ) txtMaNV.setText(userID);
+        
         txtMaNV = new JTextField();
         txtMaNV.setFont(font0);
         txtMaNV.setBounds(new Rectangle(120,120,220,30));
+        if(Handler.isNullOrEmpty(userID)) txtMaNV.setText(userID);
         btnSuggestNV = new JButton("...");
         btnSuggestNV.setFont(font0);
         btnSuggestNV.addActionListener(this);
         btnSuggestNV.setBounds(new Rectangle(340,120,30,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNV,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaNV);
         itemView.add(txtMaNV);
         itemView.add(btnSuggestNV);
@@ -146,6 +166,7 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         txtMaLaptop = new JTextField();
         txtMaLaptop.setFont(font0);
         txtMaLaptop.setBounds(new Rectangle(120,220,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaLaptop,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         btnSuggestSP = new JButton("...");
         btnSuggestSP.setFont(font0);
         btnSuggestSP.addActionListener(this);
@@ -160,6 +181,7 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         txtDonGia = new JTextField();
         txtDonGia.setFont(font0);
         txtDonGia.setBounds(new Rectangle(120,270,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtDonGia,InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         itemView.add(lbDonGia);
         itemView.add(txtDonGia);
         
@@ -179,11 +201,36 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         txtTongTien.setFont(font0);
         txtTongTien.addFocusListener(this);
         txtTongTien.setBounds(new Rectangle(120,370,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtTongTien,InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         itemView.add(lbTongTien);
         itemView.add(txtTongTien);
         
         setEditable(false);
         
+        KeyListener keyListener = new KeyListener() {
+            public void keyPressed(KeyEvent keyEvent) {
+                txtTongTien.setText(Integer.toString(sumHD()));
+            }
+
+            public void keyReleased(KeyEvent keyEvent) {
+                txtTongTien.setText(Integer.toString(sumHD()));
+            }
+
+            public void keyTyped(KeyEvent keyEvent) {
+                txtTongTien.setText(Integer.toString(sumHD()));
+            }
+        };
+        txtSoLuong.addKeyListener(keyListener);
+        txtDonGia.addKeyListener(keyListener);
+        ActionListener task = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                Date date = Timestamp.valueOf(formatter.format((LocalDateTime.now())));
+                txtNgayNhap.setText(date.toString().replace(".0",""));
+            }
+        };
+        Timer timer = new Timer(1000 ,task);
+        timer.setRepeats(true);
 /**************** TẠO CÁC BTN XÓA, SỬA, VIEW, IN BILL ********************/
 
         btnAdd = new JLabel(new ImageIcon("./src/main/java/image/btnAdd_150px.png"));
@@ -196,7 +243,8 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
                 txtMaPN.setText(nhBUS.remindMaNH());
                 
                 txtMaNV.setText(userID);
-                
+                tbl.setEnabled(false);
+                timer.start();
                 setEditable(true);
             }
         });
@@ -212,10 +260,10 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         btnConfirm.setVisible(false);
         btnConfirm.addMouseListener(this);
         btnConfirm.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
-                
-            }
+            public void mouseClicked(MouseEvent e){
+                tbl.setEnabled(false);
+                timer.stop();
+            };
         });
               
         btnBack = new JLabel(new ImageIcon("./src/main/java/image/btnBack_150px.png"));
@@ -226,7 +274,11 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
             public void mouseClicked(MouseEvent e) {
                 isAddSet(false);
                 EditOrAdd = false;
+                
+                timer.stop();
                 setEditable(false);
+                tbl.setEnabled(true);
+                clean();
             }
         });
         
@@ -297,7 +349,11 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null)
                 {
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex){
+                        
+                    }
                 }
                 txtMaPN.setText(tbl.getModel().getValueAt(i, 0).toString());
                 txtMaNCC.setText(tbl.getModel().getValueAt(i, 1).toString());
@@ -361,7 +417,7 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         txtMaPN.setEditable(false);
         txtMaNCC.setEditable(false);
         txtMaNV.setEditable(false);
-        txtNgayNhap.setEditable(flag);
+        txtNgayNhap.setEditable(false);
         txtMaLaptop.setEditable(false);
         txtSoLuong.setEditable(flag);
         txtDonGia.setEditable(flag);
@@ -440,6 +496,10 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
                 NhapHang nh = new NhapHang(maPN, maNCC, maNV, ngayNhap, maLaptop, soluong, dongia, tongTien);
                 nhBUS.add(nh);
                 outModel(model, nhBUS.getList());
+                Laptop currentLaptop = spBUS.getSP(maLaptop);
+                int oldQuantity = currentLaptop.getSoluong();
+                int newQuantity = oldQuantity + soluong;
+                spBUS.updateSLValue(currentLaptop.getMaLaptop(), newQuantity);
                 JOptionPane.showMessageDialog(null, "Nhập hàng thành công");
             }
             
@@ -465,7 +525,30 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
             setEditable(false);
         }
     }
-
+    public int sumHD() {
+        int sum = 0;
+        if ((txtDonGia.getText().equals("") || txtSoLuong.getText().equals(""))){
+            return 0;
+        }
+        int soluong = Integer.parseInt(txtSoLuong.getText());
+        int dongia = Integer.parseInt(txtDonGia.getText());
+        return soluong*dongia;
+    }
+    public void updateDate() {
+        ActionListener task = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                Date date = Timestamp.valueOf(formatter.format((LocalDateTime.now())));
+                txtNgayNhap.setText(date.toString().replace(".0",""));
+            }
+        };
+        Timer timer = new Timer(1000 ,task);
+        timer.setRepeats(true);
+        timer.start();
+    }
+    public void stopUpdateDate() {
+        
+    }
     @Override
     public void mousePressed(MouseEvent e) {
     }

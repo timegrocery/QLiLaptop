@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 public class HoaDonBUS {
     private ArrayList<HoaDon> dsHD ;
     public HoaDonBUS() {
-        
     }
     public HoaDonBUS(int i) {
         list();
@@ -135,10 +134,8 @@ public class HoaDonBUS {
         if(s == null) return dsHD;
         for(HoaDon hd : dsHD) {
             String mahd = hd.getMaHD();
-            for(String a: s)
-            {
-                if(mahd.equals(a))
-                {
+            for(String a: s){
+                if(mahd.equals(a)){
                     ds.add(hd);
                 }
             }

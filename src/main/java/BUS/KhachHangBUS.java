@@ -26,10 +26,8 @@ public class KhachHangBUS {
     }
     public KhachHang get(String MaKH)
     {
-        for(KhachHang kh : dskh )
-        {
-            if(kh.getMaKH().equals(MaKH))
-            {
+        for(KhachHang kh : dskh ){
+            if(kh.getMaKH().equals(MaKH)){
                 return kh;
             }
         }
@@ -40,8 +38,7 @@ public class KhachHangBUS {
         dskh = new ArrayList<>();
         dskh = khDAO.list();
     }
-    public void add(KhachHang kh)
-    {
+    public void add(KhachHang kh){
         dskh.add(kh);
         KhachHangDAO khDAO = new KhachHangDAO();
         khDAO.add(kh);

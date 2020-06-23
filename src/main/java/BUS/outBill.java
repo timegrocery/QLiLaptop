@@ -7,6 +7,7 @@ package BUS;
 
 import DTO.ChiTietHoaDon;
 import DTO.HoaDon;
+import BUS.LaptopBUS;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -40,18 +41,21 @@ import org.apache.pdfbox.printing.PDFPageable;
  * @author WindZ
  */
 public class outBill {
-    private String file = "./report/test.pdf";
+    private String file;// = "./report/test.pdf";
     private ArrayList<ChiTietHoaDon> cthd = new ArrayList<ChiTietHoaDon>();
     private HoaDon hd;
     private BaseFont bf;
+    private LaptopBUS spBUS;
     public outBill() {
-                
+            spBUS.listSP();
     }
 
     public outBill(HoaDon hd,ArrayList<ChiTietHoaDon> cthd)  {
         this.hd = hd;
-        file = "./report/bill"+hd.getMaHD()+".pdf";
+        file = Handler.getFullPath("report/bill"+hd.getMaHD()+".pdf");
+        System.out.println(file);
         this.cthd = cthd;
+        spBUS.listSP();
     }
     public void print() {
         String uderline = "*";
@@ -63,8 +67,7 @@ public class outBill {
             Document bill = new Document(PageSize.A4, 15, 15, 10, 10);
             
             String line = "";
-            for(int i = 0 ; i < bill.getPageSize().getWidth()/5; i++)
-            {
+            for(int i = 0 ; i < bill.getPageSize().getWidth()/5; i++){
                 line += uderline;
             }
             //Tạo đối tượng writter
@@ -73,7 +76,7 @@ public class outBill {
             //Mở document
             bill.open();
             
-            Paragraph header = new Paragraph("SIÊU THỊ",new Font(bf,35));
+            Paragraph header = new Paragraph("Cửa hàng laptop",new Font(bf,35));
             header.setAlignment(1);
             bill.add(header);
             
@@ -92,14 +95,12 @@ public class outBill {
             int[] relativeWidths = {20,80,10,40};
             t.setWidths(relativeWidths);
             
-            for(String s : cellHeader)
-            {
+            for(String s : cellHeader){
                 t.addCell(createCell(s, new Font(bf,13)));
             }    
-            for(ChiTietHoaDon ct : cthd)
-            {
+            for(ChiTietHoaDon ct : cthd){
                 t.addCell( createCell(ct.getMaLaptop()) );
-                t.addCell( createCell(ct.getMaHD()) );
+                t.addCell( createCell(spBUS.getSP(ct.getMaLaptop()).getTen()) );
                 t.addCell( createCell(String.valueOf(ct.getSl())) );
                 t.addCell( createCell(String.valueOf(ct.getGia())) );
             }

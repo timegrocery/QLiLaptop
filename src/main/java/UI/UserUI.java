@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.UserBUS;
 import DTO.User;
 import java.awt.Color;
@@ -43,17 +44,14 @@ public class UserUI extends JPanel {
     private JTextField txtPass;
     private JComboBox cmbRole;
     private JLabel btnConfirm;
-    private JLabel btnDelete;
     private JLabel btnEdit;
     private JLabel btnBack;
     
-    public UserUI(int width)
-    {
+    public UserUI(int width){
         this.DWIDTH = width;
         init();
     }
-    public void init()
-    {
+    public void init(){
         setSize(DWIDTH,700);
         setLayout(null);
         
@@ -72,6 +70,7 @@ public class UserUI extends JPanel {
         lbMaNV.setBounds(20,20,100,30);
         txtMaNV = new JTextField();
         txtMaNV.setBounds(new Rectangle(120,20,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNV,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaNV);
         itemView.add(txtMaNV);
         
@@ -80,6 +79,7 @@ public class UserUI extends JPanel {
         lbUser.setBounds(20,70,100,30);
         txtUser = new JTextField();
         txtUser.setBounds(new Rectangle(120,70,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtUser,InfoBalloon.filter_all, InfoBalloon.limit_name);
         itemView.add(lbUser);
         itemView.add(txtUser);
         
@@ -88,6 +88,7 @@ public class UserUI extends JPanel {
         lbPass.setBounds(20,120,100,30);
         txtPass = new JTextField();
         txtPass.setBounds(new Rectangle(120,120,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtPass,InfoBalloon.filter_all, InfoBalloon.limit_name);
         itemView.add(lbPass);
         itemView.add(txtPass);
         
@@ -105,9 +106,11 @@ public class UserUI extends JPanel {
         btnEdit.setBounds(new Rectangle(20,260,150,50));
         btnEdit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
+        /*
         btnDelete = new JLabel(new ImageIcon("./src/main/java/image/btnDelete_150px.png"));
         btnDelete.setBounds(new Rectangle(180,260,150,50));
-        btnDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));    
+        btnDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        */
         
         btnConfirm = new JLabel(new ImageIcon("./src/main/java/image/btnConfirm_150px.png"));
         btnConfirm.setBounds(new Rectangle(20,260,150,50));
@@ -118,10 +121,8 @@ public class UserUI extends JPanel {
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
         
         btnEdit.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
-                if(txtMaNV.getText().equals(""))
-                {
+            public void mouseClicked(MouseEvent e){
+                if(txtMaNV.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên cần sửa !!!");
                     return;
                 }
@@ -129,7 +130,6 @@ public class UserUI extends JPanel {
                 txtMaNV.setEditable(false);
                 
                 btnEdit.setVisible(false);
-                btnDelete.setVisible(false);
                 
                 btnConfirm.setVisible(true);
                 btnBack.setVisible(true);
@@ -139,16 +139,9 @@ public class UserUI extends JPanel {
             }
         });
               
-        btnDelete.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e){
-                System.exit(0);
-                setEditable(false);
-            }
-        });
         
         btnConfirm.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 int i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa sản phẩm","",JOptionPane.YES_NO_OPTION);
                     if(i == 0){
                         //Lấy dữ liệu từ TextField
@@ -172,12 +165,10 @@ public class UserUI extends JPanel {
         });
         
          btnBack.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 cleanView();
                 
                 btnEdit.setVisible(true);
-                btnDelete.setVisible(true);
                 
                 btnConfirm.setVisible(false);
                 btnBack.setVisible(false);
@@ -189,7 +180,6 @@ public class UserUI extends JPanel {
         });
         
         itemView.add(btnEdit);
-        itemView.add(btnDelete);
         itemView.add(btnConfirm);
         itemView.add(btnBack);
         
@@ -243,11 +233,9 @@ public class UserUI extends JPanel {
     /**************************************/
 /*****************************************************************************************/
         tbl.addMouseListener(new MouseAdapter() {
-             public void mouseClicked(MouseEvent e)
-             {
+            public void mouseClicked(MouseEvent e){
                 int i = tbl.getSelectedRow();
-                if(tbl.getRowSorter() != null)
-                {
+                if(tbl.getRowSorter() != null){
                     i = tbl.getRowSorter().convertRowIndexToModel(i);
                 }
                 txtMaNV.setText(tbl.getModel().getValueAt(i, 0).toString());
@@ -258,12 +246,11 @@ public class UserUI extends JPanel {
         });
 /*********************************************************************/
     }
-    public void outModel(DefaultTableModel model , ArrayList<User> user) // Xuất ra Table từ ArrayList
-    {
+    public void outModel(DefaultTableModel model , ArrayList<User> user){ // Xuất ra Table từ ArrayList
+    
         Vector data;
         model.setRowCount(0);
-        for(User us : user)
-        {
+        for(User us : user){
             data = new Vector();
             data.add(us.getUserID());
             data.add(us.getUserName());
@@ -273,16 +260,14 @@ public class UserUI extends JPanel {
         }
         tbl.setModel(model);
     }
-    public void list() // Chép ArrayList lên table
-    {
+    public void list(){ // Chép ArrayList lên table
         if(usBUS.getList()== null)usBUS.list();
         ArrayList<User> nv = usBUS.getList();
 //        model.setRowCount(0);
         outModel(model,nv);
     }
     
-    public void cleanView() //Xóa trắng các TextField
-    {
+    public void cleanView(){ //Xóa trắng các TextField
         txtMaNV.setEditable(false);
         txtMaNV.setText("");
         txtUser.setText("");

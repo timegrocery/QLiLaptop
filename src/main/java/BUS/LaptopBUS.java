@@ -52,8 +52,7 @@ public class LaptopBUS {
         }
     }
     
-    public boolean checkMasp(String masp)
-    {
+    public boolean checkMasp(String masp){
         for(Laptop sp : dssp) {
             if(sp.getMaLaptop().equals(masp)) {
                 return true;
@@ -83,9 +82,20 @@ public class LaptopBUS {
                 spDAO.set(sp);
                 System.out.println(sp.getSoluong());
                 return true;
-             }
-         }
-         return false;
+            }
+        }
+        return false;
+    }
+    public boolean updateSLValue(String masp, int sl) {
+        for(Laptop sp : dssp) {
+            if(sp.getMaLaptop().equals(masp)) {
+                sp.setSoluong(sl);
+                LaptopDAO spDAO = new LaptopDAO();
+                spDAO.set(sp);
+                return true;
+            }
+        }
+        return false;
     }
     public boolean checkSL(String masp , int sl) {
         for(Laptop sp : dssp) {

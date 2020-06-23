@@ -20,9 +20,7 @@ import java.util.logging.Logger;
  */
 public class ChiTietPhieuNhapDAO {
     private MySQLConnect mySQL = new MySQLConnect();
-    public ChiTietPhieuNhapDAO()
-    {
-        
+    public ChiTietPhieuNhapDAO(){
     }
     public ArrayList<ChiTietPhieuNhap> list() {
         ArrayList<ChiTietPhieuNhap> dsct = new ArrayList<>();

@@ -79,7 +79,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
             hmain.add(btnLogOut.isButton());
             btnLogOut.addMouseListener(new MouseAdapter() {
                @Override
-               public void mouseClicked(MouseEvent e) {
+               public void mousePressed(MouseEvent e) {
                    Login lg = new Login();
                    dispose();
                }
@@ -95,28 +95,28 @@ public class QLiLaptop extends JFrame implements MouseListener {
         
         exit.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 System.exit(0);
             }
         });
 
         exit.getlb().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 System.exit(0);
             }
         });
         
         minimize.addMouseListener(new MouseAdapter() {
            @Override
-           public void mouseClicked(MouseEvent e) {
+           public void mousePressed(MouseEvent e) {
               setState(Frame.ICONIFIED);
            }
         });
 
         minimize.getlb().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                setState(Frame.ICONIFIED);
             }
          });
@@ -175,7 +175,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(java.awt.event.MouseEvent e) {
+    public void mousePressed(java.awt.event.MouseEvent e) {
         for(int i  = 0 ; i<navObj.size();i++)
         {
             navItem item = navObj.get(i); // lấy vị trí item trong menu
@@ -313,7 +313,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
     }
     
     @Override
-    public void mousePressed(java.awt.event.MouseEvent e) {
+    public void mouseClicked(java.awt.event.MouseEvent e) {
         
     }
 

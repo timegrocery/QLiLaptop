@@ -23,13 +23,11 @@ import javax.swing.JOptionPane;
 public class ThongKeBUS {
     private HoaDonBUS hdBUS = new HoaDonBUS();
     private NhapHangBUS nhBUS = new NhapHangBUS();
-    public ThongKeBUS()
-    {
+    public ThongKeBUS(){
         hdBUS.list();
         nhBUS.list();
     }
-    public String StatisticSP(String Id,Calendar from,Calendar to)
-    {
+    public String StatisticSP(String Id,Calendar from,Calendar to){
         ArrayList<HoaDon> dsHD = new ArrayList<> ();
         dsHD = hdBUS.ListTime(from, to);
         
@@ -39,16 +37,14 @@ public class ThongKeBUS {
         ThongKeDAO tkDAO = new ThongKeDAO();
         return tkDAO.StatisticSP(dsHD,dsNhap, Id);
     }
-    public String StatisticNV(String Id,Calendar from,Calendar to)
-    {
+    public String StatisticNV(String Id,Calendar from,Calendar to){
         ArrayList<HoaDon> dsHD = new ArrayList<> ();
         dsHD = hdBUS.ListTime(from, to);
         
         ThongKeDAO tkDAO = new ThongKeDAO();
         return tkDAO.StatisticNV(dsHD, Id);
     }
-    public String StatisticKH(String Id,Calendar from,Calendar to)
-    {
+    public String StatisticKH(String Id,Calendar from,Calendar to){
         ArrayList<HoaDon> dsHD = new ArrayList<> ();
         dsHD = hdBUS.ListTime(from, to);
         
@@ -56,8 +52,7 @@ public class ThongKeBUS {
         return tkDAO.StatisticKH(dsHD, Id);
     }
     
-    public ArrayList<String> StatisticTopSP(Calendar from,Calendar to)
-    {
+    public ArrayList<String> StatisticTopSP(Calendar from,Calendar to){
         ArrayList<HoaDon> dsHD = new ArrayList<> ();
         dsHD = hdBUS.ListTime(from, to);
         
@@ -65,8 +60,7 @@ public class ThongKeBUS {
         return tkDAO.StatisticTopSP(dsHD);
     }
     
-    public ArrayList<String> StatisticTopNV(Calendar from,Calendar to)
-    {
+    public ArrayList<String> StatisticTopNV(Calendar from,Calendar to){
         ArrayList<HoaDon> dsHD = new ArrayList<> ();
         dsHD = hdBUS.ListTime(from, to);
         
@@ -74,8 +68,7 @@ public class ThongKeBUS {
         return tkDAO.StatisticTopNV(dsHD);
     }
     
-    public ArrayList<String> StatisticTopKH(Calendar from,Calendar to)
-    {
+    public ArrayList<String> StatisticTopKH(Calendar from,Calendar to){
         ArrayList<HoaDon> dsHD = new ArrayList<> ();
         dsHD = hdBUS.ListTime(from, to);
         

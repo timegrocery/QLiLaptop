@@ -49,6 +49,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.time.format.DateTimeFormatter;
 import javax.swing.Timer;
+import BUS.InfoBalloon;
 
 /**
  *
@@ -127,17 +128,19 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         txtMaHD.setEnabled(false);
         txtMaHD.setBounds(new Rectangle(55,0,120,30));
         txtMaHD.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaHD,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         hdView.add(lbMaHD);
         hdView.add(txtMaHD);
 
         JLabel lbMaKH = new JLabel("Mã KH");
         lbMaKH.setFont(font0);
         lbMaKH.setBounds(195,0,60,30);
-        txtMaKH = new JTextField();
+        txtMaKH = new JTextField("");
         txtMaKH.setHorizontalAlignment(JTextField.CENTER);
         txtMaKH.setFont(font0);
         txtMaKH.setBounds(new Rectangle(255,0,100,30));
         txtMaKH.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaKH,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         hdView.add(lbMaKH);
         hdView.add(txtMaKH);
         btnMaKH = new JButton("...");
@@ -148,12 +151,13 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         JLabel lbMaNV = new JLabel("Mã NV");
         lbMaNV.setFont(font0);
         lbMaNV.setBounds(415,0,60,30);
-        txtMaNV = new JTextField();
+        txtMaNV = new JTextField(4);
         if( userID != null ) txtMaNV.setText(userID);
         txtMaNV.setHorizontalAlignment(JTextField.CENTER);
         txtMaNV.setFont(font0);
         txtMaNV.setBounds(new Rectangle(475,0,100,30));
         txtMaNV.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNV,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         hdView.add(lbMaNV);
         hdView.add(txtMaNV);
         btnMaNV = new JButton("...");
@@ -248,6 +252,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         txtMaSP.setFont(font0);
         txtMaSP.setBounds(new Rectangle(60,240,70,30));
         txtMaSP.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaSP,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         chiTietView.add(lbMaSP);
         chiTietView.add(txtMaSP);
         btnMaSP = new JButton("...");
@@ -284,6 +289,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         txtCTSL.setHorizontalAlignment(JTextField.CENTER);
         txtCTSL.setFont(font0);
         txtCTSL.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtCTSL,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         txtCTSL.setBounds(new Rectangle(230,240,50,30));
         chiTietView.add(lbCTSL);
         chiTietView.add(txtCTSL);
@@ -312,8 +318,8 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         Vector header = new Vector();
         header.add("Mă Sản Phẩm");
         header.add("Tên Sản Phẩm");
-        header.add("Đơn Giá");
         header.add("Số lượng");
+        header.add("Đơn Giá");
         model = new DefaultTableModel(header,0)
         {
              public Class getColumnClass(int column)
@@ -379,13 +385,14 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
     {
         Vector data;
         model.setRowCount(0);
-        for(ChiTietHoaDon sp:ds) {
+        for(ChiTietHoaDon ct:ds) {
             data = new Vector();
-            data.add(sp.getMaLaptop());
-            String tenLaptop = spBUS.getSP(sp.getMaLaptop()).getTen();
+            data.add(ct.getMaLaptop());
+            String tenLaptop = spBUS.getSP(ct.getMaLaptop()).getTen();
             data.add(tenLaptop);
-            data.add(sp.getGia());
-            data.add(sp.getSl());
+            data.add(ct.getSl());
+            data.add(ct.getGia());
+            
             model.addRow(data);
         }
         tbl.setModel(model);
@@ -393,8 +400,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
     public int sumHD()
     {   
         int sum = 0;
-        for(ChiTietHoaDon sp : dsct)
-        {
+        for(ChiTietHoaDon sp : dsct) {
             int sl = sp.getSl();
             int gia = sp.getGia();
             sum += sl*gia;
@@ -403,10 +409,10 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
     }
     public void blockHD(boolean flag)
     {
-        txtMaHD.setEditable(flag);
+        txtMaHD.setEditable(false);
         txtMaKH.setEditable(flag);
         txtMaNV.setEditable(flag);
-        txtNgayHD.setEditable(flag);
+        txtNgayHD.setEditable(false);
         btnMaNV.setEnabled(flag);
     }
     public void clear(boolean flag)
@@ -445,29 +451,30 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == btnMaNV) // Suggest Nhan Vien
-        {
+        if(e.getSource() == btnMaNV){ // Suggest Nhan Vien
             SuggestNhanVien rm = new SuggestNhanVien();
             String s = rm.getTextFieldContent();
             txtMaNV.setText(s);
         }
-        if(e.getSource() == btnMaKH) // Suggest Khach hang
-        {
+        if(e.getSource() == btnMaKH){ // Suggest Khach hang
+        
             SuggestKhachHang rm = new SuggestKhachHang();
             String s = rm.getTextFieldContent();
             txtMaKH.setText(s);
         }
-        if(e.getSource().equals(btnMaSP)) // Suggest San Pham
-        {
+        if(e.getSource().equals(btnMaSP)){ // Suggest San Pham
+        
             // Lấy data và gắn lên TextField vs Hình
             SuggestSanPham rm = new SuggestSanPham(txtMaSP.getText());
             String[] s = rm.getTextFieldContent().split("%");
             txtMaSP.setText(s[0]);
             txtCTTenSP.setText(s[1]);
-            txtCTGia.setText(s[2]);
+            txtCTSL.setText(s[2]);
+            txtCTGia.setText(s[3]);
+            
             Image newImage ;
             try{
-                newImage = new ImageIcon("./src/main/java/image/SanPham/"+s[3]).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
+                newImage = new ImageIcon("./src/main/java/image/SanPham/"+s[4]).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
             } catch(NullPointerException E) {
                 newImage = new ImageIcon("./src/main/java/image/SanPham/NoImage.jpg").getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT); 
             }
@@ -495,7 +502,6 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             boolean flag = true;
             
             for(ChiTietHoaDon sp : dsct) {
-                System.out.println(sp.getMaLaptop()+" "+txtMaSP.getText());
                 if(sp.getMaLaptop().equals(txtMaSP.getText())) {
                     int old = sp.getSl();
                     if(!spBUS.checkSL(txtMaSP.getText(), sl + old)) {
@@ -510,7 +516,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
                 if(!spBUS.checkSL(txtMaSP.getText(), sl)) {
                     return;
                 }
-                dsct.add(new ChiTietHoaDon(txtMaHD.getText(), txtMaSP.getText(), sl, gia)); 
+                dsct.add(new ChiTietHoaDon(txtMaHD.getText(), txtMaSP.getText(), sl, gia));
             }
             outModel(model, dsct);
             txtTongTien.setText(String.valueOf(sumHD()));
@@ -559,14 +565,12 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             
             txtMaSP.requestFocus();
         }
-        if(e.getSource().equals(btnDeleteHD)) //Xóa HD 
-        {
+        if(e.getSource().equals(btnDeleteHD)){ //Xóa HD 
             reset(true);
         }
-        if(e.getSource().equals(btnConfirm)) //Xác nhận
-        {
-            if(dsct.isEmpty())
-            {
+        if(e.getSource().equals(btnConfirm)){ //Xác nhận
+        
+            if(dsct.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Vui lòng nhập sản phẩm");
                 return;
             }
@@ -581,17 +585,17 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             hdBUS.add(hd);
             for(ChiTietHoaDon ct : dsct) {
                 ctBUS.add(ct);
+                spBUS.updateSL(ct.getMaLaptop(),ct.getSl());
             }
+            
             outBill bill = new outBill(hd, dsct);
             bill.print();
             reset(true);
         }
-        if(e.getSource().equals(btnEdit)) //Sửa sl trong Chitiet sp
-        {
-            try{
+        if(e.getSource().equals(btnEdit)){ //Sửa sl trong Chitiet sp
+            try {
                 int i = tbl.getSelectedRow();
-                if(tbl.getRowSorter() != null)
-                {
+                if(tbl.getRowSorter() != null){
                     i = tbl.getRowSorter().convertRowIndexToModel(i);
                 }
                 String masp = tbl.getModel().getValueAt(i, 0).toString();
@@ -599,15 +603,13 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
                 while(!spBUS.checkSL(masp, sl)) {
                     sl = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm :"));
                 }
-                for(ChiTietHoaDon ct : dsct)
-                {
+                for(ChiTietHoaDon ct : dsct){
                     if(ct.getMaLaptop().equals(masp)) {
                         ct.setSl(sl);
                     }
                 }
                 outModel(model, dsct);
-            }catch(IndexOutOfBoundsException ex)
-            {
+            } catch(IndexOutOfBoundsException ex) {
                 JOptionPane.showMessageDialog(null, "Chưa chọn SP cần sửa");
             }
         }
@@ -634,26 +636,21 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         Object a = e.getSource();
         if(e.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            if(a.equals(txtMaHD) || a.equals(txtMaKH) || a.equals(txtMaNV)) //Enter TXT ở Hóa Đơn
-            {
+            if(a.equals(txtMaHD) || a.equals(txtMaKH) || a.equals(txtMaNV)){ //Enter TXT ở Hóa Đơn
                 btnNewHD.doClick();
             }
-            else if(a.equals(txtMaSP)) //Enter MASP
-            {
-                try
-                {
+            else if(a.equals(txtMaSP)){ //Enter MASP
+                try {
                     Laptop sp = spBUS.getSP(txtMaSP.getText());
                     Image img = new ImageIcon("./src/main/java/image/SanPham/"+sp.getImg()).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
                     imgSP.setIcon(new ImageIcon(img));
                     txtCTTenSP.setText(sp.getTen());
                     txtCTGia.setText(String.valueOf(sp.getGia()));
-                }catch(NullPointerException ex)
-                {
+                } catch(NullPointerException ex) {
                     JOptionPane.showMessageDialog(null, "Mã sản phẩm không tồn tại !!");
                 }
             }
-            else if(a.equals(txtCTSL)) //Enter SL
-            {
+            else if(a.equals(txtCTSL)){ //Enter SL
                 btnAddCT.doClick();
             }
         }

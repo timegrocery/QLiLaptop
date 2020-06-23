@@ -35,18 +35,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class LaptopDAO {
     private MySQLConnect mySQL = new MySQLConnect();
-    public LaptopDAO()
-    {
-        
+    public LaptopDAO(){
     }
     public ArrayList<Laptop> list() {
         ArrayList<Laptop> dsct = new ArrayList<>();
         try {
-           
             String sql = "SELECT * FROM laptop WHERE 1";
             ResultSet rs = mySQL.executeQuery(sql);
-            while(rs.next())
-            {
+            while(rs.next()){
                 String maLaptop = rs.getString("MALAPTOP");
                 String maNhaSanXuat = rs.getString("MANSX");
                 String maNhaCungCap = rs.getString("MANCC");
@@ -65,8 +61,7 @@ public class LaptopDAO {
                 dsct.add(ct);
             }
             rs.close();
-            mySQL.disConnect();
-            
+            mySQL.disConnect();  
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -119,11 +114,11 @@ public class LaptopDAO {
     }
     
     public void ExportExcelDatabase(){
-        try{
+        try {
             String sql = "SELECT * FROM laptop WHERE 1";
             ResultSet rs = mySQL.executeQuery(sql);
             XSSFWorkbook workbook = new XSSFWorkbook();
-            XSSFSheet sheet = workbook.createSheet("Sanphamdb");
+            XSSFSheet sheet = workbook.createSheet("Laptopdb");
             
                     
             XSSFFont font = workbook.createFont();
@@ -140,24 +135,36 @@ public class LaptopDAO {
             cell.setCellValue("MALAPTOP");
             cell.setCellStyle(style);
             cell = row.createCell(1);
-            cell.setCellValue("TEN");
-            cell.setCellStyle(style);
-            cell = row.createCell(2);
-            cell.setCellValue("SOLUONG");
-            cell.setCellStyle(style);
-            cell = row.createCell(3);
-            cell.setCellValue("GIA");
-            cell.setCellStyle(style);
-            cell = row.createCell(4);
-            cell.setCellValue("MACHITIET");
-            cell.setCellStyle(style);
-            cell = row.createCell(5);
             cell.setCellValue("MANSX");
             cell.setCellStyle(style);
-            cell = row.createCell(6);
+            cell = row.createCell(2);
             cell.setCellValue("MANCC");
             cell.setCellStyle(style);
+            cell = row.createCell(3);
+            cell.setCellValue("TEN");
+            cell.setCellStyle(style);
+            cell = row.createCell(4);
+            cell.setCellValue("SOLUONG");
+            cell.setCellStyle(style);
+            cell = row.createCell(5);
+            cell.setCellValue("GIA");
+            cell.setCellStyle(style);
+            cell = row.createCell(6);
+            cell.setCellValue("CPU");
+            cell.setCellStyle(style);
             cell = row.createCell(7);
+            cell.setCellValue("RAM");
+            cell.setCellStyle(style);
+            cell = row.createCell(8);
+            cell.setCellValue("GPU");
+            cell.setCellStyle(style);
+            cell = row.createCell(9);
+            cell.setCellValue("MANHINH");
+            cell.setCellStyle(style);
+            cell = row.createCell(10);
+            cell.setCellValue("OCUNG");
+            cell.setCellStyle(style);
+            cell = row.createCell(11);
             cell.setCellValue("IMG");
             cell.setCellStyle(style);
             int i = 1;
@@ -165,22 +172,29 @@ public class LaptopDAO {
         while(rs.next()){
             row = sheet.createRow(i);
             cell = row.createCell(0);
-            cell.setCellValue(rs.getString("MASP"));
+            cell.setCellValue(rs.getString("MALAPTOP"));
             cell = row.createCell(1);
-            cell.setCellValue(rs.getString("TENSP"));
-            cell = row.createCell(2);
-            cell.setCellValue(rs.getInt("SOLUONG"));
-            cell = row.createCell(3);
-            cell.setCellValue(rs.getInt("GIA"));
-            cell = row.createCell(4);
-            cell.setCellValue(rs.getString("MACT"));
-            cell = row.createCell(5);
             cell.setCellValue(rs.getString("MANSX"));
-            cell = row.createCell(6);
+            cell = row.createCell(2);
             cell.setCellValue(rs.getString("MANCC"));
+            cell = row.createCell(3);
+            cell.setCellValue(rs.getString("TEN"));
+            cell = row.createCell(4);
+            cell.setCellValue(rs.getInt("SOLUONG"));
+            cell = row.createCell(5);
+            cell.setCellValue(rs.getInt("GIA"));
+            cell = row.createCell(6);
+            cell.setCellValue(rs.getString("CPU"));
             cell = row.createCell(7);
+            cell.setCellValue(rs.getString("RAM"));
+            cell = row.createCell(8);
+            cell.setCellValue(rs.getString("GPU"));
+            cell = row.createCell(9);
+            cell.setCellValue(rs.getString("MANHINH"));
+            cell = row.createCell(10);
+            cell.setCellValue(rs.getString("OCUNG"));
+            cell = row.createCell(11);
             cell.setCellValue(rs.getString("IMG"));
-            
             i++;
         }
         
@@ -188,7 +202,7 @@ public class LaptopDAO {
             sheet.autoSizeColumn((short) (colNum));
         }
         
-        FileOutputStream out = new FileOutputStream(new File("./report/sanphamdb.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File("./report/Laptopdb.xlsx"));
         workbook.write(out);
         out.close();
         System.out.println("Xuat file thanh cong");
@@ -212,36 +226,50 @@ public class LaptopDAO {
             for(int i = 1; i <= sheet.getLastRowNum(); i++){
                 row = sheet.getRow(i);
                 String maSP = row.getCell(0).getStringCellValue();
-                String tenSP = row.getCell(1).getStringCellValue();
-                int sl = (int) row.getCell(2).getNumericCellValue();
-                int gia = (int) row.getCell(3).getNumericCellValue();
-                String maCT = row.getCell(4).getStringCellValue();
-                String maNhaSanXuat = row.getCell(5).getStringCellValue();
-                String maNhaCungCap = row.getCell(6).getStringCellValue();
-                String IMG = row.getCell(7).getStringCellValue();
+                String maNSX = row.getCell(1).getStringCellValue();
+                String maNCC = row.getCell(2).getStringCellValue();
+                String tenSP = row.getCell(3).getStringCellValue();
+                int sl = (int) row.getCell(4).getNumericCellValue();
+                int gia = (int) row.getCell(5).getNumericCellValue();
+                String CPU = row.getCell(6).getStringCellValue();
+                String RAM = row.getCell(7).getStringCellValue();
+                String GPU = row.getCell(8).getStringCellValue();
+                String MANHINH = row.getCell(9).getStringCellValue();
+                String OCUNG = row.getCell(10).getStringCellValue();
+                String IMG = row.getCell(11).getStringCellValue();
                 
-                String sql_check = "SELECT * FROM sanpham WHERE MaSP='"+maSP+"'";
+                String sql_check = "SELECT * FROM laptop WHERE MALAPTOP='"+maSP+"'";
                 ResultSet rs = mySQL.executeQuery(sql_check);
                 if(!rs.next()){
                     String sql = "INSERT INTO laptop VALUES (";
                     sql += "'"+maSP+"',";
+                    sql += "'"+maNSX+"',";
+                    sql += "'"+maNCC+"',";
                     sql += "N'"+tenSP+"',";
                     sql += "'"+sl+"',";
                     sql += "'"+gia+"',";
-                    sql += "N'"+maCT+"',";
-                    sql += "'"+maNhaSanXuat+"',";
-                    sql += "'"+maNhaCungCap+"',";
-                    sql += "'"+IMG+"',";
-                    sql += "'1')";
+                    sql += "N'"+CPU+"',";
+                    sql += "'"+RAM+"',";
+                    sql += "'"+GPU+"',";
+                    sql += "'"+MANHINH+"',";
+                    sql += "'"+OCUNG+"',";
+                    sql += "'"+IMG+"')";
                     System.out.println(sql);
                     mySQL.executeUpdate(sql);
                 }
                 else{
                     String sql = "UPDATE laptop SET ";
-                    sql += "TENSP='"+tenSP+"', ";
+                    sql += "MANSX='"+maNSX+"', ";
+                    sql += "MANCC='"+maNCC+"', ";
+                    sql += "TEN='"+tenSP+"', ";
                     sql += "SOLUONG='"+sl+"', ";
                     sql += "GIA='"+gia+"', ";
-                    sql += "MACT='"+maCT+"', ";
+                    sql += "CPU='"+CPU+"', ";
+                    sql += "RAM='"+RAM+"', ";
+                    sql += "GPU='"+GPU+"', ";
+                    sql += "MANHINH='"+MANHINH+"', ";
+                    sql += "OCUNG='"+OCUNG+"', ";
+                    sql += "IMG='"+IMG+"' ";
                     sql += "WHERE MALAPTOP='"+maSP+"'";
                     System.out.println(sql);
                     mySQL.executeUpdate(sql);

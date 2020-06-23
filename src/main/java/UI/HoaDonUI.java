@@ -36,6 +36,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import BUS.InfoBalloon;
 
 /**
  *
@@ -84,6 +85,7 @@ public class HoaDonUI extends JPanel {
         txtMaHD = new JTextField();
         txtMaHD.setFont(font0);
         txtMaHD.setBounds(new Rectangle(55,0,80,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaHD, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaHD);
         itemView.add(txtMaHD);
 
@@ -93,6 +95,7 @@ public class HoaDonUI extends JPanel {
         txtMaKH = new JTextField();
         txtMaKH.setFont(font0);
         txtMaKH.setBounds(new Rectangle(215,0,80,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaKH, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaKH);
         itemView.add(txtMaKH);
 
@@ -102,6 +105,7 @@ public class HoaDonUI extends JPanel {
         txtMaNV = new JTextField();
         txtMaNV.setFont(font0);
         txtMaNV.setBounds(new Rectangle(375,0,80,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaNV, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaNV);
         itemView.add(txtMaNV);
 
@@ -125,6 +129,7 @@ public class HoaDonUI extends JPanel {
         txtTongTien = new JTextField();
         txtTongTien.setFont(font0);
         txtTongTien.setBounds(new Rectangle(80,80,375,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtTongTien, InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         itemView.add(lbTongTien);
         itemView.add(txtTongTien);
 

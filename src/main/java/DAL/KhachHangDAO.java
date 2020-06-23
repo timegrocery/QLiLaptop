@@ -20,8 +20,7 @@ import java.util.logging.Logger;
  */
 public class KhachHangDAO {
     private MySQLConnect mySQL = new MySQLConnect();
-    public KhachHangDAO()
-    {
+    public KhachHangDAO(){
         
     }
     public ArrayList<KhachHang> list() {
@@ -30,8 +29,7 @@ public class KhachHangDAO {
            
             String sql = "SELECT * FROM khachhang WHERE 1";
             ResultSet rs = mySQL.executeQuery(sql);
-            while(rs.next())
-            {
+            while(rs.next()){
                 String maKH = rs.getString("MAKH");
                 String hoKH = rs.getString("HOKH");
                 String tenKH = rs.getString("TENKH");

@@ -32,6 +32,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import BUS.InfoBalloon;
 
 /**
  *
@@ -45,17 +46,14 @@ public class ChiTietHoaDonUI extends JFrame {
     private JTable tbl;
     private int DWIDTH = 840;
     private JTextField txtTenSP;
-    public ChiTietHoaDonUI()
-    {
+    public ChiTietHoaDonUI(){
         init();
     }
-    public ChiTietHoaDonUI(String mahd)
-    {
+    public ChiTietHoaDonUI(String mahd){
         this.mahd = mahd;
         init();
     }
-    public void init()
-    {
+    public void init(){
         setTitle("Chi tiết hóa đơn");
         setSize(DWIDTH,450);
         getContentPane().setBackground(new Color(55, 63, 81));
@@ -82,6 +80,7 @@ public class ChiTietHoaDonUI extends JFrame {
         lbMaSP.setBounds(20,20,100,30);
         txtMaSP = new JTextField();
         txtMaSP.setBounds(new Rectangle(120,20,210,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaSP, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaSP);
         itemView.add(txtMaSP);
         
@@ -92,12 +91,14 @@ public class ChiTietHoaDonUI extends JFrame {
         txtTenSP.setBounds(new Rectangle(120,60,210,30));
         itemView.add(lbTenSP);
         itemView.add(txtTenSP);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenSP, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JLabel lbSL = new JLabel("Số lượng ");
         lbSL.setFont(font0);
         lbSL.setBounds(20,100,100,30);
         txtSL = new JTextField();
         txtSL.setBounds(new Rectangle(120,100,210,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtSL, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbSL);
         itemView.add(txtSL);
         
@@ -106,20 +107,25 @@ public class ChiTietHoaDonUI extends JFrame {
         lbDonGia.setBounds(20,140,100,30);
         txtDonGia = new JTextField();
         txtDonGia.setBounds(new Rectangle(120,140,210,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtDonGia, InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         itemView.add(lbDonGia);
         itemView.add(txtDonGia);
 /**************** TẠO CÁC BTN XÓA, SỬA, VIEW, IN BILL ********************/
 
-        JLabel btnEdit = new JLabel(new ImageIcon("./src/main/java/image/btnEdit_150px.png"));
-        btnEdit.setBounds(new Rectangle(20,180,150,50));
-        btnEdit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        JLabel btnConfirm = new JLabel(new ImageIcon("./src/main/java/image/btnConfirm_150px.png"));
+        btnConfirm.setBounds(new Rectangle(20,180,150,50));
+        btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
               
-        JLabel btnDelete = new JLabel(new ImageIcon("./src/main/java/image/btnDelete_150px.png"));
-        btnDelete.setBounds(new Rectangle(180,180,150,50));
-        btnDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));    
+         
+        setEditable(false);
+        itemView.add(btnConfirm);
         
-        itemView.add(btnEdit);
-        itemView.add(btnDelete);
+        btnConfirm.addMouseListener(new MouseAdapter(){
+           @Override
+           public void mousePressed(MouseEvent e) {
+               dispose();
+           }
+        });
 /*************************************************************************/
 
 /**************** TẠO TABLE ************************************************************/
@@ -164,28 +170,25 @@ public class ChiTietHoaDonUI extends JFrame {
         itemView.add(scroll);
         
         add(itemView);
-    /**************************************/
-    tbl.addMouseListener(new MouseAdapter() {
-             public void mouseClicked(MouseEvent e)
-             {
-                int i = tbl.getSelectedRow();
-                txtMaSP.setText(tbl.getModel().getValueAt(i, 0).toString());
-                txtTenSP.setText(tbl.getModel().getValueAt(i, 1).toString());
-                txtSL.setText(tbl.getModel().getValueAt(i, 2).toString()); 
-                txtDonGia.setText(tbl.getModel().getValueAt(i, 3).toString());
-             }
+        /**************************************/
+        tbl.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e){
+                    int i = tbl.getSelectedRow();
+                    txtMaSP.setText(tbl.getModel().getValueAt(i, 0).toString());
+                    txtTenSP.setText(tbl.getModel().getValueAt(i, 1).toString());
+                    txtSL.setText(tbl.getModel().getValueAt(i, 2).toString()); 
+                    txtDonGia.setText(tbl.getModel().getValueAt(i, 3).toString());
+                }
         });
 /*****************************************************************************************/
 /*********************************************************************/
         
         setVisible(true);
     }
-    public void outModel(DefaultTableModel model , ArrayList<ChiTietHoaDon> ct) // Xuất ra Table từ ArrayList
-    {
+    public void outModel(DefaultTableModel model , ArrayList<ChiTietHoaDon> ct){ // Xuất ra Table từ ArrayList
         Vector data;
         model.setRowCount(0);
-        for(ChiTietHoaDon c:ct)
-        {
+        for(ChiTietHoaDon c:ct){
             data = new Vector();
             data.add(c.getMaLaptop());
             data.add(c.getMaHD());
@@ -195,8 +198,19 @@ public class ChiTietHoaDonUI extends JFrame {
         }
         tbl.setModel(model);
     }
-    public void list() // Chép ArrayList lên table
-    {
+    public void clean(){
+        txtMaSP.setText("");
+        txtTenSP.setText("");
+        txtSL.setText("");
+        txtDonGia.setText("");
+    }
+    public void setEditable(boolean flag) {
+        txtMaSP.setEditable(false);
+        txtTenSP.setEditable(false);
+        txtSL.setEditable(flag);
+        txtDonGia.setEditable(flag);
+    }
+    public void list(){ // Chép ArrayList lên table
         if(ctBUS.getList()== null)ctBUS.list();
         ArrayList<ChiTietHoaDon> ct = ctBUS.getListHD(mahd);
         model.setRowCount(0);

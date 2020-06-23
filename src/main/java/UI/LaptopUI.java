@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.NhaSanXuatBUS;
 import BUS.NhaCungCapBUS;
 import java.awt.Color;
@@ -107,6 +108,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtId.setBounds(new Rectangle(350,0,220,30));
         txtId.setFont(font0);
         txtId.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtId, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         
         JLabel lbName = new JLabel("Tên Sản Phẩm");
         lbName.setBounds(new Rectangle(250,40,200,30));
@@ -115,6 +117,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtTenSP.setBounds(new Rectangle(350,40,220,30));
         txtTenSP.setFont(font0);
         txtTenSP.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenSP, InfoBalloon.filter_all, InfoBalloon.limit_name);
 
 
         JLabel lbGia = new JLabel("Đơn giá ($)");
@@ -124,6 +127,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtGia.setBounds(new Rectangle(350,80,220,30));
         txtGia.setFont(font0);
         txtGia.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtGia, InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         
         JLabel lbCPU = new JLabel("CPU");
         lbCPU.setBounds(new Rectangle(250,120,200,30));
@@ -132,6 +136,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtCPU.setBounds(new Rectangle(350,120,220,30));
         txtCPU.setFont(font0);
         txtCPU.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtCPU, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JLabel lbRAM = new JLabel("RAM");
         lbRAM.setBounds(new Rectangle(250,160,200,30));
@@ -140,6 +145,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtRAM.setBounds(new Rectangle(350,160,220,30));
         txtRAM.setFont(font0);
         txtRAM.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtRAM, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JLabel lbGPU = new JLabel("GPU");
         lbGPU.setBounds(new Rectangle(250,200,200,30));
@@ -148,6 +154,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtGPU.setBounds(new Rectangle(350,200,220,30));
         txtGPU.setFont(font0);
         txtGPU.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtGPU, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JLabel lbManhinh = new JLabel("Màn hình");
         lbManhinh.setBounds(new Rectangle(250,240,200,30));
@@ -156,6 +163,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtManhinh.setBounds(new Rectangle(350,240,220,30));
         txtManhinh.setFont(font0);
         txtManhinh.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtManhinh, InfoBalloon.filter_all, InfoBalloon.limit_name);
         
         JLabel lbOcung = new JLabel("Ổ cứng");
         lbOcung.setBounds(new Rectangle(250,280,200,30));
@@ -164,6 +172,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtOcung.setBounds(new Rectangle(350,280,220,30));
         txtOcung.setFont(font0);
         txtOcung.setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtOcung, InfoBalloon.filter_all, InfoBalloon.limit_name);
 
         JLabel lbNCC = new JLabel("NCC");
         lbNCC.setBounds(new Rectangle(620,240,50,30));
@@ -681,7 +690,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         sort.setBackground(null);
         sort.setBounds(30,350,this.DEFALUT_WIDTH - 400,100);
 
-        JLabel sortTitle = new JLabel("--------------------------------------------------------------------------- TÌM KIẾM THÔNG TIN ---------------------------------------------------------------------------",JLabel.CENTER); // Mỗi bên 74 dấu ( - )
+        JLabel sortTitle = new JLabel("___________________________________________________________________________ TÌM KIẾM THÔNG TIN _________________________________________________________________________",JLabel.CENTER); // Mỗi bên 74 dấu ( - )
         sortTitle.setFont(font1);
         sortTitle.setBounds(new Rectangle(0,0,this.DEFALUT_WIDTH - 400,30));
         sort.add(sortTitle);
@@ -696,6 +705,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         sortMaSP.setFont(font0);
         sortMaSP.setBounds(new Rectangle(50,42,100,30));
         sortMaSP.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, sortMaSP,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         sort.add(sortMaSP);
         /*************************************/
         
@@ -712,6 +722,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         cmbSortNSX.setBounds(new Rectangle(400,42,100,30));
         cmbSortNSX.addItem("Không");
         cmbSortNSX.addKeyListener(this);
+        
         listNSX(cmbSortNSX);
         sort.add(cmbSortNSX);
         
@@ -727,6 +738,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtMinPrice.setFont(font0);
         txtMinPrice.setBounds(new Rectangle(580,42,100,30));
         txtMinPrice.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMinPrice,InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         sort.add(txtMinPrice);
 
         JSeparator sepPrice = new JSeparator(JSeparator.HORIZONTAL);
@@ -737,6 +749,7 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtMaxPrice.setFont(font0);
         txtMaxPrice.setBounds(new Rectangle(710,42,100,30));
         txtMaxPrice.addKeyListener(this);
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaxPrice,InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         sort.add(txtMaxPrice);
         /******************************************/
 

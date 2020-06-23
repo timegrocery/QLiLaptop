@@ -15,8 +15,7 @@ import java.util.ArrayList;
  */
 public class NhaSanXuatBUS {
     private ArrayList<NhaSanXuat> dsNsx ;
-    public NhaSanXuatBUS() {
-        
+    public NhaSanXuatBUS() {   
     }
     public void listNSX() {
         NhaSanXuatDAO nsxDAO = new NhaSanXuatDAO();

@@ -20,15 +20,12 @@ import java.util.logging.Logger;
 public class HoaDonDAO {
     private MySQLConnect mySQL = new MySQLConnect();
     public HoaDonDAO(){}
-    public ArrayList<HoaDon> list()
-    {
+    public ArrayList<HoaDon> list(){
         ArrayList<HoaDon> dshd = new ArrayList<>();
         try {
-           
             String sql = "SELECT * FROM hoadon WHERE 1";
             ResultSet rs = mySQL.executeQuery(sql);
-            while(rs.next())
-            {
+            while(rs.next()){
                 String maHD = rs.getString("MAHD");
                 String maKH = rs.getString("MAKH");
                 String maNV = rs.getString("MANV");
@@ -41,7 +38,6 @@ public class HoaDonDAO {
             }
             rs.close();
             mySQL.disConnect();
-            
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,8 +58,7 @@ public class HoaDonDAO {
         System.out.println(sql);
         mySQL.executeUpdate(sql);
     }
-    public void set(HoaDon hd)
-    {
+    public void set(HoaDon hd){
         MySQLConnect mySQL = new MySQLConnect();
         String maKH = hd.getMaKH().equals("")?null:"'"+hd.getMaKH()+"'";
         String sql = "UPDATE hoadon SET ";

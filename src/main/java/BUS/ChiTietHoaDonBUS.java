@@ -34,8 +34,7 @@ public class ChiTietHoaDonBUS {
 
     public void delete(String idChiTietHD) {
         for(ChiTietHoaDon ct : dsChiTietHD ) {
-            if(ct.getMaHD().equals(idChiTietHD))
-            {
+            if(ct.getMaHD().equals(idChiTietHD)){
                 dsChiTietHD.remove(ct);
                 ChiTietHoaDonDAO loaiDAO = new ChiTietHoaDonDAO();
                 loaiDAO.delete(idChiTietHD);

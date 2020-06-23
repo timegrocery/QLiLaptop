@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.KhachHangBUS;
 import DTO.KhachHang;
 import java.awt.Choice;
@@ -82,6 +83,7 @@ public class SuggestKhachHang extends JDialog {
         lbMaKH.setBounds(20,20,100,30);
         txtMaKH = new JTextField();
         txtMaKH.setBounds(new Rectangle(120,20,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaKH,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaKH);
         itemView.add(txtMaKH);
         
@@ -90,6 +92,7 @@ public class SuggestKhachHang extends JDialog {
         lbHo.setBounds(20,70,100,30);
         txtHo = new JTextField();
         txtHo.setBounds(new Rectangle(120,70,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtHo,InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
         itemView.add(lbHo);
         itemView.add(txtHo);
         
@@ -99,6 +102,7 @@ public class SuggestKhachHang extends JDialog {
         lbSdt.setBounds(20,170,100,30);
         txtSdt = new JTextField();
         txtSdt.setBounds(new Rectangle(120,170,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtSdt,InfoBalloon.filter_numberOnly, InfoBalloon.limit_sdt);
         itemView.add(lbSdt);
         itemView.add(txtSdt);
         
@@ -108,8 +112,7 @@ public class SuggestKhachHang extends JDialog {
         btnConfirm.setBounds(new Rectangle(20,260,150,50));
         btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnConfirm.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 dispose();
             }
         });
@@ -118,8 +121,7 @@ public class SuggestKhachHang extends JDialog {
         btnBack.setBounds(new Rectangle(180,260,150,50));
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));    
         btnBack.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 System.exit(0);
             }
         });

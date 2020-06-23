@@ -33,6 +33,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import BUS.InfoBalloon;
 
 /**
  *
@@ -49,13 +50,11 @@ public class KhachHangUI extends JPanel {
     private int DEFALUT_WIDTH;
     private boolean EditOrAdd = true;//Cờ cho button Cofirm True:ADD || False:Edit
     
-    public KhachHangUI (int width)
-    {
+    public KhachHangUI (int width){
         DEFALUT_WIDTH = width;
         init();
     }
-    public void init()
-    {
+    public void init(){
         
         setLayout(null);
         setBackground(null);
@@ -75,25 +74,31 @@ public class KhachHangUI extends JPanel {
         lbMaKH.setBounds(new Rectangle(50,0,200,30));
         lbMaKH.setFont(font0);
         txtMaKH.setBounds(new Rectangle(150,0,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaKH, InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         
         JLabel lbSDT = new JLabel("Số điện thoại");
         txtSDT = new JTextField("");
         lbSDT.setBounds(new Rectangle(400,0,100,30)); 
         lbSDT.setFont(font0);
         txtSDT.setBounds(new Rectangle(500,0,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtSDT, InfoBalloon.filter_numberOnly, InfoBalloon.limit_sdt);
         
         JLabel lbHoKH = new JLabel("Họ");
         txtHoKH = new JTextField("");
         lbHoKH.setBounds(new Rectangle(50,40,200,30));
         lbHoKH.setFont(font0);
         txtHoKH.setBounds(new Rectangle(150,40,220,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtHoKH, InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
      
         JLabel lbTenKH = new JLabel("Tên");
         txtTenKH = new JTextField("");
         lbTenKH.setBounds(new Rectangle(400,40,200,30));
         lbTenKH.setFont(font0);
         txtTenKH.setBounds(new Rectangle(500,40,220,30));
-        setEditable(false);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenKH, InfoBalloon.filter_alphaOnly, InfoBalloon.limit_name);
+        
+        
+        setEditable(false); // khóa các text field ngay từ đầu
             
         
         // THÊM VÀO PHẦN HIỂN THỊ

@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.LaptopBUS;
 import DTO.Laptop;
 import java.awt.Color;
@@ -83,6 +84,7 @@ public class SuggestSanPham extends JDialog {
         lbMaSP.setBounds(20,20,100,30);
         txtMaSP = new JTextField();
         txtMaSP.setBounds(new Rectangle(120,20,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtMaSP,InfoBalloon.filter_numberOnly, InfoBalloon.limit_ID);
         itemView.add(lbMaSP);
         itemView.add(txtMaSP);
         
@@ -91,6 +93,7 @@ public class SuggestSanPham extends JDialog {
         lbTenSP.setBounds(20,70,100,30);
         txtTenSP = new JTextField();
         txtTenSP.setBounds(new Rectangle(120,70,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtTenSP,InfoBalloon.filter_all, InfoBalloon.limit_name);
         itemView.add(lbTenSP);
         itemView.add(txtTenSP);
         
@@ -99,6 +102,7 @@ public class SuggestSanPham extends JDialog {
         lbGia.setBounds(20,120,100,30);
         txtGia = new JTextField();
         txtGia.setBounds(new Rectangle(120,120,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtGia, InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         itemView.add(lbGia);
         itemView.add(txtGia);
         
@@ -107,6 +111,7 @@ public class SuggestSanPham extends JDialog {
         lbSL.setBounds(20,220,100,30);
         txtSL = new JTextField();
         txtSL.setBounds(new Rectangle(120,220,250,30));
+        new InfoBalloon(InfoBalloon.errTxt_numberOnly, txtSL,InfoBalloon.filter_numberOnly, InfoBalloon.limit_price);
         itemView.add(lbSL);
         itemView.add(txtSL);
         
@@ -116,8 +121,7 @@ public class SuggestSanPham extends JDialog {
         btnConfirm.setBounds(new Rectangle(20,320,150,50));
         btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnConfirm.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 dispose();
             }
         });
@@ -126,8 +130,7 @@ public class SuggestSanPham extends JDialog {
         btnBack.setBounds(new Rectangle(180,320,150,50));
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));    
         btnBack.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 dispose();
             }
         });
@@ -142,8 +145,8 @@ public class SuggestSanPham extends JDialog {
         Vector header = new Vector();
         header.add("Mă SP");
         header.add("Tên SP");
-        header.add("Đơn giá");
         header.add("SL tồn");
+        header.add("Đơn giá");
         header.add("IMG");
         model = new DefaultTableModel(header,5);
         tbl = new JTable(model);
@@ -305,6 +308,7 @@ public class SuggestSanPham extends JDialog {
     {
         return  txtMaSP.getText()+"%"+
                 txtTenSP.getText()+"%"+
+                txtSL.getText()+"%"+
                 txtGia.getText()+"%"+
                 img;
     }
@@ -327,8 +331,8 @@ public class SuggestSanPham extends JDialog {
         }
         txtMaSP.setText(tbl.getModel().getValueAt(i, 0).toString());
         txtTenSP.setText(tbl.getModel().getValueAt(i, 1).toString());
-        txtGia.setText(tbl.getModel().getValueAt(i, 2).toString()); 
-        txtSL.setText(tbl.getModel().getValueAt(i, 3).toString());
+        txtSL.setText(tbl.getModel().getValueAt(i, 2).toString());
+        txtGia.setText(tbl.getModel().getValueAt(i, 3).toString()); 
         img = tbl.getModel().getValueAt(i, 4).toString();
     }
 }
