@@ -21,19 +21,16 @@ public class Maintainance extends JPanel {
     private int DEFALUT_WIDTH;
     private String title = "HỆ THỐNG ĐANG BẢO TRÌ";
     
-    public Maintainance(int width)
-    {
+    public Maintainance(int width){
         DEFALUT_WIDTH = width;
         init();
     }
-    public Maintainance(int width,String title)
-    {
+    public Maintainance(int width,String title){
         this.title = title;
         DEFALUT_WIDTH = width;
         init();
     }
-    public void init()
-    {
+    public void init(){
         setLayout(null);
         setBackground(null);
         setBounds(new Rectangle(100, 0, this.DEFALUT_WIDTH - 220, 1000));

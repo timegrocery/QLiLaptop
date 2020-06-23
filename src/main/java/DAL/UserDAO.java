@@ -5,8 +5,6 @@
  */
 package DAL;
 
-import DAL.MySQLConnect;
-import DAL.NhanVienDAO;
 import DTO.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,19 +18,15 @@ import java.util.logging.Logger;
  */
 public class UserDAO {
     private MySQLConnect mySQL = new MySQLConnect();
-    public UserDAO()
-    {
-        
+    public UserDAO(){ 
     }
-    public ArrayList<User> list()
-    {
+    public ArrayList<User> list(){
         ArrayList<User> dsnv = new ArrayList<>();
         try {
            
             String sql = "SELECT * FROM user WHERE 1";
             ResultSet rs = mySQL.executeQuery(sql);
-            while(rs.next())
-            {
+            while(rs.next()){
                 String userID = rs.getString("userID");
                 String username = rs.getString("username");
                 String pass = rs.getString("pass");

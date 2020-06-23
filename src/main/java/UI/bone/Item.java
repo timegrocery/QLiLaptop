@@ -6,9 +6,7 @@
 package UI.bone;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.Rectangle;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,8 +20,7 @@ public class Item extends JPanel {
     private JLabel itemName;
     private JLabel itemImage;
     private int x,y;
-    public Item(int x,int y,String itemName, String image)
-    {
+    public Item(int x,int y,String itemName, String image){
         this.x = x;
         this.y = y;
         this.itemName = new JLabel(itemName,JLabel.CENTER);
@@ -31,8 +28,7 @@ public class Item extends JPanel {
         this.itemImage = new JLabel("Image 200x200",JLabel.CENTER);
         init();
     }
-    public void init()
-    {
+    public void init(){
         JLabel edit = new JLabel("Edit",JLabel.CENTER);
         edit.setBounds(new Rectangle(0,240,100,20));
         JLabel delete = new JLabel("Delete",JLabel.CENTER);

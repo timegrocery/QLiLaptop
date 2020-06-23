@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -115,18 +114,18 @@ public class UserUI extends JPanel {
         btnConfirm = new JLabel(new ImageIcon("./src/main/java/image/btnConfirm_150px.png"));
         btnConfirm.setBounds(new Rectangle(20,260,150,50));
         btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));    
-        
+
         btnBack = new JLabel(new ImageIcon("./src/main/java/image/btnBack_150px.png"));
         btnBack.setBounds(new Rectangle(180,260,150,50));
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-        
+        btnBack.setVisible(false);
         btnEdit.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 if(txtMaNV.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên cần sửa !!!");
                     return;
                 }
-                
+
                 txtMaNV.setEditable(false);
                 
                 btnEdit.setVisible(false);
@@ -138,8 +137,7 @@ public class UserUI extends JPanel {
                 setEditable(true);
             }
         });
-              
-        
+
         btnConfirm.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 int i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa sản phẩm","",JOptionPane.YES_NO_OPTION);
@@ -163,7 +161,7 @@ public class UserUI extends JPanel {
                     }
             }
         });
-        
+
          btnBack.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 cleanView();
@@ -218,9 +216,9 @@ public class UserUI extends JPanel {
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);
@@ -247,7 +245,6 @@ public class UserUI extends JPanel {
 /*********************************************************************/
     }
     public void outModel(DefaultTableModel model , ArrayList<User> user){ // Xuất ra Table từ ArrayList
-    
         Vector data;
         model.setRowCount(0);
         for(User us : user){

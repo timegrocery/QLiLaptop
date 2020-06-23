@@ -9,14 +9,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import UI.bone.Maintainance;
 import UI.bone.header;
 import UI.bone.navItem;
 import java.awt.Font;
@@ -61,7 +59,7 @@ public class QLiLaptop extends JFrame implements MouseListener {
         
 /************ PHẦN HEADER *************************************/      
         header = new JPanel(null);
-        header.setBackground(new Color(34, 56, 92));
+        header.setBackground(new Color(44, 70, 112));
         header.setPreferredSize(new Dimension(DEFALUT_WIDTH,40));
         
         header hmain = new header(DEFALUT_WIDTH, 40, "Quản lý cửa hàng");
@@ -75,20 +73,20 @@ public class QLiLaptop extends JFrame implements MouseListener {
             hmain.add(user);
             
             //Tạo btn Logout
-            navItem btnLogOut = new navItem("", new Rectangle(DEFALUT_WIDTH-150, -8, 50, 50), "logout_25px.png", "logout_25px.png", "logout_hover_25px.png", new Color(80, 80, 80));
+            navItem btnLogOut = new navItem("", new Rectangle(DEFALUT_WIDTH-150, -8, 50, 50), "logout_25px.png", "logout_25px.png", "logout_hover_25px.png", new Color(101, 135, 235));
             hmain.add(btnLogOut.isButton());
             btnLogOut.addMouseListener(new MouseAdapter() {
-               @Override
-               public void mousePressed(MouseEvent e) {
-                   Login lg = new Login();
-                   dispose();
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    Login lg = new Login();
+                    dispose();
                }
             });
         }
         
         //Tạo btn EXIT & MINIMIZE
         navItem exit = new navItem("", new Rectangle(DEFALUT_WIDTH-50, -8, 50, 50), "exit_25px.png", "exit_25px.png", "exit_hover_25px.png", new Color(240, 71, 74));
-        navItem minimize = new navItem("", new Rectangle(DEFALUT_WIDTH-100, -8, 50, 50), "minimize_25px.png", "minimize_25px.png", "minimize_hover_25px.png" ,new Color(80,80,80));
+        navItem minimize = new navItem("", new Rectangle(DEFALUT_WIDTH-100, -8, 50, 50), "minimize_25px.png", "minimize_25px.png", "minimize_hover_25px.png" ,new Color(197, 240, 233));
         
         hmain.add(exit.isButton());
         hmain.add(minimize.isButton());

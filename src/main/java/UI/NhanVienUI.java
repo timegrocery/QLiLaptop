@@ -19,8 +19,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -42,7 +40,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -452,9 +449,9 @@ public class NhanVienUI extends JPanel{
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);
@@ -523,7 +520,7 @@ public class NhanVienUI extends JPanel{
             @Override
             public void focusGained(FocusEvent e) {
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px_focus.png")); //Đổi màu icon
-                searchBox.setBorder(createLineBorder(new Color(52,152,219))); // Đổi màu viền 
+                searchBox.setBorder(createLineBorder(new Color(232,57,99))); // Đổi màu viền 
             }
             //Trờ về như cũ
             public void focusLost(FocusEvent e) {

@@ -7,11 +7,7 @@ package UI.bone;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,14 +21,12 @@ public class header extends JPanel {
     private int height,width;
     private JFrame frame;
     JLabel name = new JLabel("", JLabel.CENTER);
-    public header(int w,int h, String text)
-    {
+    public header(int w,int h, String text){
         width = w;
         height = h;
         init(text);
     }
-    public void init(String text)
-    {
+    public void init(String text){
         setLayout(null);
         setSize(width,height);
         setBackground(null);

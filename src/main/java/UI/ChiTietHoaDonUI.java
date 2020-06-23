@@ -7,26 +7,18 @@ package UI;
 
 import BUS.ChiTietHoaDonBUS;
 import DTO.ChiTietHoaDon;
-import DTO.HoaDon;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -158,9 +150,9 @@ public class ChiTietHoaDonUI extends JFrame {
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);

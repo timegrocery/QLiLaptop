@@ -406,9 +406,9 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         scrollViewTable = new JScrollPane(tbl);
         scrollViewTable.setBounds(new Rectangle(570,20,(DEFALUT_WIDTH - 220)/2 - 100 ,500));
@@ -642,7 +642,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         Object obj = e.getSource();
         //Switch On Off
         if(obj.equals(onOffButton)){
-            Color color = new Color(61, 252, 47);
+            Color color = new Color(115, 155, 240);
             int change = 60;
             String text = "TOP";
             if(!OnOff){

@@ -313,9 +313,9 @@ public class KhachHangUI extends JPanel {
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);
@@ -380,7 +380,7 @@ public class KhachHangUI extends JPanel {
             @Override
             public void focusGained(FocusEvent e) {
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px_focus.png")); //Đổi màu icon
-                searchBox.setBorder(createLineBorder(new Color(52,152,219))); // Đổi màu viền 
+                searchBox.setBorder(createLineBorder(new Color(232,57,99))); // Đổi màu viền 
             }
             // trở về như cũ
             public void focusLost(FocusEvent e) {

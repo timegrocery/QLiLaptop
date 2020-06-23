@@ -5,8 +5,6 @@
  */
 package DAL;
 
-import DAL.MySQLConnect;
-import DAL.NhanVienDAO;
 import DTO.ChiTietHoaDon;
 import java.sql.ResultSet;
 import java.sql.SQLException;

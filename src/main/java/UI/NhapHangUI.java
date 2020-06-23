@@ -6,7 +6,6 @@
 package UI;
 
 import BUS.NhanVienBUS;
-import DTO.NhanVien;
 import BUS.NhapHangBUS;
 import DTO.NhapHang;
 import DTO.Laptop;
@@ -30,7 +29,6 @@ import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,8 +47,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.Timer;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -329,9 +325,9 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);

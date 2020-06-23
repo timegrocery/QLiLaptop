@@ -8,8 +8,6 @@ package UI.bone;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -22,13 +20,12 @@ import javax.swing.JPanel;
  */
 public class navItem extends JPanel implements MouseListener {
     private JLabel lb,icon;
-    private Color hover = new Color(101, 135, 235);
+    private Color hover = new Color(250, 160, 185);
     private Color normal = new Color(109, 172, 181);
     private boolean active ;
     private String name,img,imgActive,imgHover;
     private Rectangle rec = new Rectangle();
-    public navItem(String s,Rectangle r,String img,String imgActive )
-    {
+    public navItem(String s,Rectangle r,String img,String imgActive ){
         name = s;
         lb = new JLabel(name);
         this.img = img;
@@ -38,8 +35,7 @@ public class navItem extends JPanel implements MouseListener {
         rec = r;
         init();
     }
-    public navItem(String s,Rectangle r,String img,String imgActive,String imgHover,Color hover)
-    {
+    public navItem(String s,Rectangle r,String img,String imgActive,String imgHover,Color hover){
         name = s;
         lb = new JLabel(name);
         this.img = img;
@@ -63,16 +59,14 @@ public class navItem extends JPanel implements MouseListener {
         lb.repaint();   
     }
     
-    public JPanel isButton()
-    {
+    public JPanel isButton(){
         icon.setBounds(new Rectangle(rec.width/4 + 2 , rec.height/4, 50, 30));
         normal = null;
         lb.setBackground(normal);
 //        repaint();
         return this;
     }
-    public void init()
-    {
+    public void init(){
 
         lb.addMouseListener(this);
         Font font = new Font("Segoe UI",Font.BOLD,13);
@@ -80,7 +74,7 @@ public class navItem extends JPanel implements MouseListener {
         setBounds(rec);
         
         icon.setIcon(new ImageIcon("./src/main/java/image/"+img));
-        icon.setBackground(new Color(249, 242, 255));
+        icon.setBackground(new Color(255, 66, 119));
         icon.setBounds(new Rectangle(rec.width/7 , rec.height/4, 50, 30));
         
         lb.setFont(font);
@@ -88,7 +82,7 @@ public class navItem extends JPanel implements MouseListener {
         lb.setBounds(new Rectangle(rec.width/4+10, rec.height/4, 150, 30));
            
         if(active) {
-            setBackground(new Color(249, 242, 255));
+            setBackground(new Color(255, 66, 119));
         }
         else
         {
@@ -98,8 +92,7 @@ public class navItem extends JPanel implements MouseListener {
         add(lb);
         
     }
-    public void setActive(boolean a)
-    {
+    public void setActive(boolean a){
         active = a;
         
     }
@@ -112,15 +105,13 @@ public class navItem extends JPanel implements MouseListener {
         return lb;
     }
 
-    public void doActive()
-    {
+    public void doActive(){
         active = true;
         icon.setIcon(new ImageIcon("./src/main/java/image/"+imgActive));
         lb.setForeground(Color.BLACK);
-        setBackground(new Color(249, 242, 255));
+        setBackground(new Color(255, 66, 119));
     }
-    public void noActive()
-    {
+    public void noActive(){
         active = false;
         icon.setIcon(new ImageIcon("./src/main/java/image/"+img));
         lb.setForeground(Color.WHITE);
@@ -151,8 +142,7 @@ public class navItem extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if(!active)
-        {
+        if(!active){
             setBackground(hover);
             icon.setIcon(new ImageIcon("./src/main/java/image/"+imgHover));
         }
@@ -160,8 +150,7 @@ public class navItem extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e){
-        if(!active)
-        {
+        if(!active){
             setBackground(normal);
             icon.setIcon(new ImageIcon("./src/main/java/image/"+img));
         }

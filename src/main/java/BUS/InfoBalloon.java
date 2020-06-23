@@ -16,10 +16,6 @@ import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -42,7 +38,7 @@ public class InfoBalloon extends JPanel {
     private static final String ctrlZ = Character.toString((char)26); // ASCII 26 (Ctrl+Z) character
     private static final String modulus = Character.toString((char)37); // ASCII 37 (%) character
     public static String sqlInjectionCharacter = "\0\'\\\"\b\n\r\t\f";
-    public static String filter_all; 
+    public static String filter_all = String.format("^((?![%s]).)*$", sqlInjectionCharacter); 
     public static final String filter_alphaOnly = "^((?![0-9]).)*$";
 
 

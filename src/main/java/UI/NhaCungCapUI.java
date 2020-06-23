@@ -7,34 +7,25 @@ package UI;
 
 import BUS.InfoBalloon;
 import BUS.NhaCungCapBUS;
-import BUS.NhanVienBUS;
 import DTO.NhaCungCap;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static javax.swing.BorderFactory.createLineBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -323,9 +314,9 @@ public class NhaCungCapUI extends JPanel {
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);
@@ -388,7 +379,7 @@ public class NhaCungCapUI extends JPanel {
             @Override
             public void focusGained(FocusEvent e) {
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px_focus.png")); //Đổi màu icon
-                searchBox.setBorder(createLineBorder(new Color(52,152,219))); // Đổi màu viền 
+                searchBox.setBorder(createLineBorder(new Color(232,57,99))); // Đổi màu viền 
             }
             public void focusLost(FocusEvent e){ //Trờ về như cũ
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px.png"));

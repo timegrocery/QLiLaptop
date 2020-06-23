@@ -2,10 +2,8 @@ package BUS;
 
 import DAL.PhieuNhapDAO;
 import DTO.PhieuNhap;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class PhieuNhapBUS {
     private ArrayList <PhieuNhap> dspn = new ArrayList<>();

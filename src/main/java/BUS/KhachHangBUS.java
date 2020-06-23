@@ -7,7 +7,6 @@ package BUS;
 
 import DAL.KhachHangDAO;
 import DTO.KhachHang;
-import DTO.NhanVien;
 import java.util.ArrayList;
 
 

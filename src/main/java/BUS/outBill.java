@@ -7,7 +7,6 @@ package BUS;
 
 import DTO.ChiTietHoaDon;
 import DTO.HoaDon;
-import BUS.LaptopBUS;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -22,20 +21,14 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.attribute.standard.PageRanges;
 import javax.swing.JOptionPane;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
 /**
  *
  * @author WindZ
@@ -45,7 +38,7 @@ public class outBill {
     private ArrayList<ChiTietHoaDon> cthd = new ArrayList<ChiTietHoaDon>();
     private HoaDon hd;
     private BaseFont bf;
-    private LaptopBUS spBUS;
+    private LaptopBUS spBUS = new LaptopBUS();
     public outBill() {
             spBUS.listSP();
     }

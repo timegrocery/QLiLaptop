@@ -14,7 +14,6 @@ import BUS.LaptopBUS;
 import BUS.outBill;
 import DTO.ChiTietHoaDon;
 import DTO.HoaDon;
-import DTO.NhanVien;
 import DTO.Laptop;
 import UI.bone.Maintainance;
 import java.awt.Color;
@@ -29,11 +28,9 @@ import java.awt.event.KeyListener;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -229,8 +226,8 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
 /****************************************************************************/
 /*********************** PHẦN VIEW THÔNG TIN CHI TIẾT *****************************/
         
-        page = new Maintainance(WIDTH, "Tạo hóa đơn");
-        page.setBounds(new Rectangle(50,0,DEFALUT_WIDTH - 60,500));
+        page = new Maintainance(WIDTH, "      Tạo hóa đơn");
+        page.setBounds(new Rectangle(100,-20,DEFALUT_WIDTH - 60,500));
         add(page);
         
         chiTietView = new JPanel(null);
@@ -363,9 +360,9 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
         tbl.setShowVerticalLines(false);              
         tbl.getTableHeader().setOpaque(false);
         tbl.setFillsViewportHeight(true);
-        tbl.getTableHeader().setBackground(new Color(232,57,99));
+        tbl.getTableHeader().setBackground(new Color(57, 127, 232));
         tbl.getTableHeader().setForeground(Color.WHITE);
-        tbl.setSelectionBackground(new Color(52,152,219));          
+        tbl.setSelectionBackground(new Color(232,57,99));          
         
         // Add table vào ScrollPane
         JScrollPane scroll = new JScrollPane(tbl);
