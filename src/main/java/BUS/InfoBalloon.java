@@ -138,7 +138,7 @@ public class InfoBalloon extends JPanel {
         timer.start();
     }
 
-   private boolean textOK(String text) {
+    private boolean textOK(String text) {
         if (Handler.isNullOrEmpty(text)) {
             return true;
         }
@@ -148,9 +148,9 @@ public class InfoBalloon extends JPanel {
             return true;
         }
         return false;
-   }
+    }
 
-   private class DocFilter extends DocumentFilter {
+    private class DocFilter extends DocumentFilter {
         private int limit;
         public DocFilter(int limit) {
             if (limit <= 0) {
