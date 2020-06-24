@@ -564,7 +564,7 @@ public class NhanVienUI extends JPanel{
         sort.setBackground(null);
         sort.setBounds(30,265,this.DEFALUT_WIDTH - 400,100);
 
-        JLabel sortTitle = new JLabel("______________________________________________________________________________ TÌM KIẾM THÔNG TIN ______________________________________________________________________________",JLabel.CENTER); // Mỗi bên 78 dấu ( - )
+        JLabel sortTitle = new JLabel("------------------------------------------------------------------------------ TÌM KIẾM THÔNG TIN ------------------------------------------------------------------------------",JLabel.CENTER); // Mỗi bên 78 dấu ( - )
         sortTitle.setFont(font1);
         sortTitle.setBounds(new Rectangle(0,0,this.DEFALUT_WIDTH - 400,30));
         sort.add(sortTitle);

@@ -382,7 +382,7 @@ public class HoaDonUI extends JPanel {
         sort.setBackground(null);
         sort.setBounds(30,170,this.DEFALUT_WIDTH - 400,140);
         
-        JLabel sortTitle = new JLabel("____________________________________________________________________________________ BỘ LỌC ____________________________________________________________________________________",JLabel.CENTER); // Mỗi bên 84 dấu ( - )
+        JLabel sortTitle = new JLabel("------------------------------------------------------------------------------------ BỘ LỌC ------------------------------------------------------------------------------------",JLabel.CENTER); // Mỗi bên 84 dấu ( - )
         sortTitle.setFont(font1);
         sortTitle.setBounds(new Rectangle(0,0,this.DEFALUT_WIDTH - 400,30));
         sort.add(sortTitle);
