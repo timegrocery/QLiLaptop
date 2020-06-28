@@ -477,10 +477,8 @@ public class NhapHangUI extends JPanel implements ActionListener,FocusListener,M
     @Override
     public void mouseClicked(MouseEvent e) {
         Object obj = e.getSource();
-        if(obj.equals(btnConfirm))
-        {
-            if(EditOrAdd)
-            {
+        if(obj.equals(btnConfirm)){
+            if(EditOrAdd){
                 String maPN = txtMaPN.getText();
                 String maNCC = txtMaNCC.getText();
                 String maNV = txtMaNV.getText();

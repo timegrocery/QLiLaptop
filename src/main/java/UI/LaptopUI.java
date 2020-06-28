@@ -598,21 +598,25 @@ public class LaptopUI extends JPanel implements KeyListener {
                 {
                     newImage = new ImageIcon("./src/main/java/image/SanPham/NoImage.jpg").getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT); 
                 }
-                txtId.setText(tbl.getModel().getValueAt(i, 0).toString());
-                cmbNSX.setSelectedItem(nsxBUS.searchMaNsx(tbl.getModel().getValueAt(i, 1).toString()));
-                cmbNCC.setSelectedItem(nccBUS.searchMaNcc(tbl.getModel().getValueAt(i, 2).toString()));
-                txtTenSP.setText(tbl.getModel().getValueAt(i, 3).toString());
-                //txtSl.setText(tbl.getModel().getValueAt(i, 4).toString());
-                txtGia.setText(tbl.getModel().getValueAt(i, 5).toString());
-                txtCPU.setText(tbl.getModel().getValueAt(i, 6).toString());
-                txtRAM.setText(tbl.getModel().getValueAt(i, 7).toString());
-                txtGPU.setText(tbl.getModel().getValueAt(i, 8).toString());
-                txtManhinh.setText(tbl.getModel().getValueAt(i, 9).toString());
-                txtOcung.setText(tbl.getModel().getValueAt(i, 10).toString());
-                
-                
-                img.setText("");
-                img.setIcon(new ImageIcon(newImage));
+                try {
+                    txtId.setText(tbl.getModel().getValueAt(i, 0).toString());
+                    cmbNSX.setSelectedItem(nsxBUS.searchMaNsx(tbl.getModel().getValueAt(i, 1).toString()));
+                    cmbNCC.setSelectedItem(nccBUS.searchMaNcc(tbl.getModel().getValueAt(i, 2).toString()));
+                    txtTenSP.setText(tbl.getModel().getValueAt(i, 3).toString());
+                    //txtSl.setText(tbl.getModel().getValueAt(i, 4).toString());
+                    txtGia.setText(tbl.getModel().getValueAt(i, 5).toString());
+                    txtCPU.setText(tbl.getModel().getValueAt(i, 6).toString());
+                    txtRAM.setText(tbl.getModel().getValueAt(i, 7).toString());
+                    txtGPU.setText(tbl.getModel().getValueAt(i, 8).toString());
+                    txtManhinh.setText(tbl.getModel().getValueAt(i, 9).toString());
+                    txtOcung.setText(tbl.getModel().getValueAt(i, 10).toString());
+
+
+                    img.setText("");
+                    img.setIcon(new ImageIcon(newImage));
+                } catch (Exception ex) {
+                    
+                }
              }
         });
 /********************* THANH SEARCH ***********************************************/

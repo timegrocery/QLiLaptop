@@ -42,7 +42,7 @@ public class ChiTietHoaDonBUS {
             }
         }
     }
-    
+
     public void set(ChiTietHoaDon s) {
         for(int i = 0 ; i < dsChiTietHD.size() ; i++) {
             if(dsChiTietHD.get(i).getMaHD().equals(s.getMaHD())) {
