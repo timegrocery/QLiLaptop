@@ -22,7 +22,9 @@ public class NhaCungCapBUS {
         dsncc = new ArrayList<>();
         dsncc = nccDAO.list();
     }
-    
+    public int getSize(){
+        return this.dsncc.size();
+    }
     public void addNCC(NhaCungCap ncc) {
         dsncc.add(ncc);
         NhaCungCapDAO nccDAO = new NhaCungCapDAO();

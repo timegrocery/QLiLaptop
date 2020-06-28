@@ -51,13 +51,11 @@ public class SuggestKhachHang extends JDialog {
     private JComboBox cmbChoice;
 
     
-    public SuggestKhachHang()
-    {
+    public SuggestKhachHang(){
         setModal(true);
         init();
     }
-    public void init()
-    {
+    public void init(){
         setTitle("Danh sách khách hàng");
         setSize(DWIDTH,700);
         getContentPane().setBackground(new Color(55, 63, 81));

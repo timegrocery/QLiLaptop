@@ -94,6 +94,10 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
     private JPanel view;
     private JScrollPane scrollViewALL;
     
+    private JButton btnMoreInfo;
+    
+    
+    
     
     public ThongKeUI(int width){
         spBUS.listSP();
@@ -182,7 +186,7 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         //*********************** Panel điền thông tin ***********************//
         form = new JPanel(null);
         form.setBackground(null);
-        form.setBounds(new Rectangle(0,230,(DEFALUT_WIDTH - 220)/2 - 10,300));
+        form.setBounds(new Rectangle(0,230,(DEFALUT_WIDTH - 220)/2 - 10,500));
         
         lbMa.setBounds(new Rectangle(0,0,100,30));
         lbMa.setFont(font0);
@@ -366,6 +370,17 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
             }
         });
         
+        btnMoreInfo = new JButton("Tổng quát...");
+        btnMoreInfo.setFont(new Font("Segoe UI", Font.PLAIN, 15) {
+        });
+        btnMoreInfo.setBounds(new Rectangle(200,350,(DEFALUT_WIDTH - 220)/2-400,40));
+        btnMoreInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ThongKeAllUI tkall = new ThongKeAllUI();
+            }
+        });
+        form.add(btnMoreInfo);
         form.add(btnStatistic);
         
         control.add(form);

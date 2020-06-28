@@ -34,6 +34,18 @@ public class NhanVienBUS {
         dsnv = new ArrayList<>();
         dsnv = nvDAO.list();
     }
+    public int getSize(){
+        return dsnv.size();
+    }
+    public int getSizeOf(String phai){
+        int count = 0;
+        for(NhanVien nv : dsnv) {
+            if (nv.getPhai().equals(phai)){
+                count++;
+            }
+        }
+        return count;
+    }
     public void addNV(NhanVien sp) {
         dsnv.add(sp);
         NhanVienDAO nvDAO = new NhanVienDAO();

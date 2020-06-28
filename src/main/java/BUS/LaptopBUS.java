@@ -25,6 +25,18 @@ public class LaptopBUS {
         dssp = new ArrayList<>();
         dssp = spDAO.list();
     }
+    public int getSize(){
+        return this.dssp.size();
+    }
+    public int getSizeOf(String maNsx) {
+        int soluong = 0;
+        for(Laptop sp : dssp) {
+            if (sp.getMaNhaSanXuat().equals(maNsx)) {
+                soluong++;
+            }
+        }
+        return soluong;
+    }
     public void addSP(Laptop sp) {
         dssp.add(sp);
         LaptopDAO spDAO = new LaptopDAO();

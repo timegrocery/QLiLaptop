@@ -37,6 +37,9 @@ public class KhachHangBUS {
         dskh = new ArrayList<>();
         dskh = khDAO.list();
     }
+    public int getSize(){
+        return dskh.size();
+    }
     public void add(KhachHang kh){
         dskh.add(kh);
         KhachHangDAO khDAO = new KhachHangDAO();

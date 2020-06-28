@@ -29,7 +29,17 @@ public class NhapHangBUS {
         dsNH= new ArrayList<>();
         dsNH= nhDAO.list();
     }
-    
+    public int getSize(){
+        list();
+        return dsNH.size();
+    }
+    public int getInvest() {
+        int invest = 0;
+        for(NhapHang nh : dsNH) {
+            invest += nh.getTongTien();
+        }
+        return invest;
+    }
     public void add(NhapHang nh) {
         int id = 0;
         if(!dsNH.isEmpty()) {

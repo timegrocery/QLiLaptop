@@ -27,6 +27,16 @@ public class HoaDonBUS {
         dsHD = new ArrayList<>();
         dsHD = hdDAO.list();
     }
+    public int getSize(){
+        return dsHD.size();
+    }
+    public int getProfit() {
+        int profit = 0;
+        for(HoaDon hd : dsHD) {
+            profit += hd.getTongtien();
+        }
+        return profit;
+    }
     public void add(HoaDon hd) {
         dsHD.add(hd);
         HoaDonDAO hdDAO = new HoaDonDAO();
