@@ -50,20 +50,17 @@ public class SuggestSanPham extends JDialog {
     private JTextField txtSearch;
     private JComboBox cmbChoice;
 
-    public SuggestSanPham(String maSP)
-    {
+    public SuggestSanPham(String maSP){
         this.maSP = maSP;
         setModal(true);
         init();
     }
-    public SuggestSanPham()
-    {
+    public SuggestSanPham(){
         this.maSP ="";
         setModal(true);
         init();
     }
-    public void init()
-    {
+    public void init(){
         setTitle("Danh sách sản phẩm");
         setSize(DWIDTH,700);
         getContentPane().setBackground(new Color(55, 63, 81));
@@ -192,8 +189,7 @@ public class SuggestSanPham extends JDialog {
     /**************************************/
 /*****************************************************************************************/
         tbl.addMouseListener(new MouseAdapter() {
-             public void mouseClicked(MouseEvent e)
-             {
+             public void mouseClicked(MouseEvent e){
                 int i = tbl.getSelectedRow();
                 TabletoTXT(i);
              }
@@ -235,13 +231,11 @@ public class SuggestSanPham extends JDialog {
         //bắt sự kiện Focus vào search box
         txtSearch.addFocusListener(new FocusAdapter(){
             @Override
-            public void focusGained(FocusEvent e) 
-            {
+            public void focusGained(FocusEvent e) {
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px_focus.png")); //Đổi màu icon
                 searchBox.setBorder(createLineBorder(new Color(232,57,99))); // Đổi màu viền 
             }
-            public void focusLost(FocusEvent e) //Trờ về như cũ
-            {
+            public void focusLost(FocusEvent e){ //Trờ về như cũ
                 searchIcon.setIcon(new ImageIcon("./src/main/java/image/search_25px.png"));
                 searchBox.setBorder(createLineBorder(Color.BLACK));
             }
@@ -281,12 +275,10 @@ public class SuggestSanPham extends JDialog {
 /*********************************************************************************/
         setVisible(true);
     }
-    public void outModel(DefaultTableModel model , ArrayList<Laptop> sp) // Xuất ra Table từ ArrayList
-    {
+    public void outModel(DefaultTableModel model , ArrayList<Laptop> sp){ // Xuất ra Table từ ArrayList
         Vector data;
         model.setRowCount(0);
-        for(Laptop s:sp)
-        {
+        for(Laptop s:sp){
             data = new Vector();
             data.add(s.getMaLaptop());
             data.add(s.getTen());
@@ -297,37 +289,34 @@ public class SuggestSanPham extends JDialog {
         }
         tbl.setModel(model);
     }
-    public void listSP() // Chép ArrayList lên table
-    {
+    public void listSP(){ // Chép ArrayList lên table
         if(spBUS.getList()== null)spBUS.listSP();
         ArrayList<Laptop> nv = spBUS.getList();
         model.setRowCount(0);
         outModel(model,nv);
     }
-    public String getTextFieldContent() 
-    {
+    public String getTextFieldContent() {
         return  txtMaSP.getText()+"%"+
                 txtTenSP.getText()+"%"+
                 txtSL.getText()+"%"+
                 txtGia.getText()+"%"+
                 img;
     }
-    public int searchModel(DefaultTableModel model,String s)
-    {
-        for(int i = 0 ; i < model.getRowCount();i++)
-        {
-            if(model.getValueAt(i, 0).equals(s))
-            {
+    public int searchModel(DefaultTableModel model,String s){
+        for(int i = 0 ; i < model.getRowCount();i++){
+            if(model.getValueAt(i, 0).equals(s)){
                 return i;
             }
         }
         return 0;
     }
-    public void TabletoTXT(int i)
-    {
-        if(tbl.getRowSorter() != null)
-        {
-            i = tbl.getRowSorter().convertRowIndexToModel(i);
+    public void TabletoTXT(int i){
+        if(tbl.getRowSorter() != null){
+            try{
+                i = tbl.getRowSorter().convertRowIndexToModel(i);
+            } catch (Exception ex) {
+                
+            }
         }
         txtMaSP.setText(tbl.getModel().getValueAt(i, 0).toString());
         txtTenSP.setText(tbl.getModel().getValueAt(i, 1).toString());

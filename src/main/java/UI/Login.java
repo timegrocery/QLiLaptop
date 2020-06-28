@@ -176,8 +176,7 @@ public class Login extends JFrame implements KeyListener {
                 String username = user.getText();
                 char[] passwd = pass.getPassword();
                 User user = usBUS.check(username, passwd);
-                if(user == null)
-                {
+                if(user == null){
                     JOptionPane.showMessageDialog(null, "Sai tên tài khoản hoặc mật khẩu");
                     return;
                 }

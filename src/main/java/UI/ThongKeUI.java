@@ -186,6 +186,8 @@ public class ThongKeUI extends JPanel implements ActionListener,ItemListener,Cha
         
         lbMa.setBounds(new Rectangle(0,0,100,30));
         lbMa.setFont(font0);
+        
+        
         txtMa.setBounds(new Rectangle(110,0,230,30));
         txtMa.setFont(font0);
         txtMa.addKeyListener(new KeyAdapter() {

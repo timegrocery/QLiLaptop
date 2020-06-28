@@ -177,7 +177,11 @@ public class SuggestKhachHang extends JDialog {
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null)
                 {
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex) {
+                        
+                    }
                 }
                 txtMaKH.setText(tbl.getModel().getValueAt(i, 0).toString());
                 txtHo.setText(tbl.getModel().getValueAt(i, 1).toString()); 

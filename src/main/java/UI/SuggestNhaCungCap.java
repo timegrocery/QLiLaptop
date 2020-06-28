@@ -186,7 +186,11 @@ public class SuggestNhaCungCap extends JDialog {
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null)
                 {
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex) {
+                        
+                    }
                 }
                 txtMaNcc.setText(tbl.getModel().getValueAt(i, 0).toString());
                 txtTenNcc.setText(tbl.getModel().getValueAt(i, 1).toString());

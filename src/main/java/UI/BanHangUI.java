@@ -593,7 +593,11 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             try {
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null){
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex) {
+                        
+                    }
                 }
                 String masp = tbl.getModel().getValueAt(i, 0).toString();
                 int sl = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm :"));
@@ -615,7 +619,11 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             try {
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null) {
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    }catch (Exception ex) {
+                       
+                    }
                 }
                 dsct.remove(i);
                 model.removeRow(i);

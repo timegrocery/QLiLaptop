@@ -810,15 +810,12 @@ public class LaptopUI extends JPanel implements KeyListener {
         txtOcung.setText("");
         img.setIcon(null);
         img.setText("Image");
-        
         imgName = "null";
     }
-    public void outModel(DefaultTableModel model , ArrayList<Laptop> sp) // Xuất ra Table từ ArrayList
-    {
+    public void outModel(DefaultTableModel model , ArrayList<Laptop> sp){ // Xuất ra Table từ ArrayList
         Vector data;
         model.setRowCount(0);
-        for(Laptop s:sp)
-        {
+        for(Laptop s:sp){
             data = new Vector();
             data.add(s.getMaLaptop());
             data.add(s.getMaNhaSanXuat());
@@ -836,33 +833,24 @@ public class LaptopUI extends JPanel implements KeyListener {
         }
         tbl.setModel(model);
     }
-    public void listSP() // Chép ArrayList lên table
-    {
+    public void listSP(){ // Chép ArrayList lên table
         if(spBUS.getList()== null)spBUS.listSP();
         ArrayList<Laptop> sp = spBUS.getList();
         model.setRowCount(0);
         outModel(model,sp);
     }
-    public void listLoai(JComboBox cmb)
-    {
-        
-    }
-    public void listNCC(JComboBox cmb)
-    {
+    public void listNCC(JComboBox cmb){
         if(nccBUS.getList()== null)nccBUS.listNCC();
         ArrayList<NhaCungCap> ncc = nccBUS.getList();
         addCombo(cmb,ncc);
     }
-    public void listNSX(JComboBox cmb)
-    {
+    public void listNSX(JComboBox cmb){
         if(nsxBUS.getList()== null)nsxBUS.listNSX();
         ArrayList<NhaSanXuat> nsx = nsxBUS.getList();
         addCombo(cmb,nsx);
     }
-    public void addCombo(JComboBox cmb,ArrayList list)
-    {
-        for(Object a:list)
-        {
+    public void addCombo(JComboBox cmb,ArrayList list){
+        for(Object a:list){
             cmb.addItem(a);
         }
     }

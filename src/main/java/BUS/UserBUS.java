@@ -24,14 +24,12 @@ public class UserBUS {
         dsUS= new ArrayList<>();
         dsUS= usDAO.list();
     }
-    public void add(User hd) {
-        dsUS.add(hd);
-        UserDAO usDAO = new UserDAO();
-        usDAO.add(hd);
-    }
 
     public void add(User hd,int i) {
         UserDAO usDAO = new UserDAO();
+        Encryptor enc = new Encryptor();
+        // mã hóa mật khẩu
+        hd.setPass(enc.encryptPassword(hd.getPass()));
         usDAO.add(hd);
     }
     
@@ -45,10 +43,10 @@ public class UserBUS {
             }
         }
     }
+    
     public void set(User s) {
         for(int i = 0 ; i < dsUS.size() ; i++) {
             if(dsUS.get(i).getUserID().equals(s.getUserID())) {
-                System.out.println("ABC");
                 dsUS.set(i, s);
                 UserDAO usDAO = new UserDAO();
                 usDAO.set(s);
@@ -56,13 +54,17 @@ public class UserBUS {
             }
         }
     }
+    
     public User check(String userName,char[] pass) {
-        
         for(User us : dsUS) {   
-            char[] correctPass = us.getPass().toCharArray();
-            if( us.getUserName().equals(userName) && Arrays.equals(pass, correctPass) && us.getEnable().equals("1")) {
-                return us;
+            if( us.getUserName().equals(userName)){
+                Decryptor dnc = new Decryptor();
+                char[] correctPass = dnc.decryptPassword(us.getPass()).toCharArray();
+                if (Arrays.equals(pass, correctPass) && us.getEnable().equals("1")){
+                    return us;
+                }
             }
+                
         }
         return null;
     }

@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BUS.Encryptor;
 import BUS.InfoBalloon;
 import BUS.NhanVienBUS;
 import BUS.UserBUS;
@@ -69,6 +70,7 @@ public class NhanVienUI extends JPanel{
     private JTextField sortTenNV;
     private Choice sortPhai;
     private JComboBox cmbPhai;
+    private final String DEFAULT_PASSWORD = "123";
     public NhanVienUI(int width)
     {
         DEFALUT_WIDTH = width;
@@ -135,8 +137,6 @@ public class NhanVienUI extends JPanel{
         String []phai = {"Nam","Nữ"};
         cmbPhai = new JComboBox(phai);
         cmbPhai.setBounds(new Rectangle(310,200,80,30));
-//        txtPhai= new JTextField("");
-//        txtPhai.setBounds(new Rectangle(360,250,80,30));
         
         img = new JLabel("Image");
         img.setBorder(createLineBorder(Color.BLACK));
@@ -155,7 +155,6 @@ public class NhanVienUI extends JPanel{
         ItemView.add(txtNamSinh);
         ItemView.add(lbPhai);
         ItemView.add(cmbPhai);
-//        ItemView.add(txtPhai);
         ItemView.add(lbDiaChi);
         ItemView.add(txtDiaChi);
         setEditable(false);
@@ -318,16 +317,12 @@ public class NhanVienUI extends JPanel{
         
         //MouseClick btnConfirm
         btnConfirm.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e){
                 int i;
-               
-                if(EditOrAdd) //Thêm Nhân Viên
-                {
-                    i = JOptionPane.showConfirmDialog(null, "Xác nhận thêm sản phẩm","",JOptionPane.YES_NO_OPTION);
-                    if(i == 0)
-                    {
-                        try{
+                if(EditOrAdd){ //Thêm Nhân Viên
+                    i = JOptionPane.showConfirmDialog(null, "Xác nhận thêm nhân viên","",JOptionPane.YES_NO_OPTION);
+                    if(i == 0){
+                        try {
                         //Lấy dữ liệu từ TextField
                         String maNV = txtMaNV.getText();
                         String hoNV = txtHoNV.getText();
@@ -337,8 +332,7 @@ public class NhanVienUI extends JPanel{
                         String diaChi = txtDiaChi.getText();
                         String IMG = imgName;
                        
-                        if(nvBUS.check(maNV))
-                        {
+                        if(nvBUS.check(maNV)) {
                             JOptionPane.showMessageDialog(null, "Mã nhân viên đă tồn tại !!!");
                             return;
                         }
@@ -346,7 +340,8 @@ public class NhanVienUI extends JPanel{
                         NhanVien nv = new NhanVien(maNV, hoNV, tenNV,  phai, diaChi, namSinh, IMG);
                         nvBUS.addNV(nv);
                         UserBUS usBUS = new UserBUS();
-                        User user = new User(maNV, removeAccent(tenNV.concat(maNV)).toLowerCase(), "123456", "Nhân Viên", "1");
+                        Encryptor enc = new Encryptor();
+                        User user = new User(maNV, removeAccent(tenNV.concat(maNV)).toLowerCase(), DEFAULT_PASSWORD, "Nhân Viên", "1");
                         usBUS.add(user, 1);
                         outModel(model, nvBUS.getList());// Load lại table
 
@@ -354,7 +349,7 @@ public class NhanVienUI extends JPanel{
                             
                         cleanView();
                         setEditable(false);
-                        }catch(NumberFormatException ex){
+                        } catch(NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null,"Loi");
                         }
                         
@@ -704,8 +699,7 @@ public class NhanVienUI extends JPanel{
 //        model.setRowCount(0);
         outModel(model,nv);
     }
-    public String removeAccent(String s)  // Xóa dấu tiếng việt
-    {
+    public String removeAccent(String s){  // Xóa dấu tiếng việt
         String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(temp).replaceAll("").replace('đ','d').replace('Đ','D');

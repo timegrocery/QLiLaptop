@@ -5,6 +5,8 @@
  */
 package UI;
 
+import BUS.Decryptor;
+import BUS.Encryptor;
 import BUS.InfoBalloon;
 import BUS.UserBUS;
 import DTO.User;
@@ -87,7 +89,7 @@ public class UserUI extends JPanel {
         lbPass.setBounds(20,120,100,30);
         txtPass = new JTextField();
         txtPass.setBounds(new Rectangle(120,120,250,30));
-        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtPass,InfoBalloon.filter_all, InfoBalloon.limit_name);
+        new InfoBalloon(InfoBalloon.errTxt_invalidName, txtPass,InfoBalloon.filter_all, 255);
         itemView.add(lbPass);
         itemView.add(txtPass);
         
@@ -120,12 +122,12 @@ public class UserUI extends JPanel {
         btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
         btnBack.setVisible(false);
         btnEdit.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
                 if(txtMaNV.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên cần sửa !!!");
                     return;
                 }
-
                 txtMaNV.setEditable(false);
                 
                 btnEdit.setVisible(false);
@@ -139,30 +141,33 @@ public class UserUI extends JPanel {
         });
 
         btnConfirm.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
-                int i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa sản phẩm","",JOptionPane.YES_NO_OPTION);
-                    if(i == 0){
-                        //Lấy dữ liệu từ TextField
-                        String maNV = txtMaNV.getText();
-                        String user = txtUser.getText();
-                        String pass = txtPass.getText();
-                        String role = String.valueOf(cmbRole.getSelectedItem());
-                        String enable = "1";
+                int i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa thông tin?","",JOptionPane.YES_NO_OPTION);
+                if(i == 0){
+                    Encryptor enc = new Encryptor();
+                    //Lấy dữ liệu từ TextField
+                    String maNV = txtMaNV.getText();
+                    String user = txtUser.getText();
+                    String pass = enc.encryptPassword(txtPass.getText());
+                    
+                    String role = String.valueOf(cmbRole.getSelectedItem());
+                    String enable = "1";
 
-                        //Upload sản phẩm lên DAO và BUS
-                        User us = new User(maNV, user, pass, role, enable);
-                        usBUS.set(us);
-                        
-                        outModel(model, usBUS.getList());// Load lại table
-                        
-                        JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
-                        setEditable(false);
-                        
-                    }
+                    //Upload nhân viên lên DAO và BUS
+                    User us = new User(maNV, user, pass, role, enable);
+                    usBUS.set(us);
+                    
+                    outModel(model, usBUS.getList());// Load lại table
+
+                    JOptionPane.showMessageDialog(null, "Sửa thành công","Thành công",JOptionPane.INFORMATION_MESSAGE);
+                    setEditable(false);
+                }
             }
         });
 
          btnBack.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
                 cleanView();
                 
@@ -170,7 +175,6 @@ public class UserUI extends JPanel {
                 
                 btnConfirm.setVisible(false);
                 btnBack.setVisible(false);
-//                btnFile.setVisible(false);
                 
                 tbl.setEnabled(true);
                 setEditable(false);
@@ -234,7 +238,11 @@ public class UserUI extends JPanel {
             public void mouseClicked(MouseEvent e){
                 int i = tbl.getSelectedRow();
                 if(tbl.getRowSorter() != null){
-                    i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    try {
+                        i = tbl.getRowSorter().convertRowIndexToModel(i);
+                    } catch (Exception ex) {
+                        
+                    }
                 }
                 txtMaNV.setText(tbl.getModel().getValueAt(i, 0).toString());
                 txtUser.setText(tbl.getModel().getValueAt(i, 1).toString());
@@ -247,11 +255,12 @@ public class UserUI extends JPanel {
     public void outModel(DefaultTableModel model , ArrayList<User> user){ // Xuất ra Table từ ArrayList
         Vector data;
         model.setRowCount(0);
+        Decryptor dnc = new Decryptor();
         for(User us : user){
             data = new Vector();
             data.add(us.getUserID());
             data.add(us.getUserName());
-            data.add(us.getPass());
+            data.add(dnc.decryptPassword(us.getPass()));
             data.add(us.getRole());
             model.addRow(data);
         }
