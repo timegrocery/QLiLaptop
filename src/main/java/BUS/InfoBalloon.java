@@ -9,18 +9,13 @@ package BUS;
  *
  * @author WindZ
  */
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class InfoBalloon extends JPanel {
     private static final int PREF_WIDTH = 400;
@@ -35,9 +30,9 @@ public class InfoBalloon extends JPanel {
     public static final int limit_sdt = 11;
     // regex for different cases
     public static final String filter_numberOnly = "\\d*";
-    private static final String ctrlZ = Character.toString((char)26); // ASCII 26 (Ctrl+Z) character
-    private static final String modulus = Character.toString((char)37); // ASCII 37 (%) character
-    public static String sqlInjectionCharacter = "\0\'\\\"\b\n\r\t\f";
+//    private static final String ctrlZ = Character.toString((char)26); // ASCII 26 (Ctrl+Z) character
+//    private static final String modulus = Character.toString((char)37); // ASCII 37 (%) character
+    public static String sqlInjectionCharacter = "\0'\\\"\b\n\r\t\f";
     public static String filter_all = String.format("^((?![%s]).)*$", sqlInjectionCharacter); 
     public static final String filter_alphaOnly = "^((?![0-9]).)*$";
 
@@ -47,7 +42,7 @@ public class InfoBalloon extends JPanel {
     private final String FILTER;
     private JWindow errorWindow;
     private JWindow tooLongErrorWindow;
-    private String tooLongMessage;
+    private final String tooLongMessage;
    
 
     public InfoBalloon(String errorTxt, JTextField txtField, String filterType, int limit) {
@@ -102,11 +97,7 @@ public class InfoBalloon extends JPanel {
         Point loc = TXT_FIELD.getLocationOnScreen();
         errorWindow.setLocation(loc.x + 7, loc.y - 27);
         errorWindow.setVisible(true);
-        ActionListener task = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                errorWindow.setVisible(false);
-            }
-        };
+        ActionListener task = evt -> errorWindow.setVisible(false);
         Timer timer = new Timer(2500 ,task); // balloon tooltip will be disable after 2.5 seconds xD
         timer.setRepeats(false);
         timer.start(); 
@@ -128,11 +119,7 @@ public class InfoBalloon extends JPanel {
         Point loc = TXT_FIELD.getLocationOnScreen();
         tooLongErrorWindow.setLocation(loc.x + 7, loc.y - 57);
         tooLongErrorWindow.setVisible(true);
-        ActionListener task = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                tooLongErrorWindow.setVisible(false);
-            }
-        };
+        ActionListener task = evt -> tooLongErrorWindow.setVisible(false);
         Timer timer = new Timer(2500 ,task); // balloon tooltip will be disable after 2.5 seconds xD
         timer.setRepeats(false);
         timer.start();
@@ -144,14 +131,11 @@ public class InfoBalloon extends JPanel {
         }
         if (text.equals(""))
             return true;
-        if (text.matches(this.FILTER)) {
-            return true;
-        }
-        return false;
+       return text.matches(this.FILTER);
    }
 
    private class DocFilter extends DocumentFilter {
-        private int limit;
+        private final int limit;
         public DocFilter(int limit) {
             if (limit <= 0) {
                 throw new IllegalArgumentException("Limit can not be <= 0");
@@ -186,9 +170,7 @@ public class InfoBalloon extends JPanel {
                     } else if (tooLongErrorWindow != null && tooLongErrorWindow.isVisible()) {
                         tooLongErrorWindow.setVisible(false);
                     }
-                    if (text.length() > 0) {
-                        //super.replace(fb, offset, length, text, attrs);
-                    }
+
                     super.replace(fb, offset, length, text, attrs);
                     if (errorWindow != null && errorWindow.isVisible()) {
                         errorWindow.setVisible(false);

@@ -19,15 +19,15 @@ import java.util.logging.Logger;
  */
 public class MySQLConnect {
     private String user = "root";
-    private String password="";
-    private String url="jdbc:mysql://localhost/qlilaptop?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private String password="123456789";
+    private String url="jdbc:mysql://localhost:3306/qlilaptop?zeroDateTimeBehavior=CONVERT_TO_NULL";
     private Connection conn = null;
     private Statement st = null;
     
     public void Connect()
     {
          try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);

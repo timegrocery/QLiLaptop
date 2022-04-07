@@ -28,7 +28,7 @@ public class HoaDonDAO {
                 String maHD = rs.getString("MAHD");
                 String maKH = rs.getString("MAKH");
                 String maNV = rs.getString("MANV");
-                String ngayhd = rs.getTimestamp("NGAYHD").toString();
+                String ngayhd = rs.getString("NGAYHD");
                 String maCtkm = rs.getString("MAKM");
                 int tongtien = rs.getInt("TONGTIEN");
 

@@ -19,11 +19,7 @@ public class NhapHangBUS {
     private ArrayList<NhapHang> dsNH;
     public NhapHangBUS() {
     }
-    
-    public NhapHangBUS(int i) {
-        list();
-    }
-    
+
     public void list() {
         NhapHangDAO nhDAO = new NhapHangDAO();
         dsNH= new ArrayList<>();
@@ -73,10 +69,7 @@ public class NhapHangBUS {
         return -1;
     }
     public boolean checkTime(Calendar from,Calendar to,Calendar time) {
-        if(time.after(from) && time.before(to)) {
-            return true;
-        }
-        return false;
+        return time.after(from) && time.before(to);
     }
     public ArrayList<NhapHang> ListTime(Calendar from,Calendar to) {
         ArrayList<NhapHang> list = new ArrayList<>();
@@ -92,17 +85,15 @@ public class NhapHangBUS {
     }
     public String remindMaNH() {
         int max = 0;
-        String s ="";
+        StringBuilder s = new StringBuilder();
         for(NhapHang nh : dsNH) {
             int id = Integer.parseInt(nh.getMaPN());
             if(id > max) {
                 max = id;
             }
         }
-        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
-            s+="0";
-        }
-        return s+(max+1);
+        s.append("0".repeat(Math.max(0, 3 - String.valueOf(max + 1).length())));
+        return s.toString() +(max+1);
     }
     public ArrayList<NhapHang> getList() {
         return dsNH;

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author WindZ
  */
 public class NhapHangDAO {
-    private MySQLConnect mySQL = new MySQLConnect();
+    private final MySQLConnect mySQL = new MySQLConnect();
     public NhapHangDAO()
     {
         
