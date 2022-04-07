@@ -7,9 +7,10 @@ package BUS;
 
 import DAL.LaptopDAO;
 import DTO.Laptop;
+
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -80,50 +81,48 @@ public class LaptopBUS {
         }
         return null;
     }
-    public boolean updateSL(String masp,int sl) {
+    public void updateSL(String masp, int sl) {
         for(Laptop sp : dssp) {
             if(sp.getMaLaptop().equals(masp)) {
                 int old = sp.getSoluong();
                 if(sl > old) {
                     JOptionPane.showMessageDialog(null, "Không đủ hàng");
-                    return false;
+                    return;
                 }
                 old -= sl;
                 sp.setSoluong(old);
                 LaptopDAO spDAO = new LaptopDAO();
                 spDAO.set(sp);
                 System.out.println(sp.getSoluong());
-                return true;
+                return;
             }
         }
-        return false;
     }
-    public boolean updateSLValue(String masp, int sl) {
+    public void updateSLValue(String masp, int sl) {
         for(Laptop sp : dssp) {
             if(sp.getMaLaptop().equals(masp)) {
                 sp.setSoluong(sl);
                 LaptopDAO spDAO = new LaptopDAO();
                 spDAO.set(sp);
-                return true;
+                return;
             }
         }
-        return false;
     }
     public boolean checkSL(String masp , int sl) {
         for(Laptop sp : dssp) {
              if(sp.getMaLaptop().equals(masp)) {
                 if(sl > sp.getSoluong()) {
                     JOptionPane.showMessageDialog(null, "Không đủ hàng");
-                    return false;
+                    return true;
                 }
              }
          }
-         return true;
+         return false;
     }
     public ArrayList<Laptop> searchSP(String masp, String mansx, int max, int min) {
         ArrayList<Laptop> search = new ArrayList<>();
-        masp = masp.isEmpty()?masp = "": masp;
-        mansx = mansx.isEmpty()?mansx = "": mansx;
+        masp = masp.isEmpty()? "" : masp;
+        mansx = mansx.isEmpty()? "" : mansx;
         for(Laptop sp : dssp) {
             if( sp.getMaLaptop().contains(masp) && 
                 sp.getMaNhaSanXuat().contains(mansx) &&
@@ -136,17 +135,15 @@ public class LaptopBUS {
     }
     public String remindMaLaptop() {
         int max = 0;
-        String s ="";
+        StringBuilder s = new StringBuilder();
         for(Laptop kh : dssp) {
             int id = Integer.parseInt(kh.getMaLaptop());
             if(id > max) {
                 max = id;
             }
         }
-        for(int i = 0 ; i < 3-String.valueOf(max+1).length(); i++) {
-            s+="0";
-        }
-        return s+(max+1);
+        s.append("0".repeat(Math.max(0, 3 - String.valueOf(max + 1).length())));
+        return s.toString() +(max+1);
     }
     public ArrayList<Laptop> getList() {
         return dssp;

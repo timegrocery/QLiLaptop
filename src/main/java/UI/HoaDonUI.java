@@ -173,6 +173,7 @@ public class HoaDonUI extends JPanel {
         setEditable(false);
         // MouseClick btnDelete
         btnDelete.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e)
             {   
                 int i = JOptionPane.showConfirmDialog(null, "Xác nhận xóa","Alert",JOptionPane.YES_NO_OPTION);
@@ -293,10 +294,10 @@ public class HoaDonUI extends JPanel {
         /*************************************************************************/
 /****************** TẠO MODEL VÀ HEADER *********************************************/
         Vector header = new Vector();
-        header.add("Mă Hóa Đơn");
+        header.add("Mã Hóa Đơn");
         header.add("Mă KH");
         header.add("Mã NV");
-        header.add("Ngay Hóa Đơn");
+        header.add("Ngày in Hóa Đơn");
         header.add("Tổng Tiền");
         model = new DefaultTableModel(header,5)
         {

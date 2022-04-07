@@ -6,69 +6,50 @@
 package UI;
 
 import BUS.InfoBalloon;
-import BUS.NhaSanXuatBUS;
-import BUS.NhaCungCapBUS;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javax.swing.BorderFactory.createLineBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import DTO.Laptop;
 import BUS.LaptopBUS;
-import DTO.NhaSanXuat;
+import BUS.NhaCungCapBUS;
+import BUS.NhaSanXuatBUS;
+import DTO.Laptop;
 import DTO.NhaCungCap;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import DTO.NhaSanXuat;
+
 import javax.imageio.ImageIO;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JSeparator;
-import javax.swing.RowFilter;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static javax.swing.BorderFactory.createLineBorder;
 
 /**
  *
  * @author WindZ
  */
 public class LaptopUI extends JPanel implements KeyListener {
-    private LaptopBUS spBUS = new LaptopBUS();
-    private NhaSanXuatBUS nsxBUS = new NhaSanXuatBUS();
-    private NhaCungCapBUS nccBUS = new NhaCungCapBUS();
+    private final LaptopBUS spBUS = new LaptopBUS();
+    private final NhaSanXuatBUS nsxBUS = new NhaSanXuatBUS();
+    private final NhaCungCapBUS nccBUS = new NhaCungCapBUS();
     private JTable tbl;
     private BufferedImage i = null;//Hình ảnh chọn từ file
     private JLabel img;
     private String imgName = "null";
     private JTextField txtId,txtTenSP,txtGia,txtCPU,txtRAM,txtGPU,txtManhinh,txtOcung,txtSearch;
     private DefaultTableModel model;
-    private int DEFALUT_WIDTH;
+    private final int DEFALUT_WIDTH;
     private boolean EditOrAdd = true;//Cờ cho button Cofirm True:ADD || False:Edit
-    private JTextField sortTenSP;
     private JTextField txtMaxPrice;
     private JTextField sortMaSP;
     private JTextField txtMinPrice;

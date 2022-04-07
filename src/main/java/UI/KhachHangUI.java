@@ -5,49 +5,38 @@
  */
 package UI;
 
+import BUS.InfoBalloon;
 import BUS.KhachHangBUS;
 import DTO.KhachHang;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Rectangle;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
+
 import static javax.swing.BorderFactory.createLineBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-import BUS.InfoBalloon;
 
 /**
  *
  * @author WindZ
  */
 public class KhachHangUI extends JPanel {
-    private KhachHangBUS khBUS = new KhachHangBUS();
+    private final KhachHangBUS khBUS = new KhachHangBUS();
     
     private JTable tbl = new JTable();
     
     private JTextField txtMaKH,txtHoKH,txtTenKH,txtSDT;
-    private JTextField sortMaKH,sortHoKH,sortTenKH;
     DefaultTableModel model;
-    private int DEFALUT_WIDTH;
+    private final int DEFALUT_WIDTH;
     private boolean EditOrAdd = true;//Cờ cho button Cofirm True:ADD || False:Edit
     
     public KhachHangUI (int width){
@@ -164,7 +153,6 @@ public class KhachHangUI extends JPanel {
                 
                 btnConfirm.setVisible(true);
                 btnBack.setVisible(true);
-//                btnFile.setVisible(true);
                 txtMaKH.setText(khBUS.remindMaKH());
                 
                 tbl.clearSelection();
@@ -291,7 +279,7 @@ public class KhachHangUI extends JPanel {
         header.add("SĐT");
         model = new DefaultTableModel(header,5);
         tbl = new JTable(model);
-        TableRowSorter<TableModel> rowSorter = new TableRowSorter<TableModel>(model);
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
         tbl.setRowSorter(rowSorter);
         list(); //Đọc từ database lên table 
         
@@ -331,8 +319,8 @@ public class KhachHangUI extends JPanel {
                 int i = tbl.getSelectedRow();
                 txtMaKH.setText(tbl.getModel().getValueAt(i, 0).toString());
                 String name = tbl.getModel().getValueAt(i, 1).toString();
-                String lastName = "";
-                String firstName= "";
+                String lastName = "" ;
+                String firstName;
                 if(name.split("\\w+").length>1){
                     lastName = name.substring(name.lastIndexOf(" ")+1);
                     firstName = name.substring(0, name.lastIndexOf(' '));

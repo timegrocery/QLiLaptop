@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Jun 24 10:05:12 ICT 2020
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1592967912418
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact mysql\:mysql-connector-java\:pom\:8.0.20 from/to central (https\://repo.maven.apache.org/maven2)\: Transfer failed for https\://repo.maven.apache.org/maven2/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.pom

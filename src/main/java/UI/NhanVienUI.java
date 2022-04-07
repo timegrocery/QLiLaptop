@@ -11,13 +11,16 @@ import BUS.NhanVienBUS;
 import BUS.UserBUS;
 import DTO.NhanVien;
 import DTO.User;
-import java.awt.Choice;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -32,24 +35,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
+
 import static javax.swing.BorderFactory.createLineBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -565,7 +552,7 @@ public class NhanVienUI extends JPanel{
         sort.add(sortTitle);
 
         /******** SORT MAKH **************/
-        JLabel lbSortMaNV = new JLabel("Mă NV :");
+        JLabel lbSortMaNV = new JLabel("Mã NV :");
         lbSortMaNV.setFont(font0);
         lbSortMaNV.setBounds(0,40,50,30);
         sort.add(lbSortMaNV);
@@ -639,7 +626,13 @@ public class NhanVienUI extends JPanel{
         add(sort);
 /*******************************************************************/
     }
-    public void saveIMG()
+    public void
+
+
+
+
+
+    saveIMG()
     {
         try {
             if(i != null)

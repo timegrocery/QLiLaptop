@@ -27,7 +27,7 @@ public class ChiTietHoaDon {
     }
 
     public void setMaLaptop(String maSP) {
-        this.maLaptop = maLaptop;
+        this.maLaptop = maSP;
     }
 
     public String getMaHD() {

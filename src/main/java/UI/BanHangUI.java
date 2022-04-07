@@ -6,47 +6,28 @@
 
 package UI;
 
-import BUS.ChiTietHoaDonBUS;
-import BUS.HoaDonBUS;
-import BUS.KhachHangBUS;
-import BUS.NhanVienBUS;
-import BUS.LaptopBUS;
-import BUS.outBill;
+import BUS.*;
 import DTO.ChiTietHoaDon;
 import DTO.HoaDon;
 import DTO.Laptop;
 import UI.bone.Maintainance;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-import java.time.format.DateTimeFormatter;
-import javax.swing.Timer;
-import BUS.InfoBalloon;
 
 /**
  *
@@ -501,7 +482,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
             for(ChiTietHoaDon sp : dsct) {
                 if(sp.getMaLaptop().equals(txtMaSP.getText())) {
                     int old = sp.getSl();
-                    if(!spBUS.checkSL(txtMaSP.getText(), sl + old)) {
+                    if(spBUS.checkSL(txtMaSP.getText(), sl + old)) {
                         return;
                     }
                     sp.setSl(sl + old);
@@ -510,7 +491,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
                 }
             }
             if(flag) {
-                if(!spBUS.checkSL(txtMaSP.getText(), sl)) {
+                if(spBUS.checkSL(txtMaSP.getText(), sl)) {
                     return;
                 }
                 dsct.add(new ChiTietHoaDon(txtMaHD.getText(), txtMaSP.getText(), sl, gia));
@@ -601,7 +582,7 @@ public class BanHangUI extends JPanel implements ActionListener,KeyListener {
                 }
                 String masp = tbl.getModel().getValueAt(i, 0).toString();
                 int sl = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm :"));
-                while(!spBUS.checkSL(masp, sl)) {
+                while(spBUS.checkSL(masp, sl)) {
                     sl = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm :"));
                 }
                 for(ChiTietHoaDon ct : dsct){
